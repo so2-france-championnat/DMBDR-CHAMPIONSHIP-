@@ -1,0 +1,122 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "BussGang",
+      "logo": "team1.jpg",
+      "points": 0,
+      "roundsWon": 0,
+      "roundsLost": 0,
+      "rd": 0,
+      "players": [
+        "Akra",
+        "Homn",
+        "Suzuki"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Nexus",
+      "logo": "team2.jpg",
+      "points": 0,
+      "roundsWon": 0,
+      "roundsLost": 0,
+      "rd": 0,
+      "players": [
+        "LaynOx",
+        "Gabin15",
+        "Qualites",
+        "Vlase"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "VitriX",
+      "logo": "team3.jpg",
+      "points": 0,
+      "roundsWon": 0,
+      "roundsLost": 0,
+      "rd": 0,
+      "players": [
+        "Loic",
+        "Senzy",
+        "Nounours",
+        "Oceano"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Grizzly SDBT",
+      "logo": "team4.jpg",
+      "points": 0,
+      "roundsWon": 0,
+      "roundsLost": 0,
+      "rd": 0,
+      "players": [
+        "Freezy",
+        "Youko",
+        "Wanheda",
+        "ZoraYtB"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Vortex",
+      "logo": "team5.jpg",
+      "points": 0,
+      "roundsWon": 0,
+      "roundsLost": 0,
+      "rd": 0,
+      "players": [
+        "Narvalow",
+        "Stronex",
+        "Numb",
+        "Grainut"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "CP-0",
+      "logo": "team6.jpg",
+      "points": 0,
+      "roundsWon": 0,
+      "roundsLost": 0,
+      "rd": 0,
+      "players": [
+        "Manji",
+        "Tata",
+        "Sharko"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "NSRP",
+      "logo": "team7.jpg",
+      "points": 0,
+      "roundsWon": 0,
+      "roundsLost": 0,
+      "rd": 0,
+      "players": [
+        "Nistugo",
+        "Go Silver",
+        "Ragnar",
+        "PickixBack"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Sp4rks",
+      "logo": "team8.jpg",
+      "points": 0,
+      "roundsWon": 0,
+      "roundsLost": 0,
+      "rd": 0,
+      "players": [
+        "OmarBapLO6",
+        "Moe Lester",
+        "Skiimi",
+        "Kitaro"
+      ]
+    }
+  ]
+}
