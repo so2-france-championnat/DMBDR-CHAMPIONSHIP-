@@ -3021,11 +3021,17 @@ document.addEventListener(
             calculateChampionshipStats();
 
 
-            /* =========================
-               RAFRAÎCHISSEMENT AFFICHAGE
-            ========================= */
+/* =========================
+   RAFRAÎCHISSEMENT AFFICHAGE
+========================= */
 
-            renderMatchTeams();
+renderTeams();
+
+renderRanking();
+
+renderPlayers();
+
+renderMatchTeams();
 
 updateCounts();
 
