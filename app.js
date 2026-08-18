@@ -2526,22 +2526,32 @@ function renderRanking(){
         [...teams].sort(
             (a,b) => {
 
-                if(
-                    Number(b.points) !==
-                    Number(a.points)
-                ){
+                const pointsA =
+                    Number(a.points || 0);
 
-                    return (
-                        Number(b.points) -
-                        Number(a.points)
-                    );
+                const pointsB =
+                    Number(b.points || 0);
+
+                const rdA =
+                    Number(a.rd || 0);
+
+                const rdB =
+                    Number(b.rd || 0);
+
+
+                /*
+                 * 1. POINTS
+                 * 2. RD en cas d'égalité
+                 */
+
+                if(pointsB !== pointsA){
+
+                    return pointsB - pointsA;
 
                 }
 
-                return (
-                    Number(b.rd) -
-                    Number(a.rd)
-                );
+
+                return rdB - rdA;
 
             }
         );
@@ -2554,18 +2564,38 @@ function renderRanking(){
                 let rankClass =
                     "rank-normal";
 
+
                 if(index === 0){
+
                     rankClass =
                         "rank-first";
+
                 }
                 else if(index === 1){
+
                     rankClass =
                         "rank-second";
+
                 }
                 else if(index === 2){
+
                     rankClass =
                         "rank-third";
+
                 }
+
+
+                const points =
+                    Number(team.points || 0);
+
+                const rd =
+                    Number(team.rd || 0);
+
+
+                const rdText =
+                    rd >= 0
+                    ? `+${rd}`
+                    : `${rd}`;
 
 
                 return `
@@ -2578,7 +2608,9 @@ function renderRanking(){
                 >
 
                     <div class="ranking-position">
-                        #${index + 1}
+
+                        ${index + 1}.
+
                     </div>
 
 
@@ -2595,29 +2627,17 @@ function renderRanking(){
                             ${team.name}
                         </strong>
 
-                        <span>
-
-                            RD
-
-                            ${
-                                Number(team.rd) >= 0
-                                ? "+"
-                                : ""
-                            }
-
-                            ${team.rd}
-
-                        </span>
-
                     </div>
 
 
-                    <div class="ranking-points">
+                    <div class="ranking-stats">
 
-                        ${team.points}
+                        <strong>
+                            ${points} pts
+                        </strong>
 
                         <span>
-                            PTS
+                            RD ${rdText}
                         </span>
 
                     </div>
