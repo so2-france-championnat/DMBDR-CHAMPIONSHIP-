@@ -85,7 +85,6 @@ function renderTeams(){
 
     if(!container) return;
 
-
     container.innerHTML =
         teams.map(team => `
 
@@ -103,7 +102,6 @@ function renderTeams(){
 
             </div>
 
-
             <div class="team-card-info">
 
                 <div class="team-card-name">
@@ -113,7 +111,6 @@ function renderTeams(){
                 <div class="team-card-players">
 
                     ${team.players.length}
-
                     PLAYER${team.players.length > 1 ? "S" : ""}
 
                 </div>
