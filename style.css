@@ -265,85 +265,351 @@ body{
 
 
 /* =========================
-        SOCIAL
+        SOCIAL — NEON V2
 ========================= */
 
 .social-bar{
     display:flex;
 
-    gap:8px;
+    gap:10px;
 
     padding:
         12px 14px;
 
     overflow-x:auto;
+
+    background:
+        rgba(0,20,45,.45);
+
+    border-top:
+        1px solid
+        rgba(0,140,255,.12);
+
+    border-bottom:
+        1px solid
+        rgba(0,140,255,.12);
+
 }
 
 
+/* =========================
+        BASE
+========================= */
+
 .social{
+
+    position:relative;
+
     flex:1;
 
     min-width:95px;
 
     padding:
-        10px 12px;
+        12px 14px;
 
     border:
         1px solid
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.18);
 
-    border-radius:10px;
+    border-radius:11px;
 
     color:white;
 
     font-size:10px;
 
-    font-weight:900;
+    font-weight:1000;
+
+    letter-spacing:1px;
 
     cursor:pointer;
 
-    transition:.25s;
+    overflow:hidden;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+
 }
 
 
-.social:hover{
-    transform:
-        translateY(-2px);
+/* REFLET */
+
+.social::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(255,255,255,.18),
+            transparent 35%,
+            transparent 65%,
+            rgba(255,255,255,.06)
+        );
+
+    pointer-events:none;
+
 }
 
+
+/* LUEUR INTERNE */
+
+.social::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:80px;
+
+    height:80px;
+
+    top:-45px;
+
+    right:-30px;
+
+    border-radius:50%;
+
+    filter:blur(25px);
+
+    opacity:.65;
+
+    pointer-events:none;
+
+}
+
+
+.social span{
+
+    position:relative;
+
+    z-index:2;
+
+    text-shadow:
+        0 0 8px
+        rgba(255,255,255,.35);
+
+}
+
+
+/* =========================
+        DISCORD — VIOLET / BLEU
+========================= */
 
 .discord{
+
     background:
         linear-gradient(
             135deg,
-            rgba(88,101,242,.3),
-            rgba(88,101,242,.08)
+            rgba(88,101,242,.95),
+            rgba(115,70,255,.72),
+            rgba(0,140,255,.45)
         );
+
+    border-color:
+        rgba(115,130,255,.75);
 
     box-shadow:
-        inset
+        0 0 8px
+        rgba(88,101,242,.55),
+
         0 0 20px
-        rgba(88,101,242,.08);
+        rgba(88,101,242,.30),
+
+        inset 0 0 18px
+        rgba(140,120,255,.18);
+
 }
 
+
+.discord::after{
+
+    background:#9b7cff;
+
+}
+
+
+.discord:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    border-color:
+        #9b8cff;
+
+    box-shadow:
+        0 0 12px
+        rgba(88,101,242,.85),
+
+        0 0 30px
+        rgba(120,80,255,.55),
+
+        0 0 50px
+        rgba(0,140,255,.25),
+
+        inset 0 0 22px
+        rgba(150,120,255,.25);
+
+}
+
+
+/* =========================
+        TWITCH — CYAN / VIOLET
+========================= */
 
 .twitch{
+
     background:
         linear-gradient(
             135deg,
-            rgba(145,70,255,.3),
-            rgba(145,70,255,.08)
+            rgba(145,70,255,.95),
+            rgba(100,80,255,.80),
+            rgba(0,190,255,.55)
         );
+
+    border-color:
+        rgba(170,120,255,.80);
+
+    box-shadow:
+        0 0 8px
+        rgba(145,70,255,.60),
+
+        0 0 22px
+        rgba(145,70,255,.32),
+
+        inset 0 0 18px
+        rgba(80,200,255,.14);
+
 }
 
 
+.twitch::after{
+
+    background:#b66cff;
+
+}
+
+
+.twitch:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    border-color:
+        #c38aff;
+
+    box-shadow:
+        0 0 12px
+        rgba(145,70,255,.90),
+
+        0 0 30px
+        rgba(170,70,255,.55),
+
+        0 0 50px
+        rgba(0,190,255,.25),
+
+        inset 0 0 22px
+        rgba(180,100,255,.25);
+
+}
+
+
+/* =========================
+        YOUTUBE — ROUGE NÉON
+========================= */
+
 .youtube{
+
     background:
         linear-gradient(
             135deg,
-            rgba(255,0,51,.3),
-            rgba(255,0,51,.08)
+            rgba(255,0,55,.98),
+            rgba(220,0,75,.82),
+            rgba(145,0,70,.60)
         );
+
+    border-color:
+        rgba(255,70,105,.80);
+
+    box-shadow:
+        0 0 8px
+        rgba(255,0,55,.65),
+
+        0 0 22px
+        rgba(255,0,55,.35),
+
+        inset 0 0 18px
+        rgba(255,60,90,.16);
+
+}
+
+
+.youtube::after{
+
+    background:#ff1744;
+
+}
+
+
+.youtube:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    border-color:
+        #ff5a78;
+
+    box-shadow:
+        0 0 12px
+        rgba(255,0,55,.95),
+
+        0 0 30px
+        rgba(255,0,55,.60),
+
+        0 0 50px
+        rgba(255,0,80,.28),
+
+        inset 0 0 22px
+        rgba(255,50,80,.25);
+
+}
+
+
+/* =========================
+        MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    .social-bar{
+
+        gap:9px;
+
+        padding:
+            12px 12px;
+
+    }
+
+
+    .social{
+
+        min-width:100px;
+
+        padding:
+            12px 10px;
+
+        font-size:9px;
+
+    }
+
 }
 
 
