@@ -820,6 +820,429 @@ function openTeam(teamId){
 
 }
 
+/* =========================
+        MATCH DETAILS
+========================= */
+
+function openMatch(matchId){
+
+    const match =
+        matches.find(
+            m => String(m.id) === String(matchId)
+        );
+
+    if(!match) return;
+
+
+    const details =
+        document.getElementById("matchDetails");
+
+    const teamDetails =
+        document.getElementById("teamDetails");
+
+    const teamList =
+        document.getElementById("teamList");
+
+
+    if(!details) return;
+
+
+    const team1 =
+        teams.find(
+            team => team.name === match.team1
+        );
+
+    const team2 =
+        teams.find(
+            team => team.name === match.team2
+        );
+
+
+    const score1 =
+        Number(match.score1 || 0);
+
+    const score2 =
+        Number(match.score2 || 0);
+
+
+    const team1Won =
+        score1 > score2;
+
+
+    const team2Won =
+        score2 > score1;
+
+
+    teamList.style.display = "none";
+
+
+    if(teamDetails){
+        teamDetails.classList.remove("active");
+        teamDetails.innerHTML = "";
+    }
+
+
+    details.innerHTML = `
+
+        <button
+            class="back-button"
+            onclick="closeMatch()"
+        >
+            ← BACK
+        </button>
+
+
+        <div class="match-detail-header">
+
+            <span>
+                MATCH ${match.id}
+            </span>
+
+            <strong>
+                ${match.status === "played"
+                    ? "PLAYED"
+                    : "UPCOMING"
+                }
+            </strong>
+
+        </div>
+
+
+        <div class="match-detail-scoreboard">
+
+            <div class="
+                match-detail-team
+                ${team1Won ? "match-winner" : ""}
+            ">
+
+                <img
+                    src="${team1 ? team1.logo : ""}"
+                    alt="${match.team1}"
+                >
+
+                <strong>
+                    ${match.team1}
+                </strong>
+
+            </div>
+
+
+            <div class="match-detail-score">
+
+                <span>
+                    ${score1}
+                </span>
+
+                <b>
+                    -
+                </b>
+
+                <span>
+                    ${score2}
+                </span>
+
+            </div>
+
+
+            <div class="
+                match-detail-team
+                ${team2Won ? "match-winner" : ""}
+            ">
+
+                <img
+                    src="${team2 ? team2.logo : ""}"
+                    alt="${match.team2}"
+                >
+
+                <strong>
+                    ${match.team2}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="match-result">
+
+            ${
+                team1Won
+                ? `${match.team1} WIN`
+                : team2Won
+                ? `${match.team2} WIN`
+                : "DRAW"
+            }
+
+        </div>
+
+
+        ${
+            match.mvp
+            ?
+
+            `
+
+            <div class="match-mvp-card">
+
+                <div class="match-mvp-title">
+                    👑 MATCH MVP
+                </div>
+
+                <strong>
+                    ${match.mvp.name}
+                </strong>
+
+                <div>
+
+                    ${match.mvp.kills} K
+                    •
+                    ${match.mvp.assists} A
+                    •
+                    ${match.mvp.deaths} D
+
+                    <span>
+                        KD ${Number(match.mvp.kd).toFixed(2)}
+                    </span>
+
+                </div>
+
+            </div>
+
+            `
+
+            :
+
+            ""
+
+        }
+
+
+        <div class="section-title">
+
+            <span></span>
+
+            PLAYER STATS
+
+            <span></span>
+
+        </div>
+
+
+        <div class="match-player-columns">
+
+            <div class="match-player-team">
+
+                <div class="match-player-team-title">
+
+                    ${match.team1}
+
+                </div>
+
+
+                ${
+                    match.stats
+
+                    ?
+
+                    match.stats
+                        .filter(
+                            player =>
+                                player.team ===
+                                match.team1
+                        )
+                        .map(
+                            player => {
+
+                                const kd =
+                                    player.deaths === 0
+                                    ? player.kills
+                                    : player.kills /
+                                      player.deaths;
+
+
+                                return `
+
+                                <div class="match-player-card">
+
+                                    <div>
+
+                                        <strong>
+                                            ${player.player}
+                                        </strong>
+
+                                        <span>
+                                            ${player.kills} K
+                                            •
+                                            ${player.assists} A
+                                            •
+                                            ${player.deaths} D
+                                        </span>
+
+                                    </div>
+
+
+                                    <strong class="
+                                        ${
+                                            kd >= 2
+                                            ? "kd-good"
+                                            : kd >= 1
+                                            ? "kd-mid"
+                                            : "kd-bad"
+                                        }
+                                    ">
+
+                                        ${kd.toFixed(2)}
+
+                                        <small>
+                                            KD
+                                        </small>
+
+                                    </strong>
+
+                                </div>
+
+                                `;
+
+                            }
+                        )
+                        .join("")
+
+                    :
+
+                    ""
+
+                }
+
+            </div>
+
+
+            <div class="match-player-team">
+
+                <div class="match-player-team-title">
+
+                    ${match.team2}
+
+                </div>
+
+
+                ${
+                    match.stats
+
+                    ?
+
+                    match.stats
+                        .filter(
+                            player =>
+                                player.team ===
+                                match.team2
+                        )
+                        .map(
+                            player => {
+
+                                const kd =
+                                    player.deaths === 0
+                                    ? player.kills
+                                    : player.kills /
+                                      player.deaths;
+
+
+                                return `
+
+                                <div class="match-player-card">
+
+                                    <div>
+
+                                        <strong>
+                                            ${player.player}
+                                        </strong>
+
+                                        <span>
+                                            ${player.kills} K
+                                            •
+                                            ${player.assists} A
+                                            •
+                                            ${player.deaths} D
+                                        </span>
+
+                                    </div>
+
+
+                                    <strong class="
+                                        ${
+                                            kd >= 2
+                                            ? "kd-good"
+                                            : kd >= 1
+                                            ? "kd-mid"
+                                            : "kd-bad"
+                                        }
+                                    ">
+
+                                        ${kd.toFixed(2)}
+
+                                        <small>
+                                            KD
+                                        </small>
+
+                                    </strong>
+
+                                </div>
+
+                                `;
+
+                            }
+                        )
+                        .join("")
+
+                    :
+
+                    ""
+
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    details.classList.add("active");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+        CLOSE MATCH
+========================= */
+
+function closeMatch(){
+
+    const details =
+        document.getElementById("matchDetails");
+
+    const teamList =
+        document.getElementById("teamList");
+
+
+    if(!details) return;
+
+
+    details.classList.remove("active");
+
+    details.innerHTML = "";
+
+
+    if(teamList){
+        teamList.style.display = "";
+    }
+
+}
 
 /* =========================
         CLOSE TEAM
