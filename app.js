@@ -1304,7 +1304,7 @@ function closeTeam(){
         PLAYERS
 ========================= */
 
-function renderPlayers(){
+function renderPlayers(sortMode = "leaderboard"){
 
     const container =
         document.getElementById("playerList");
@@ -1312,30 +1312,94 @@ function renderPlayers(){
     if(!container) return;
 
 
+    /* =========================
+            SORT PLAYERS
+    ========================= */
+
     const sortedPlayers =
         [...players].sort(
             (a,b) => {
 
-                const kdA = getKD(a);
-                const kdB = getKD(b);
+                /* =========================
+                    LEADERBOARD
+                    KD → KILLS → ASSISTS
+                ========================= */
 
-                if(kdB !== kdA){
-                    return kdB - kdA;
+                if(sortMode === "leaderboard"){
+
+                    const kdA =
+                        getKD(a);
+
+                    const kdB =
+                        getKD(b);
+
+
+                    if(kdB !== kdA){
+
+                        return kdB - kdA;
+
+                    }
+
+
+                    if(b.kills !== a.kills){
+
+                        return b.kills - a.kills;
+
+                    }
+
+
+                    return b.assists - a.assists;
+
                 }
 
-                if(b.kills !== a.kills){
+
+                /* =========================
+                        KD
+                ========================= */
+
+                if(sortMode === "kd"){
+
+                    return getKD(b) - getKD(a);
+
+                }
+
+
+                /* =========================
+                        KILLS
+                ========================= */
+
+                if(sortMode === "kills"){
+
                     return b.kills - a.kills;
+
                 }
 
-                return b.assists - a.assists;
+
+                /* =========================
+                        MVP
+                ========================= */
+
+                if(sortMode === "mvp"){
+
+                    return b.mvp - a.mvp;
+
+                }
+
+
+                return 0;
 
             }
         );
 
 
+    /* =========================
+            DISPLAY PLAYERS
+    ========================= */
+
     container.innerHTML =
         sortedPlayers.map(
             (player,index) => {
+
 
                 const kd =
                     getKD(player);
@@ -1348,11 +1412,18 @@ function renderPlayers(){
                 let kdClass =
                     "kd-bad";
 
+
                 if(kd >= 2){
-                    kdClass = "kd-good";
+
+                    kdClass =
+                        "kd-good";
+
                 }
                 else if(kd >= 1){
-                    kdClass = "kd-mid";
+
+                    kdClass =
+                        "kd-mid";
+
                 }
 
 
@@ -1364,24 +1435,38 @@ function renderPlayers(){
                     "player-rank-normal";
 
 
+                /* 🥇 #1 */
+
                 if(index === 0){
 
                     rankClass =
                         "player-rank-first";
 
                 }
+
+
+                /* 🥈 #2 */
+
                 else if(index === 1){
 
                     rankClass =
                         "player-rank-second";
 
                 }
+
+
+                /* 🥉 #3 */
+
                 else if(index === 2){
 
                     rankClass =
                         "player-rank-third";
 
                 }
+
+
+                /* 🔴 3 DERNIERS */
+
                 else if(
                     index >=
                     sortedPlayers.length - 3
@@ -1411,9 +1496,14 @@ function renderPlayers(){
                     : "";
 
 
+                /* =========================
+                        PLAYER CARD
+                ========================= */
+
                 return `
 
                 <div class="player-card">
+
 
                     <div
                         class="
@@ -1421,7 +1511,9 @@ function renderPlayers(){
                             ${rankClass}
                         "
                     >
+
                         ${index + 1}
+
                     </div>
 
 
@@ -1429,6 +1521,7 @@ function renderPlayers(){
 
                         ${
                             teamLogo
+
                             ?
 
                             `
@@ -1453,12 +1546,16 @@ function renderPlayers(){
                     <div class="player-info">
 
                         <div class="player-name">
+
                             ${player.name}
+
                         </div>
 
 
                         <div class="player-team">
+
                             ${player.team}
+
                         </div>
 
                     </div>
@@ -1482,10 +1579,18 @@ function renderPlayers(){
 
 
                         <strong class="${kdClass}">
+
                             ${kd.toFixed(2)} KD
+
                         </strong>
 
+
+                        <span>
+                            👑 ${player.mvp || 0} MVP
+                        </span>
+
                     </div>
+
 
                 </div>
 
@@ -1496,6 +1601,65 @@ function renderPlayers(){
 
 }
 
+/* =========================
+        PLAYER FILTERS
+========================= */
+
+function setupPlayerFilters(){
+
+    const filters =
+        document.querySelectorAll(
+            ".filter"
+        );
+
+
+    filters.forEach(
+        filter => {
+
+            filter.addEventListener(
+                "click",
+                () => {
+
+
+                    /* =========================
+                            ACTIVE BUTTON
+                    ========================= */
+
+                    filters.forEach(
+                        button => {
+
+                            button.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    filter.classList.add(
+                        "active"
+                    );
+
+
+                    /* =========================
+                            SORT MODE
+                    ========================= */
+
+                    const sortMode =
+                        filter.dataset.sort;
+
+
+                    renderPlayers(
+                        sortMode
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
 
 /* =========================
         RANKING
@@ -1793,11 +1957,13 @@ document.addEventListener(
 
             renderTeams();
 
-            renderPlayers();
+renderPlayers("leaderboard");
 
-            renderRanking();
+renderRanking();
 
-            updateCounts();
+updateCounts();
+
+setupPlayerFilters();
 
 
             console.log(
