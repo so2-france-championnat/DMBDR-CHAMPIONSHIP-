@@ -841,6 +841,693 @@ function openTeam(teamId){
 }
 
 /* =========================
+        MATCHES SYSTEM V2
+========================= */
+
+let currentMatchFilter = "all";
+let selectedMatchTeam = null;
+
+
+/* =========================
+        RENDER MATCH TEAMS
+========================= */
+
+function renderMatchTeams(){
+
+    const container =
+        document.getElementById("matchTeamList");
+
+    if(!container) return;
+
+
+    const playedMatches =
+        matches.filter(
+            match =>
+                match.status === "played"
+        );
+
+
+    const upcomingMatches =
+        matches.filter(
+            match =>
+                match.status !== "played"
+        );
+
+
+    container.innerHTML =
+        teams.map(team => {
+
+            const teamMatches =
+                matches.filter(
+                    match =>
+                        match.team1 === team.name ||
+                        match.team2 === team.name
+                );
+
+
+            const played =
+                teamMatches.filter(
+                    match =>
+                        match.status === "played"
+                ).length;
+
+
+            const upcoming =
+                teamMatches.filter(
+                    match =>
+                        match.status !== "played"
+                ).length;
+
+
+            return `
+
+            <div
+                class="match-team-card clickable"
+                onclick="openMatchTeam('${team.id}')"
+            >
+
+                <div class="match-team-logo">
+
+                    <img
+                        src="${team.logo}"
+                        alt="${team.name}"
+                    >
+
+                </div>
+
+
+                <div class="match-team-info">
+
+                    <strong>
+                        ${team.name}
+                    </strong>
+
+                    <span>
+                        ${teamMatches.length}
+                        MATCH${teamMatches.length > 1 ? "ES" : ""}
+                    </span>
+
+                </div>
+
+
+                <div class="match-team-status">
+
+                    <span class="match-team-played">
+                        ${played} PLAYED
+                    </span>
+
+                    <span class="match-team-upcoming">
+                        ${upcoming} UPCOMING
+                    </span>
+
+                </div>
+
+            </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================
+        OPEN TEAM MATCHES
+========================= */
+
+function openMatchTeam(teamId){
+
+    const team =
+        teams.find(
+            t =>
+                String(t.id) ===
+                String(teamId)
+        );
+
+    if(!team) return;
+
+
+    selectedMatchTeam =
+        team.name;
+
+
+    const teamList =
+        document.getElementById(
+            "matchTeamList"
+        );
+
+    const details =
+        document.getElementById(
+            "matchTeamDetails"
+        );
+
+    const matchDetails =
+        document.getElementById(
+            "matchDetails"
+        );
+
+
+    if(!teamList || !details) return;
+
+
+    if(matchDetails){
+
+        matchDetails.classList.remove(
+            "active"
+        );
+
+        matchDetails.innerHTML = "";
+
+    }
+
+
+    teamList.style.display = "none";
+
+
+    renderTeamMatchHistory(
+        team
+    );
+
+}
+
+
+/* =========================
+        TEAM MATCH HISTORY
+========================= */
+
+function renderTeamMatchHistory(team){
+
+    const details =
+        document.getElementById(
+            "matchTeamDetails"
+        );
+
+    if(!details) return;
+
+
+    const teamMatches =
+        matches.filter(
+            match =>
+                match.team1 === team.name ||
+                match.team2 === team.name
+        );
+
+
+    const filteredMatches =
+        teamMatches.filter(
+            match => {
+
+                if(
+                    currentMatchFilter ===
+                    "played"
+                ){
+
+                    return match.status ===
+                        "played";
+
+                }
+
+
+                if(
+                    currentMatchFilter ===
+                    "upcoming"
+                ){
+
+                    return match.status !==
+                        "played";
+
+                }
+
+
+                return true;
+
+            }
+        );
+
+
+    details.innerHTML = `
+
+        <button
+            class="back-button"
+            onclick="closeMatchTeam()"
+        >
+            ← BACK TO TEAMS
+        </button>
+
+
+        <div class="match-team-profile">
+
+            <div class="match-team-profile-logo">
+
+                <img
+                    src="${team.logo}"
+                    alt="${team.name}"
+                >
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    MATCH HISTORY
+                </span>
+
+                <h2>
+                    ${team.name}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="match-team-filter-info">
+
+            <span>
+                ${currentMatchFilter === "all"
+                    ? "ALL MATCHES"
+                    : currentMatchFilter === "played"
+                    ? "PLAYED MATCHES"
+                    : "UPCOMING MATCHES"
+                }
+            </span>
+
+            <strong>
+                ${filteredMatches.length}
+            </strong>
+
+        </div>
+
+
+        <div class="match-history-list">
+
+            ${
+                filteredMatches.length
+
+                ?
+
+                filteredMatches.map(
+                    match =>
+                        createMatchHistoryCard(
+                            match,
+                            team
+                        )
+                ).join("")
+
+                :
+
+                `
+
+                <div class="empty-card">
+
+                    <div class="empty-icon">
+                        ⚔
+                    </div>
+
+                    <strong>
+                        NO MATCHES
+                    </strong>
+
+                    <p>
+                        No matches found for this filter.
+                    </p>
+
+                </div>
+
+                `
+            }
+
+        </div>
+
+    `;
+
+
+    details.classList.add(
+        "active"
+    );
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+        MATCH CARD
+========================= */
+
+function createMatchHistoryCard(
+    match,
+    selectedTeam
+){
+
+    const isTeam1 =
+        match.team1 ===
+        selectedTeam.name;
+
+
+    const opponentName =
+        isTeam1
+        ? match.team2
+        : match.team1;
+
+
+    const teamScore =
+        Number(
+            isTeam1
+            ? match.score1
+            : match.score2
+        );
+
+
+    const opponentScore =
+        Number(
+            isTeam1
+            ? match.score2
+            : match.score1
+        );
+
+
+    const opponentTeam =
+        teams.find(
+            team =>
+                team.name ===
+                opponentName
+        );
+
+
+    const played =
+        match.status === "played";
+
+
+    const won =
+        played &&
+        teamScore >
+        opponentScore;
+
+
+    const loss =
+        played &&
+        teamScore <
+        opponentScore;
+
+
+    const resultClass =
+        won
+        ? "match-card-win"
+        : loss
+        ? "match-card-loss"
+        : "match-card-upcoming";
+
+
+    const resultText =
+        won
+        ? "WIN"
+        : loss
+        ? "LOSS"
+        : "UPCOMING";
+
+
+    return `
+
+    <div
+        class="
+            match-v2-card
+            ${resultClass}
+            clickable
+        "
+        onclick="openMatch('${match.id}')"
+    >
+
+        <div class="match-v2-top">
+
+            <span>
+                MATCH ${match.id}
+            </span>
+
+            <strong>
+                ${resultText}
+            </strong>
+
+        </div>
+
+
+        <div class="match-v2-versus">
+
+            <div class="match-v2-team">
+
+                <img
+                    src="${selectedTeam.logo}"
+                    alt="${selectedTeam.name}"
+                >
+
+                <span>
+                    ${selectedTeam.name}
+                </span>
+
+            </div>
+
+
+            <div class="match-v2-score">
+
+                ${
+                    played
+
+                    ?
+
+                    `
+
+                    <strong>
+
+                        <span
+                            class="${
+                                won
+                                ? "score-win"
+                                : "score-loss"
+                            }"
+                        >
+                            ${teamScore}
+                        </span>
+
+                        <b>
+                            -
+                        </b>
+
+                        <span
+                            class="${
+                                loss
+                                ? "score-win"
+                                : "score-loss"
+                            }"
+                        >
+                            ${opponentScore}
+                        </span>
+
+                    </strong>
+
+                    `
+
+                    :
+
+                    `
+
+                    <strong
+                        class="score-upcoming"
+                    >
+                        VS
+                    </strong>
+
+                    `
+                }
+
+            </div>
+
+
+            <div class="match-v2-team">
+
+                <img
+                    src="${
+                        opponentTeam
+                        ? opponentTeam.logo
+                        : ""
+                    }"
+                    alt="${opponentName}"
+                >
+
+                <span>
+                    ${opponentName}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        ${
+            played && match.mvp
+
+            ?
+
+            `
+
+            <div class="match-v2-mvp">
+
+                👑 MVP
+
+                <strong>
+                    ${match.mvp.name}
+                </strong>
+
+            </div>
+
+            `
+
+            :
+
+            `
+
+            <div class="match-v2-status">
+
+                ${
+                    match.date
+                    ? match.date
+                    : "UPCOMING MATCH"
+                }
+
+            </div>
+
+            `
+        }
+
+    </div>
+
+    `;
+
+}
+
+
+/* =========================
+        CLOSE TEAM MATCHES
+========================= */
+
+function closeMatchTeam(){
+
+    const teamList =
+        document.getElementById(
+            "matchTeamList"
+        );
+
+    const details =
+        document.getElementById(
+            "matchTeamDetails"
+        );
+
+
+    if(!teamList || !details) return;
+
+
+    selectedMatchTeam = null;
+
+
+    details.classList.remove(
+        "active"
+    );
+
+    details.innerHTML = "";
+
+
+    teamList.style.display = "";
+
+}
+
+
+/* =========================
+        MATCH FILTERS
+========================= */
+
+function setupMatchFilters(){
+
+    document.querySelectorAll(
+        "[data-match-filter]"
+    ).forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                currentMatchFilter =
+                    button.dataset.matchFilter;
+
+
+                document
+                    .querySelectorAll(
+                        "[data-match-filter]"
+                    )
+                    .forEach(
+                        btn =>
+                            btn.classList.remove(
+                                "active"
+                            )
+                    );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                if(selectedMatchTeam){
+
+                    const team =
+                        teams.find(
+                            t =>
+                                t.name ===
+                                selectedMatchTeam
+                        );
+
+
+                    if(team){
+
+                        renderTeamMatchHistory(
+                            team
+                        );
+
+                    }
+
+                }
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =========================
+        MATCH COUNT
+========================= */
+
+function updateMatchCount(){
+
+    const count =
+        document.getElementById(
+            "matchPageCount"
+        );
+
+    if(!count) return;
+
+
+    count.textContent =
+        matches.length;
+
+}
+
+/* =========================
         MATCH DETAILS
 ========================= */
 
@@ -1961,9 +2648,15 @@ renderPlayers("leaderboard");
 
 renderRanking();
 
+renderMatchTeams();
+
 updateCounts();
 
+updateMatchCount();
+
 setupPlayerFilters();
+
+setupMatchFilters();
 
 
             console.log(
