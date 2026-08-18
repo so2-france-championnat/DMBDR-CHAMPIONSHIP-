@@ -1677,18 +1677,49 @@ function openMatch(matchId){
 
         <div class="match-detail-header">
 
+    <span>
+        MATCH ${match.id}
+    </span>
+
+    <strong>
+        ${match.status === "played"
+            ? "PLAYED"
+            : "UPCOMING"
+        }
+    </strong>
+
+</div>
+
+${
+    match.status === "played" && match.video
+    ?
+    `
+    <div class="match-publication-info">
+
+        ${
+            match.publication
+            ?
+            `
             <span>
-                MATCH ${match.id}
+                📺 PUBLICATION #${match.publication}
             </span>
+            `
+            :
+            ""
+        }
 
-            <strong>
-                ${match.status === "played"
-                    ? "PLAYED"
-                    : "UPCOMING"
-                }
-            </strong>
+        <button
+            class="match-video-button"
+            onclick="openLink('${match.video}')"
+        >
+            ▶ WATCH MATCH
+        </button>
 
-        </div>
+    </div>
+    `
+    :
+    ""
+}
 
 
         <div class="match-detail-scoreboard">
