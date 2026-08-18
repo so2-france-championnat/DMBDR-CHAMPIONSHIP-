@@ -1781,16 +1781,23 @@ main{
 }
 
 
+/* =========================
+        RANKING V1
+========================= */
+
 .ranking-card{
+
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    gap:14px;
 
     margin-bottom:9px;
 
-    padding:13px;
+    padding:15px 14px;
+
+    min-height:78px;
 
     border:
         1px solid
@@ -1800,72 +1807,281 @@ main{
 
     background:
         rgba(255,255,255,.025);
+
+    transition:.25s;
+
 }
 
 
+.ranking-card:hover{
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(0,140,255,.35);
+
+}
+
+
+/* POSITION */
+
 .ranking-position{
-    width:35px;
+
+    width:32px;
+
+    flex-shrink:0;
+
+    color:#008cff;
+
+    font-size:15px;
+
+    font-weight:1000;
+
+    text-align:center;
+
+}
+
+
+/* LOGO */
+
+.ranking-logo{
+
+    width:52px;
+
+    height:52px;
+
+    flex-shrink:0;
+
+    border-radius:13px;
+
+    object-fit:cover;
+
+}
+
+
+/* TEAM */
+
+.ranking-team{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.ranking-team strong{
+
+    display:block;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:1000;
+
+}
+
+
+/* STATS À DROITE */
+
+.ranking-stats{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:8px;
+
+    flex-shrink:0;
+
+    white-space:nowrap;
+
+}
+
+
+.ranking-stats strong{
+
+    color:#008cff;
+
+    font-size:16px;
+
+    font-weight:1000;
+
+}
+
+
+.ranking-stats span{
 
     color:#008cff;
 
     font-size:14px;
 
     font-weight:1000;
+
 }
 
 
-.ranking-logo{
-    width:45px;
-    height:45px;
+/* =========================
+        PODIUM COLORS
+========================= */
 
-    border-radius:12px;
+.rank-first{
 
-    object-fit:cover;
+    border-left:
+        4px solid
+        #ffd700;
+
+    box-shadow:
+        inset
+        0 0 20px
+        rgba(255,215,0,.035);
+
 }
 
 
-.ranking-team{
-    flex:1;
-}
+.rank-first
+.ranking-position{
 
-
-.ranking-team strong{
-    display:block;
-
-    font-size:13px;
-}
-
-
-.ranking-team span{
-    display:block;
-
-    margin-top:4px;
-
-    color:#737b88;
-
-    font-size:8px;
-}
-
-
-.ranking-points{
     color:#008cff;
 
-    font-size:17px;
-
-    font-weight:1000;
-
-    text-align:right;
 }
 
 
-.ranking-points span{
-    display:block;
+.rank-first
+.ranking-stats strong,
+.rank-first
+.ranking-stats span{
 
-    color:#737b88;
+    color:#ffd700;
 
-    font-size:6px;
+}
 
-    letter-spacing:1px;
+
+.rank-second{
+
+    border-left:
+        4px solid
+        #c0c0c0;
+
+}
+
+
+.rank-second
+.ranking-stats strong,
+.rank-second
+.ranking-stats span{
+
+    color:#c0c0c0;
+
+}
+
+
+.rank-third{
+
+    border-left:
+        4px solid
+        #cd7f32;
+
+}
+
+
+.rank-third
+.ranking-stats strong,
+.rank-third
+.ranking-stats span{
+
+    color:#cd7f32;
+
+}
+
+
+.rank-normal{
+
+    border-left:
+        3px solid
+        rgba(0,140,255,.35);
+
+}
+
+
+/* =========================
+        MOBILE RANKING
+========================= */
+
+@media(max-width:480px){
+
+    .ranking-card{
+
+        gap:10px;
+
+        padding:13px 10px;
+
+        min-height:70px;
+
+    }
+
+
+    .ranking-position{
+
+        width:27px;
+
+        font-size:14px;
+
+    }
+
+
+    .ranking-logo{
+
+        width:48px;
+
+        height:48px;
+
+        border-radius:12px;
+
+    }
+
+
+    .ranking-team strong{
+
+        font-size:14px;
+
+    }
+
+
+    .ranking-stats{
+
+        gap:4px;
+
+        flex-direction:column;
+
+        align-items:flex-end;
+
+    }
+
+
+    .ranking-stats strong{
+
+        font-size:15px;
+
+    }
+
+
+    .ranking-stats span{
+
+        font-size:11px;
+
+    }
+
 }
 
 
