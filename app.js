@@ -1042,12 +1042,13 @@ document.addEventListener(
             "DMBDR CHAMPIONSHIP V2 — ONLINE"
         );
 
-
         try{
 
             await loadTeams();
 
             await loadPlayers();
+
+            await loadMatches();
 
 
             console.log(
@@ -1055,10 +1056,14 @@ document.addEventListener(
                 " équipes chargées"
             );
 
-
             console.log(
                 players.length +
                 " joueurs chargés"
+            );
+
+            console.log(
+                matches.length +
+                " matchs chargés"
             );
 
         }
