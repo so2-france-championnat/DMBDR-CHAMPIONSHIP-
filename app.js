@@ -2,6 +2,8 @@ let teams = [];
 let players = [];
 let matches = [];
 
+let currentMatchFilter = "all";
+let selectedMatchTeam = null;
 
 /* =========================
         LOAD TEAMS
