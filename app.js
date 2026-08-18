@@ -315,6 +315,7 @@ function renderTeams(){
 
     if(!container) return;
 
+
     container.innerHTML =
         teams.map(team => `
 
@@ -340,8 +341,18 @@ function renderTeams(){
 
                 <div class="team-card-players">
 
-                    ${team.players.length}
-                    PLAYER${team.players.length > 1 ? "S" : ""}
+                    ${
+                        Array.isArray(team.players)
+                        ? team.players.length
+                        : 0
+                    }
+
+                    PLAYER${
+                        Array.isArray(team.players) &&
+                        team.players.length > 1
+                        ? "S"
+                        : ""
+                    }
 
                 </div>
 
@@ -349,83 +360,95 @@ function renderTeams(){
 
         </div>
 
-    `).join("");
+        `).join("");
 
 }
 
 
 /* =========================
-        TEAM DETAILS
+        TEAM PROFILE
 ========================= */
 
 function openTeam(teamId){
 
     const team =
         teams.find(
-            t => String(t.id) === String(teamId)
+            t =>
+                String(t.id) ===
+                String(teamId)
         );
 
     if(!team) return;
 
 
     const list =
-        document.getElementById("teamList");
+        document.getElementById(
+            "teamList"
+        );
 
     const details =
-        document.getElementById("teamDetails");
+        document.getElementById(
+            "teamDetails"
+        );
+
 
     if(!list || !details) return;
 
 
-    const sortedTeams =
-        [...teams].sort((a,b) => {
-
-            const pointsA =
-                Number(a.points ?? 0);
-
-            const pointsB =
-                Number(b.points ?? 0);
-
-            const rdA =
-                Number(a.rd ?? 0);
-
-            const rdB =
-                Number(b.rd ?? 0);
-
-
-            if(pointsB !== pointsA){
-                return pointsB - pointsA;
-            }
-
-            return rdB - rdA;
-
-        });
-
-
-    const position =
-        sortedTeams.findIndex(
-            t =>
-                String(t.id) ===
-                String(team.id)
-        ) + 1;
-
+    /*
+     * Les joueurs sont récupérés
+     * depuis players.json
+     */
 
     const teamPlayers =
         players.filter(
             player =>
-                player.team === team.name
+                player.team ===
+                team.name
         );
 
 
-    const teamMatches =
-        matches.filter(
-            match =>
-                match.team1 === team.name ||
-                match.team2 === team.name
-        );
+    /*
+     * Si aucun joueur n'est trouvé
+     * dans players.json, on utilise
+     * le roster présent dans teams.json.
+     */
+
+    let roster =
+        teamPlayers;
 
 
-    list.style.display = "none";
+    if(
+        roster.length === 0 &&
+        Array.isArray(team.players)
+    ){
+
+        roster =
+            team.players.map(
+                player => {
+
+                    if(typeof player === "string"){
+
+                        return {
+                            name: player,
+                            kills: 0,
+                            assists: 0,
+                            deaths: 0,
+                            mvp: 0
+                        };
+
+                    }
+
+                    return player;
+
+                }
+            );
+
+    }
+
+
+    list.style.display =
+        "none";
 
 
     details.innerHTML = `
@@ -438,9 +461,9 @@ function openTeam(teamId){
         </button>
 
 
-        <div class="team-hero-card">
+        <div class="team-simple-header">
 
-            <div class="team-hero-logo">
+            <div class="team-simple-logo">
 
                 <img
                     src="${team.logo}"
@@ -450,10 +473,10 @@ function openTeam(teamId){
             </div>
 
 
-            <div class="team-hero-name">
+            <div>
 
                 <span>
-                    TEAM PROFILE
+                    TEAM ROSTER
                 </span>
 
                 <h2>
@@ -465,84 +488,15 @@ function openTeam(teamId){
         </div>
 
 
-        <div class="team-position">
+        <div class="team-roster-count">
 
-            <div>
+            <span>
+                PLAYERS
+            </span>
 
-                <span>
-                    RANK
-                </span>
-
-                <strong>
-                    #${position}
-                </strong>
-
-            </div>
-
-
-            <div>
-
-                <span>
-                    POINTS
-                </span>
-
-                <strong>
-                    ${team.points}
-                </strong>
-
-            </div>
-
-
-            <div>
-
-                <span>
-                    RD
-                </span>
-
-                <strong class="${
-                    team.rd > 0
-                    ? "rd-positive"
-                    : team.rd < 0
-                    ? "rd-negative"
-                    : ""
-                }">
-
-                    ${team.rd >= 0 ? "+" : ""}
-                    ${team.rd}
-
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="team-record-grid">
-
-            <div class="team-record rounds-win">
-
-                <span>
-                    ROUNDS WON
-                </span>
-
-                <strong>
-                    ${team.roundsWon}
-                </strong>
-
-            </div>
-
-
-            <div class="team-record rounds-loss">
-
-                <span>
-                    ROUNDS LOST
-                </span>
-
-                <strong>
-                    ${team.roundsLost}
-                </strong>
-
-            </div>
+            <strong>
+                ${roster.length}
+            </strong>
 
         </div>
 
@@ -551,21 +505,44 @@ function openTeam(teamId){
 
             <span></span>
 
-            ROSTER
+            PLAYERS
 
             <span></span>
 
         </div>
 
 
-        <div class="roster-list">
+        <div class="simple-roster">
 
             ${
-                teamPlayers.map(
+                roster.length
+
+                ?
+
+                roster.map(
                     (player,index) => {
 
+                        const kills =
+                            Number(
+                                player.kills || 0
+                            );
+
+                        const assists =
+                            Number(
+                                player.assists || 0
+                            );
+
+                        const deaths =
+                            Number(
+                                player.deaths || 0
+                            );
+
+
                         const kd =
-                            getKD(player);
+                            deaths === 0
+                            ? kills
+                            : kills / deaths;
+
 
                         const kdClass =
                             kd >= 2
@@ -578,10 +555,14 @@ function openTeam(teamId){
                         return `
 
                         <div
-                            class="roster-player"
+                            class="simple-roster-player"
                         >
 
-                            <div class="roster-number">
+                            <div
+                                class="
+                                    simple-roster-number
+                                "
+                            >
 
                                 ${String(
                                     index + 1
@@ -590,7 +571,11 @@ function openTeam(teamId){
                             </div>
 
 
-                            <div class="roster-info">
+                            <div
+                                class="
+                                    simple-roster-info
+                                "
+                            >
 
                                 <strong>
                                     ${player.name}
@@ -598,11 +583,11 @@ function openTeam(teamId){
 
                                 <span>
 
-                                    ${player.kills} K
+                                    ${kills} K
                                     •
-                                    ${player.assists} A
+                                    ${assists} A
                                     •
-                                    ${player.deaths} D
+                                    ${deaths} D
 
                                 </span>
 
@@ -611,16 +596,16 @@ function openTeam(teamId){
 
                             <div
                                 class="
-                                    roster-kd
+                                    simple-roster-kd
                                     ${kdClass}
                                 "
                             >
 
                                 ${kd.toFixed(2)}
 
-                                <span>
+                                <small>
                                     KD
-                                </span>
+                                </small>
 
                             </div>
 
@@ -629,510 +614,6 @@ function openTeam(teamId){
                         `;
 
                     }
-                ).join("")
-            }
-
-        </div>
-
-
-        <div class="section-title">
-
-            <span></span>
-
-            MATCH HISTORY
-
-            <span></span>
-
-        </div>
-
-
-        <div class="team-match-history">
-
-            ${
-                teamMatches.length
-
-                ?
-
-                teamMatches.map(
-                    match => {
-
-                        const isTeam1 =
-                            match.team1 === team.name;
-
-                        const opponent =
-                            isTeam1
-                            ? match.team2
-                            : match.team1;
-
-                        const teamScore =
-                            isTeam1
-                            ? match.score1
-                            : match.score2;
-
-                        const opponentScore =
-                            isTeam1
-                            ? match.score2
-                            : match.score1;
-
-                        const won =
-                            teamScore > opponentScore;
-
-                        const opponentTeam =
-                            teams.find(
-                                t =>
-                                    t.name ===
-                                    opponent
-                            );
-
-
-                        return `
-
-                        <div
-    class="
-        match-history-card
-        clickable
-        ${won
-            ? "history-win"
-            : "history-loss"
-        }
-    "
-    onclick="openMatch('${match.id}')"
->
-
-                            <div class="history-top">
-
-                                <span>
-                                    MATCH ${match.id}
-                                </span>
-
-                                <strong class="${
-                                    won
-                                    ? "history-result-win"
-                                    : "history-result-loss"
-                                }">
-
-                                    ${
-                                        won
-                                        ? "WIN"
-                                        : "LOSS"
-                                    }
-
-                                </strong>
-
-                            </div>
-
-
-                            <div class="history-versus">
-
-                                <div>
-
-                                    <img
-                                        src="${team.logo}"
-                                        alt="${team.name}"
-                                    >
-
-                                    <span>
-                                        ${team.name}
-                                    </span>
-
-                                </div>
-
-
-                                <strong class="history-score">
-
-    <span class="${
-        won
-        ? "history-score-win"
-        : "history-score-loss"
-    }">
-        ${teamScore}
-    </span>
-
-    <b>
-        -
-    </b>
-
-    <span class="${
-        won
-        ? "history-score-loss"
-        : "history-score-win"
-    }">
-        ${opponentScore}
-    </span>
-
-</strong>
-
-
-                                <div>
-
-                                    <img
-                                        src="${
-                                            opponentTeam
-                                            ? opponentTeam.logo
-                                            : ""
-                                        }"
-                                        alt="${opponent}"
-                                    >
-
-                                    <span>
-                                        ${opponent}
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="history-mvp">
-
-                                👑 MVP
-
-                                <strong>
-                                    ${match.mvp.name}
-                                </strong>
-
-                                <span>
-
-                                    ${match.mvp.kills} K
-                                    •
-                                    ${match.mvp.assists} A
-                                    •
-                                    ${match.mvp.deaths} D
-                                    •
-                                    KD ${match.mvp.kd}
-
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                        `;
-
-                    }
-                ).join("")
-
-                :
-
-                `
-
-                <div class="empty-card">
-
-                    NO MATCHES PLAYED
-
-                </div>
-
-                `
-            }
-
-        </div>
-
-    `;
-
-
-    details.classList.add("active");
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-/* =========================
-        MATCHES SYSTEM V2
-========================= */
-
-let currentMatchFilter = "all";
-let selectedMatchTeam = null;
-
-
-/* =========================
-        RENDER MATCH TEAMS
-========================= */
-
-function renderMatchTeams(){
-
-    const container =
-        document.getElementById("matchTeamList");
-
-    if(!container) return;
-
-
-    const playedMatches =
-        matches.filter(
-            match =>
-                match.status === "played"
-        );
-
-
-    const upcomingMatches =
-        matches.filter(
-            match =>
-                match.status !== "played"
-        );
-
-
-    container.innerHTML =
-        teams.map(team => {
-
-            const teamMatches =
-                matches.filter(
-                    match =>
-                        match.team1 === team.name ||
-                        match.team2 === team.name
-                );
-
-
-            const played =
-                teamMatches.filter(
-                    match =>
-                        match.status === "played"
-                ).length;
-
-
-            const upcoming =
-                teamMatches.filter(
-                    match =>
-                        match.status !== "played"
-                ).length;
-
-
-            return `
-
-            <div
-                class="match-team-card clickable"
-                onclick="openMatchTeam('${team.id}')"
-            >
-
-                <div class="match-team-logo">
-
-                    <img
-                        src="${team.logo}"
-                        alt="${team.name}"
-                    >
-
-                </div>
-
-
-                <div class="match-team-info">
-
-                    <strong>
-                        ${team.name}
-                    </strong>
-
-                    <span>
-                        ${teamMatches.length}
-                        MATCH${teamMatches.length > 1 ? "ES" : ""}
-                    </span>
-
-                </div>
-
-
-                <div class="match-team-status">
-
-                    <span class="match-team-played">
-                        ${played} PLAYED
-                    </span>
-
-                    <span class="match-team-upcoming">
-                        ${upcoming} UPCOMING
-                    </span>
-
-                </div>
-
-            </div>
-
-            `;
-
-        }).join("");
-
-}
-
-
-/* =========================
-        OPEN TEAM MATCHES
-========================= */
-
-function openMatchTeam(teamId){
-
-    const team =
-        teams.find(
-            t =>
-                String(t.id) ===
-                String(teamId)
-        );
-
-    if(!team) return;
-
-
-    selectedMatchTeam =
-        team.name;
-
-
-    const teamList =
-        document.getElementById(
-            "matchTeamList"
-        );
-
-    const details =
-        document.getElementById(
-            "matchTeamDetails"
-        );
-
-    const matchDetails =
-        document.getElementById(
-            "matchDetails"
-        );
-
-
-    if(!teamList || !details) return;
-
-
-    if(matchDetails){
-
-        matchDetails.classList.remove(
-            "active"
-        );
-
-        matchDetails.innerHTML = "";
-
-    }
-
-
-    teamList.style.display = "none";
-
-
-    renderTeamMatchHistory(
-        team
-    );
-
-}
-
-
-/* =========================
-        TEAM MATCH HISTORY
-========================= */
-
-function renderTeamMatchHistory(team){
-
-    const details =
-        document.getElementById(
-            "matchTeamDetails"
-        );
-
-    if(!details) return;
-
-
-    const teamMatches =
-        matches.filter(
-            match =>
-                match.team1 === team.name ||
-                match.team2 === team.name
-        );
-
-
-    const filteredMatches =
-        teamMatches.filter(
-            match => {
-
-                if(
-                    currentMatchFilter ===
-                    "played"
-                ){
-
-                    return match.status ===
-                        "played";
-
-                }
-
-
-                if(
-                    currentMatchFilter ===
-                    "upcoming"
-                ){
-
-                    return match.status !==
-                        "played";
-
-                }
-
-
-                return true;
-
-            }
-        );
-
-
-    details.innerHTML = `
-
-        <button
-            class="back-button"
-            onclick="closeMatchTeam()"
-        >
-            ← BACK TO TEAMS
-        </button>
-
-
-        <div class="match-team-profile">
-
-            <div class="match-team-profile-logo">
-
-                <img
-                    src="${team.logo}"
-                    alt="${team.name}"
-                >
-
-            </div>
-
-
-            <div>
-
-                <span>
-                    MATCH HISTORY
-                </span>
-
-                <h2>
-                    ${team.name}
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="match-team-filter-info">
-
-            <span>
-                ${currentMatchFilter === "all"
-                    ? "ALL MATCHES"
-                    : currentMatchFilter === "played"
-                    ? "PLAYED MATCHES"
-                    : "UPCOMING MATCHES"
-                }
-            </span>
-
-            <strong>
-                ${filteredMatches.length}
-            </strong>
-
-        </div>
-
-
-        <div class="match-history-list">
-
-            ${
-                filteredMatches.length
-
-                ?
-
-                filteredMatches.map(
-                    match =>
-                        createMatchHistoryCard(
-                            match,
-                            team
-                        )
                 ).join("")
 
                 :
@@ -1142,15 +623,15 @@ function renderTeamMatchHistory(team){
                 <div class="empty-card">
 
                     <div class="empty-icon">
-                        ⚔
+                        ♙
                     </div>
 
                     <strong>
-                        NO MATCHES
+                        NO PLAYERS
                     </strong>
 
                     <p>
-                        No matches found for this filter.
+                        No players found for this team.
                     </p>
 
                 </div>
@@ -1177,260 +658,23 @@ function renderTeamMatchHistory(team){
 
 
 /* =========================
-        MATCH CARD
+        CLOSE TEAM
 ========================= */
 
-function createMatchHistoryCard(
-    match,
-    selectedTeam
-){
+function closeTeam(){
 
-    const isTeam1 =
-        match.team1 ===
-        selectedTeam.name;
-
-
-    const opponentName =
-        isTeam1
-        ? match.team2
-        : match.team1;
-
-
-    const teamScore =
-        Number(
-            isTeam1
-            ? match.score1
-            : match.score2
-        );
-
-
-    const opponentScore =
-        Number(
-            isTeam1
-            ? match.score2
-            : match.score1
-        );
-
-
-    const opponentTeam =
-        teams.find(
-            team =>
-                team.name ===
-                opponentName
-        );
-
-
-    const played =
-        match.status === "played";
-
-
-    const won =
-        played &&
-        teamScore >
-        opponentScore;
-
-
-    const loss =
-        played &&
-        teamScore <
-        opponentScore;
-
-
-    const resultClass =
-        won
-        ? "match-card-win"
-        : loss
-        ? "match-card-loss"
-        : "match-card-upcoming";
-
-
-    const resultText =
-        won
-        ? "WIN"
-        : loss
-        ? "LOSS"
-        : "UPCOMING";
-
-
-    return `
-
-    <div
-        class="
-            match-v2-card
-            ${resultClass}
-            clickable
-        "
-        onclick="openMatch('${match.id}')"
-    >
-
-        <div class="match-v2-top">
-
-            <span>
-                MATCH ${match.id}
-            </span>
-
-            <strong>
-                ${resultText}
-            </strong>
-
-        </div>
-
-
-        <div class="match-v2-versus">
-
-            <div class="match-v2-team">
-
-                <img
-                    src="${selectedTeam.logo}"
-                    alt="${selectedTeam.name}"
-                >
-
-                <span>
-                    ${selectedTeam.name}
-                </span>
-
-            </div>
-
-
-            <div class="match-v2-score">
-
-                ${
-                    played
-
-                    ?
-
-                    `
-
-                    <strong>
-
-                        <span
-                            class="${
-                                won
-                                ? "score-win"
-                                : "score-loss"
-                            }"
-                        >
-                            ${teamScore}
-                        </span>
-
-                        <b>
-                            -
-                        </b>
-
-                        <span
-                            class="${
-                                loss
-                                ? "score-win"
-                                : "score-loss"
-                            }"
-                        >
-                            ${opponentScore}
-                        </span>
-
-                    </strong>
-
-                    `
-
-                    :
-
-                    `
-
-                    <strong
-                        class="score-upcoming"
-                    >
-                        VS
-                    </strong>
-
-                    `
-                }
-
-            </div>
-
-
-            <div class="match-v2-team">
-
-                <img
-                    src="${
-                        opponentTeam
-                        ? opponentTeam.logo
-                        : ""
-                    }"
-                    alt="${opponentName}"
-                >
-
-                <span>
-                    ${opponentName}
-                </span>
-
-            </div>
-
-        </div>
-
-
-        ${
-            played && match.mvp
-
-            ?
-
-            `
-
-            <div class="match-v2-mvp">
-
-                👑 MVP
-
-                <strong>
-                    ${match.mvp.name}
-                </strong>
-
-            </div>
-
-            `
-
-            :
-
-            `
-
-            <div class="match-v2-status">
-
-                ${
-                    match.date
-                    ? match.date
-                    : "UPCOMING MATCH"
-                }
-
-            </div>
-
-            `
-        }
-
-    </div>
-
-    `;
-
-}
-
-
-/* =========================
-        CLOSE TEAM MATCHES
-========================= */
-
-function closeMatchTeam(){
-
-    const teamList =
+    const list =
         document.getElementById(
-            "matchTeamList"
+            "teamList"
         );
 
     const details =
         document.getElementById(
-            "matchTeamDetails"
+            "teamDetails"
         );
 
 
-    if(!teamList || !details) return;
-
-
-    selectedMatchTeam = null;
+    if(!list || !details) return;
 
 
     details.classList.remove(
@@ -1440,7 +684,8 @@ function closeMatchTeam(){
     details.innerHTML = "";
 
 
-    teamList.style.display = "";
+    list.style.display =
+        "";
 
 }
 
