@@ -57,10 +57,6 @@ async function loadPlayers(){
         LOAD MATCHES
 ========================= */
 
-/* =========================
-        LOAD MATCHES
-========================= */
-
 async function loadMatches(){
 
     try{
@@ -124,6 +120,189 @@ function getKD(player){
 
 }
 
+/* =========================
+   CALCUL AUTOMATIQUE STATS
+========================= */
+
+function calculateChampionshipStats(){
+
+    /* =========================
+       RESET EQUIPES
+    ========================= */
+
+    teams.forEach(team => {
+
+        team.points = 0;
+        team.roundsWon = 0;
+        team.roundsLost = 0;
+        team.rd = 0;
+
+    });
+
+
+    /* =========================
+       RESET JOUEURS ACTUELS
+    ========================= */
+
+    players.forEach(player => {
+
+        player.kills = 0;
+        player.assists = 0;
+        player.deaths = 0;
+        player.mvp = 0;
+
+    });
+
+
+    /* =========================
+       CALCUL DES MATCHS
+    ========================= */
+
+    matches.forEach(match => {
+
+        if(match.status !== "played"){
+            return;
+        }
+
+
+        const team1 =
+            teams.find(
+                team =>
+                    team.name === match.team1
+            );
+
+        const team2 =
+            teams.find(
+                team =>
+                    team.name === match.team2
+            );
+
+
+        if(!team1 || !team2){
+            return;
+        }
+
+
+        const score1 =
+            Number(match.score1 || 0);
+
+        const score2 =
+            Number(match.score2 || 0);
+
+
+        /* =========================
+           ROUNDS
+        ========================= */
+
+        team1.roundsWon += score1;
+        team1.roundsLost += score2;
+
+        team2.roundsWon += score2;
+        team2.roundsLost += score1;
+
+
+        /* =========================
+           RD
+        ========================= */
+
+        team1.rd += score1 - score2;
+
+        team2.rd += score2 - score1;
+
+
+        /* =========================
+           POINTS
+        ========================= */
+
+        if(score1 > score2){
+
+            team1.points += 3;
+
+        }
+        else if(score2 > score1){
+
+            team2.points += 3;
+
+        }
+
+
+        /* =========================
+           STATS JOUEURS
+        ========================= */
+
+        if(Array.isArray(match.stats)){
+
+            match.stats.forEach(stat => {
+
+                const player =
+                    players.find(
+                        p =>
+                            p.name ===
+                            stat.player
+                    );
+
+
+                /*
+                 * Si le joueur n'existe plus
+                 * dans players.json,
+                 * on ignore ses stats globales.
+                 */
+
+                if(!player){
+                    return;
+                }
+
+
+                player.kills +=
+                    Number(stat.kills || 0);
+
+                player.assists +=
+                    Number(stat.assists || 0);
+
+                player.deaths +=
+                    Number(stat.deaths || 0);
+
+            });
+
+        }
+
+
+        /* =========================
+           MVP
+        ========================= */
+
+        if(match.mvp){
+
+            const mvpPlayer =
+                players.find(
+                    player =>
+                        player.name ===
+                        match.mvp.name
+                );
+
+
+            /*
+             * Les MVP des anciens joueurs
+             * ne sont pas comptabilisés
+             * dans les stats actuelles.
+             */
+
+            if(mvpPlayer){
+
+                mvpPlayer.mvp += 1;
+
+            }
+
+        }
+
+    });
+
+
+    console.log(
+        "📊 STATISTIQUES CHAMPIONNAT CALCULÉES"
+    );
+
+}
 
 /* =========================
         TEAMS
@@ -1042,6 +1221,7 @@ document.addEventListener(
             "DMBDR CHAMPIONSHIP V2 — ONLINE"
         );
 
+
         try{
 
             await loadTeams();
@@ -1051,15 +1231,37 @@ document.addEventListener(
             await loadMatches();
 
 
+            /* =========================
+               CALCUL CHAMPIONNAT
+            ========================= */
+
+            calculateChampionshipStats();
+
+
+            /* =========================
+               RAFRAÎCHISSEMENT AFFICHAGE
+            ========================= */
+
+            renderTeams();
+
+            renderPlayers();
+
+            renderRanking();
+
+            updateCounts();
+
+
             console.log(
                 teams.length +
                 " équipes chargées"
             );
 
+
             console.log(
                 players.length +
                 " joueurs chargés"
             );
+
 
             console.log(
                 matches.length +
