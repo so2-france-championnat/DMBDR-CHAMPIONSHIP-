@@ -1079,13 +1079,22 @@ function openMatch(matchId){
 
         <div class="match-player-columns">
 
-            <div class="match-player-team">
+            <div class="
+    match-player-team
+    ${
+        team1Won
+        ? "match-player-team-win"
+        : team2Won
+        ? "match-player-team-loss"
+        : ""
+    }
+">
 
-                <div class="match-player-team-title">
+    <div class="match-player-team-title">
 
-                    ${match.team1}
+        ${match.team1}
 
-                </div>
+    </div>
 
 
                 ${
@@ -1165,13 +1174,22 @@ function openMatch(matchId){
             </div>
 
 
-            <div class="match-player-team">
+            <div class="
+    match-player-team
+    ${
+        team2Won
+        ? "match-player-team-win"
+        : team1Won
+        ? "match-player-team-loss"
+        : ""
+    }
+">
 
-                <div class="match-player-team-title">
+    <div class="match-player-team-title">
 
-                    ${match.team2}
+        ${match.team2}
 
-                </div>
+    </div>
 
 
                 ${
