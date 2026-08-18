@@ -688,14 +688,16 @@ function openTeam(teamId){
                         return `
 
                         <div
-                            class="
-                                match-history-card
-                                ${won
-                                    ? "history-win"
-                                    : "history-loss"
-                                }
-                            "
-                        >
+    class="
+        match-history-card
+        clickable
+        ${won
+            ? "history-win"
+            : "history-loss"
+        }
+    "
+    onclick="openMatch('${match.id}')"
+>
 
                             <div class="history-top">
 
