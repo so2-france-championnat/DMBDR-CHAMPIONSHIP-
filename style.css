@@ -2037,14 +2037,6 @@ main{
     white-space:nowrap;
 }
 
-.history-versus > strong{
-    font-size:22px;
-
-    font-weight:1000;
-
-    white-space:nowrap;
-}
-
 
 /* =========================
         HISTORY SCORE COLORS
@@ -2343,7 +2335,7 @@ main{
 }
 
 
-.match-detail-score span:first-child{
+.match-detail-score .history-score-win{
     color:#00ff88;
 
     text-shadow:
@@ -2352,7 +2344,7 @@ main{
 }
 
 
-.match-detail-score span:last-child{
+.match-detail-score .history-score-loss{
     color:#ff1744;
 
     text-shadow:
