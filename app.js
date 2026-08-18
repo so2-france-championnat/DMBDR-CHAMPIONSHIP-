@@ -1690,38 +1690,6 @@ function openMatch(matchId){
 
 </div>
 
-${
-    match.status === "played" && match.video
-    ?
-    `
-    <div class="match-publication-info">
-
-        ${
-            match.publication
-            ?
-            `
-            <span>
-                📺 PUBLICATION #${match.publication}
-            </span>
-            `
-            :
-            ""
-        }
-
-        <button
-            class="match-video-button"
-            onclick="openLink('${match.video}')"
-        >
-            ▶ WATCH MATCH
-        </button>
-
-    </div>
-    `
-    :
-    ""
-}
-
-
         <div class="match-detail-scoreboard">
 
             <div class="
@@ -2052,7 +2020,44 @@ ${
 
             </div>
 
-        </div>
+                </div>
+
+
+        ${
+            match.status === "played" && match.video
+            ?
+            `
+            <div class="match-video-section">
+
+                ${
+                    match.publication
+                    ?
+                    `
+                    <div class="match-publication-number">
+                        PUBLICATION #${match.publication}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+                <div class="match-video-player">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/${match.video.split("youtu.be/")[1]?.split("?")[0]}"
+                        title="MATCH ${match.id}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+            </div>
+            `
+            :
+            ""
+        }
 
     `;
 
