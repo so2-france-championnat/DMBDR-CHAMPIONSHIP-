@@ -1,5 +1,6 @@
 let teams = [];
 let players = [];
+let matches = [];
 
 
 /* =========================
@@ -52,6 +53,26 @@ async function loadPlayers(){
 
 }
 
+/* =========================
+        LOAD MATCHES
+========================= */
+
+async function loadMatches(){
+
+    const response =
+        await fetch("data/matches.json");
+
+    if(!response.ok){
+        throw new Error("matches.json introuvable");
+    }
+
+    const data =
+        await response.json();
+
+    matches =
+        data.matches || [];
+
+}
 
 /* =========================
         KD
@@ -145,6 +166,450 @@ function openTeam(teamId){
         document.getElementById("teamDetails");
 
     if(!list || !details) return;
+
+
+    const sortedTeams =
+        [...teams].sort((a,b) => {
+
+            const pointsA =
+                Number(a.points ?? 0);
+
+            const pointsB =
+                Number(b.points ?? 0);
+
+            const rdA =
+                Number(a.rd ?? 0);
+
+            const rdB =
+                Number(b.rd ?? 0);
+
+
+            if(pointsB !== pointsA){
+                return pointsB - pointsA;
+            }
+
+            return rdB - rdA;
+
+        });
+
+
+    const position =
+        sortedTeams.findIndex(
+            t =>
+                String(t.id) ===
+                String(team.id)
+        ) + 1;
+
+
+    const teamPlayers =
+        players.filter(
+            player =>
+                player.team === team.name
+        );
+
+
+    const teamMatches =
+        matches.filter(
+            match =>
+                match.team1 === team.name ||
+                match.team2 === team.name
+        );
+
+
+    list.style.display = "none";
+
+
+    details.innerHTML = `
+
+        <button
+            class="back-button"
+            onclick="closeTeam()"
+        >
+            ← BACK TO TEAMS
+        </button>
+
+
+        <div class="team-hero-card">
+
+            <div class="team-hero-logo">
+
+                <img
+                    src="${team.logo}"
+                    alt="${team.name}"
+                >
+
+            </div>
+
+
+            <div class="team-hero-name">
+
+                <span>
+                    TEAM PROFILE
+                </span>
+
+                <h2>
+                    ${team.name}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="team-position">
+
+            <div>
+
+                <span>
+                    RANK
+                </span>
+
+                <strong>
+                    #${position}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    POINTS
+                </span>
+
+                <strong>
+                    ${team.points}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    RD
+                </span>
+
+                <strong class="${
+                    team.rd > 0
+                    ? "rd-positive"
+                    : team.rd < 0
+                    ? "rd-negative"
+                    : ""
+                }">
+
+                    ${team.rd >= 0 ? "+" : ""}
+                    ${team.rd}
+
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="team-record-grid">
+
+            <div class="team-record rounds-win">
+
+                <span>
+                    ROUNDS WON
+                </span>
+
+                <strong>
+                    ${team.roundsWon}
+                </strong>
+
+            </div>
+
+
+            <div class="team-record rounds-loss">
+
+                <span>
+                    ROUNDS LOST
+                </span>
+
+                <strong>
+                    ${team.roundsLost}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="section-title">
+
+            <span></span>
+
+            ROSTER
+
+            <span></span>
+
+        </div>
+
+
+        <div class="roster-list">
+
+            ${
+                teamPlayers.map(
+                    (player,index) => {
+
+                        const kd =
+                            getKD(player);
+
+                        const kdClass =
+                            kd >= 2
+                            ? "kd-good"
+                            : kd >= 1
+                            ? "kd-mid"
+                            : "kd-bad";
+
+
+                        return `
+
+                        <div
+                            class="roster-player"
+                        >
+
+                            <div class="roster-number">
+
+                                ${String(
+                                    index + 1
+                                ).padStart(2,"0")}
+
+                            </div>
+
+
+                            <div class="roster-info">
+
+                                <strong>
+                                    ${player.name}
+                                </strong>
+
+                                <span>
+
+                                    ${player.kills} K
+                                    •
+                                    ${player.assists} A
+                                    •
+                                    ${player.deaths} D
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="
+                                    roster-kd
+                                    ${kdClass}
+                                "
+                            >
+
+                                ${kd.toFixed(2)}
+
+                                <span>
+                                    KD
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        `;
+
+                    }
+                ).join("")
+            }
+
+        </div>
+
+
+        <div class="section-title">
+
+            <span></span>
+
+            MATCH HISTORY
+
+            <span></span>
+
+        </div>
+
+
+        <div class="team-match-history">
+
+            ${
+                teamMatches.length
+
+                ?
+
+                teamMatches.map(
+                    match => {
+
+                        const isTeam1 =
+                            match.team1 === team.name;
+
+                        const opponent =
+                            isTeam1
+                            ? match.team2
+                            : match.team1;
+
+                        const teamScore =
+                            isTeam1
+                            ? match.score1
+                            : match.score2;
+
+                        const opponentScore =
+                            isTeam1
+                            ? match.score2
+                            : match.score1;
+
+                        const won =
+                            teamScore > opponentScore;
+
+                        const opponentTeam =
+                            teams.find(
+                                t =>
+                                    t.name ===
+                                    opponent
+                            );
+
+
+                        return `
+
+                        <div
+                            class="
+                                match-history-card
+                                ${won
+                                    ? "history-win"
+                                    : "history-loss"
+                                }
+                            "
+                        >
+
+                            <div class="history-top">
+
+                                <span>
+                                    MATCH ${match.id}
+                                </span>
+
+                                <strong class="${
+                                    won
+                                    ? "history-result-win"
+                                    : "history-result-loss"
+                                }">
+
+                                    ${
+                                        won
+                                        ? "WIN"
+                                        : "LOSS"
+                                    }
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="history-versus">
+
+                                <div>
+
+                                    <img
+                                        src="${team.logo}"
+                                        alt="${team.name}"
+                                    >
+
+                                    <span>
+                                        ${team.name}
+                                    </span>
+
+                                </div>
+
+
+                                <strong>
+                                    ${teamScore}
+                                    -
+                                    ${opponentScore}
+                                </strong>
+
+
+                                <div>
+
+                                    <img
+                                        src="${
+                                            opponentTeam
+                                            ? opponentTeam.logo
+                                            : ""
+                                        }"
+                                        alt="${opponent}"
+                                    >
+
+                                    <span>
+                                        ${opponent}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="history-mvp">
+
+                                👑 MVP
+
+                                <strong>
+                                    ${match.mvp.name}
+                                </strong>
+
+                                <span>
+
+                                    ${match.mvp.kills} K
+                                    •
+                                    ${match.mvp.assists} A
+                                    •
+                                    ${match.mvp.deaths} D
+                                    •
+                                    KD ${match.mvp.kd}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        `;
+
+                    }
+                ).join("")
+
+                :
+
+                `
+
+                <div class="empty-card">
+
+                    NO MATCHES PLAYED
+
+                </div>
+
+                `
+            }
+
+        </div>
+
+    `;
+
+
+    details.classList.add("active");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
 
 
     /* =========================
