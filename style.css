@@ -4434,3 +4434,703 @@ main{
         rgba(190,0,255,.35);
 
 }
+
+/* =========================================================
+        DMBDR RANKING — FINAL NEON V2
+        À COLLER À LA FIN DE style.css
+========================================================= */
+
+
+/* =========================================================
+        BASE — CARTES DU CLASSEMENT
+========================================================= */
+
+#rankingList .ranking-card{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    min-height:78px;
+
+    margin-bottom:10px;
+
+    padding:15px 14px;
+
+    overflow:hidden;
+
+    border-radius:15px;
+
+    /* Bordure de base */
+    border:1px solid rgba(0,140,255,.35) !important;
+
+    /* Intérieur */
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,140,255,.10),
+            rgba(0,140,255,.025)
+        ) !important;
+
+    /* Glow extérieur */
+    box-shadow:
+        0 0 8px rgba(0,140,255,.10),
+        0 0 22px rgba(0,140,255,.06),
+        inset 0 0 25px rgba(0,140,255,.06) !important;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+/* =========================================================
+        REFLET INTERNE
+========================================================= */
+
+#rankingList .ranking-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    border-radius:inherit;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.045),
+            transparent 45%
+        );
+
+    opacity:.7;
+
+}
+
+
+/* =========================================================
+        HOVER
+========================================================= */
+
+#rankingList .ranking-card:hover{
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+        POSITION
+========================================================= */
+
+#rankingList .ranking-position{
+
+    position:relative;
+
+    z-index:2;
+
+    width:32px;
+
+    flex-shrink:0;
+
+    color:#008cff;
+
+    font-size:15px;
+
+    font-weight:1000;
+
+    text-align:center;
+
+    text-shadow:
+        0 0 10px
+        rgba(0,140,255,.5);
+}
+
+
+/* =========================================================
+        LOGO
+========================================================= */
+
+#rankingList .ranking-logo{
+
+    position:relative;
+
+    z-index:2;
+
+    width:52px;
+
+    height:52px;
+
+    flex-shrink:0;
+
+    object-fit:cover;
+
+    border-radius:13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    background:
+        rgba(0,0,0,.25);
+}
+
+
+/* =========================================================
+        NOM ÉQUIPE
+========================================================= */
+
+#rankingList .ranking-team{
+
+    position:relative;
+
+    z-index:2;
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+#rankingList .ranking-team strong{
+
+    display:block;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:1000;
+
+}
+
+
+/* =========================================================
+        PTS / RD
+========================================================= */
+
+#rankingList .ranking-stats{
+
+    position:relative;
+
+    z-index:2;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:8px;
+
+    flex-shrink:0;
+
+    white-space:nowrap;
+
+}
+
+
+#rankingList .ranking-stats strong{
+
+    font-size:15px;
+
+    font-weight:1000;
+
+}
+
+
+#rankingList .ranking-stats span{
+
+    font-size:13px;
+
+    font-weight:1000;
+
+}
+
+
+/* =========================================================
+        🥇 1ER — OR / GOLD
+========================================================= */
+
+#rankingList .ranking-card.rank-first{
+
+    border:
+        1px solid
+        #ffd700 !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,215,0,.20),
+            rgba(255,215,0,.07)
+        ) !important;
+
+    box-shadow:
+
+        /* Glow extérieur */
+        0 0 8px
+        rgba(255,215,0,.45),
+
+        0 0 22px
+        rgba(255,215,0,.28),
+
+        0 0 45px
+        rgba(255,215,0,.12),
+
+        /* Glow intérieur */
+        inset 0 0 25px
+        rgba(255,215,0,.13) !important;
+}
+
+
+#rankingList .rank-first .ranking-position{
+
+    color:#ffd700 !important;
+
+    text-shadow:
+        0 0 8px #ffd700,
+        0 0 18px
+        rgba(255,215,0,.55);
+}
+
+
+#rankingList .rank-first .ranking-team strong{
+
+    color:#fff;
+
+    text-shadow:
+        0 0 8px
+        rgba(255,215,0,.25);
+}
+
+
+#rankingList .rank-first .ranking-stats strong,
+#rankingList .rank-first .ranking-stats span{
+
+    color:#ffd700 !important;
+
+    text-shadow:
+        0 0 8px
+        rgba(255,215,0,.65),
+
+        0 0 18px
+        rgba(255,215,0,.30);
+}
+
+
+/* =========================================================
+        🥈 2E — ARGENT
+========================================================= */
+
+#rankingList .ranking-card.rank-second{
+
+    border:
+        1px solid
+        #c0c0c0 !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(192,192,192,.17),
+            rgba(192,192,192,.055)
+        ) !important;
+
+    box-shadow:
+
+        0 0 8px
+        rgba(192,192,192,.40),
+
+        0 0 22px
+        rgba(192,192,192,.22),
+
+        0 0 42px
+        rgba(192,192,192,.10),
+
+        inset 0 0 25px
+        rgba(192,192,192,.11) !important;
+}
+
+
+#rankingList .rank-second .ranking-position{
+
+    color:#c0c0c0 !important;
+
+    text-shadow:
+        0 0 8px #c0c0c0,
+        0 0 18px
+        rgba(192,192,192,.45);
+}
+
+
+#rankingList .rank-second .ranking-stats strong,
+#rankingList .rank-second .ranking-stats span{
+
+    color:#d7d7d7 !important;
+
+    text-shadow:
+        0 0 8px
+        rgba(192,192,192,.65),
+
+        0 0 18px
+        rgba(192,192,192,.25);
+}
+
+
+/* =========================================================
+        🥉 3E — BRONZE
+========================================================= */
+
+#rankingList .ranking-card.rank-third{
+
+    border:
+        1px solid
+        #cd7f32 !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(205,127,50,.19),
+            rgba(205,127,50,.055)
+        ) !important;
+
+    box-shadow:
+
+        0 0 8px
+        rgba(205,127,50,.45),
+
+        0 0 22px
+        rgba(205,127,50,.25),
+
+        0 0 42px
+        rgba(205,127,50,.11),
+
+        inset 0 0 25px
+        rgba(205,127,50,.12) !important;
+}
+
+
+#rankingList .rank-third .ranking-position{
+
+    color:#cd7f32 !important;
+
+    text-shadow:
+        0 0 8px #cd7f32,
+        0 0 18px
+        rgba(205,127,50,.50);
+}
+
+
+#rankingList .rank-third .ranking-stats strong,
+#rankingList .rank-third .ranking-stats span{
+
+    color:#cd7f32 !important;
+
+    text-shadow:
+        0 0 8px
+        rgba(205,127,50,.65),
+
+        0 0 18px
+        rgba(205,127,50,.30);
+}
+
+
+/* =========================================================
+        🔵 CLASSEMENT NORMAL
+========================================================= */
+
+#rankingList .ranking-card.rank-normal{
+
+    border:
+        1px solid
+        rgba(0,140,255,.55) !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,140,255,.12),
+            rgba(0,140,255,.025)
+        ) !important;
+
+    box-shadow:
+
+        0 0 7px
+        rgba(0,140,255,.25),
+
+        0 0 20px
+        rgba(0,140,255,.12),
+
+        0 0 35px
+        rgba(0,140,255,.06),
+
+        inset 0 0 22px
+        rgba(0,140,255,.07) !important;
+}
+
+
+#rankingList .rank-normal .ranking-position{
+
+    color:#008cff !important;
+
+    text-shadow:
+        0 0 9px
+        rgba(0,140,255,.70);
+}
+
+
+#rankingList .rank-normal .ranking-stats strong,
+#rankingList .rank-normal .ranking-stats span{
+
+    color:#008cff !important;
+
+    text-shadow:
+        0 0 8px
+        rgba(0,140,255,.70),
+
+        0 0 16px
+        rgba(0,140,255,.30);
+}
+
+
+/* =========================================================
+        🔴 DERNIÈRE ÉQUIPE — ROUGE
+========================================================= */
+
+#rankingList .ranking-card.rank-last{
+
+    border:
+        1px solid
+        #ff1744 !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,23,68,.20),
+            rgba(255,23,68,.055)
+        ) !important;
+
+    box-shadow:
+
+        /* GLOW EXTÉRIEUR */
+        0 0 8px
+        rgba(255,23,68,.55),
+
+        0 0 22px
+        rgba(255,23,68,.35),
+
+        0 0 45px
+        rgba(255,23,68,.18),
+
+        0 0 70px
+        rgba(255,23,68,.08),
+
+        /* GLOW INTÉRIEUR */
+        inset 0 0 25px
+        rgba(255,23,68,.14) !important;
+}
+
+
+#rankingList .rank-last .ranking-position{
+
+    color:#ff1744 !important;
+
+    text-shadow:
+        0 0 8px #ff1744,
+        0 0 18px
+        rgba(255,23,68,.65),
+        0 0 30px
+        rgba(255,23,68,.30);
+}
+
+
+#rankingList .rank-last .ranking-team strong{
+
+    color:#fff;
+
+    text-shadow:
+        0 0 8px
+        rgba(255,23,68,.35);
+}
+
+
+#rankingList .rank-last .ranking-stats strong,
+#rankingList .rank-last .ranking-stats span{
+
+    color:#ff1744 !important;
+
+    text-shadow:
+        0 0 8px
+        rgba(255,23,68,.75),
+
+        0 0 18px
+        rgba(255,23,68,.40);
+}
+
+
+/* =========================================================
+        HOVER — CHAQUE COULEUR CONSERVÉE
+========================================================= */
+
+#rankingList .ranking-card.rank-first:hover{
+
+    box-shadow:
+        0 0 12px
+        rgba(255,215,0,.60),
+
+        0 0 30px
+        rgba(255,215,0,.35),
+
+        inset 0 0 30px
+        rgba(255,215,0,.15) !important;
+}
+
+
+#rankingList .ranking-card.rank-second:hover{
+
+    box-shadow:
+        0 0 12px
+        rgba(192,192,192,.55),
+
+        0 0 30px
+        rgba(192,192,192,.30),
+
+        inset 0 0 30px
+        rgba(192,192,192,.14) !important;
+}
+
+
+#rankingList .ranking-card.rank-third:hover{
+
+    box-shadow:
+        0 0 12px
+        rgba(205,127,50,.60),
+
+        0 0 30px
+        rgba(205,127,50,.35),
+
+        inset 0 0 30px
+        rgba(205,127,50,.15) !important;
+}
+
+
+#rankingList .ranking-card.rank-normal:hover{
+
+    box-shadow:
+        0 0 12px
+        rgba(0,140,255,.40),
+
+        0 0 28px
+        rgba(0,140,255,.20),
+
+        inset 0 0 28px
+        rgba(0,140,255,.10) !important;
+}
+
+
+#rankingList .ranking-card.rank-last:hover{
+
+    box-shadow:
+        0 0 12px
+        rgba(255,23,68,.70),
+
+        0 0 32px
+        rgba(255,23,68,.45),
+
+        0 0 60px
+        rgba(255,23,68,.20),
+
+        inset 0 0 30px
+        rgba(255,23,68,.18) !important;
+}
+
+
+/* =========================================================
+        MOBILE — RANKING
+========================================================= */
+
+@media(max-width:480px){
+
+    #rankingList .ranking-card{
+
+        gap:9px;
+
+        padding:13px 10px;
+
+        min-height:70px;
+
+    }
+
+
+    #rankingList .ranking-position{
+
+        width:27px;
+
+        font-size:14px;
+
+    }
+
+
+    #rankingList .ranking-logo{
+
+        width:48px;
+
+        height:48px;
+
+        border-radius:12px;
+
+    }
+
+
+    #rankingList .ranking-team strong{
+
+        font-size:13px;
+
+    }
+
+
+    #rankingList .ranking-stats{
+
+        gap:3px;
+
+        flex-direction:column;
+
+        align-items:flex-end;
+
+    }
+
+
+    #rankingList .ranking-stats strong{
+
+        font-size:14px;
+
+    }
+
+
+    #rankingList .ranking-stats span{
+
+        font-size:11px;
+
+    }
+
+}
+
+
+/* =========================================================
+        FIN
+========================================================= */
