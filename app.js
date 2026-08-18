@@ -3,7 +3,7 @@ let players = [];
 
 
 /* =========================
-        CHARGEMENT TEAMS
+        LOAD TEAMS
 ========================= */
 
 async function loadTeams(){
@@ -18,16 +18,18 @@ async function loadTeams(){
     const data =
         await response.json();
 
-    teams = data.teams || [];
+    teams =
+        data.teams || [];
 
     renderTeams();
+    renderRanking();
     updateCounts();
 
 }
 
 
 /* =========================
-        CHARGEMENT PLAYERS
+        LOAD PLAYERS
 ========================= */
 
 async function loadPlayers(){
@@ -42,67 +44,11 @@ async function loadPlayers(){
     const data =
         await response.json();
 
-    players = data.players || [];
+    players =
+        data.players || [];
 
     renderPlayers();
     updateCounts();
-
-}
-
-
-/* =========================
-        TEAMS
-========================= */
-
-function renderTeams(){
-
-    const container =
-        document.getElementById("teamList");
-
-    if(!container) return;
-
-
-    container.innerHTML =
-        teams.map(team => `
-
-        <div class="team-card">
-
-            <div class="team-card-logo">
-
-                <img
-                    src="${team.logo}"
-                    alt="${team.name}"
-                    onerror="this.style.display='none'"
-                >
-
-            </div>
-
-            <div class="team-card-info">
-
-                <div class="team-card-name">
-                    ${team.name}
-                </div>
-
-                <div class="team-card-players">
-                    ${team.players.length}
-                    PLAYER${team.players.length > 1 ? "S" : ""}
-                </div>
-
-            </div>
-
-            <div class="team-card-points">
-
-                ${team.points}
-
-                <span>
-                    PTS
-                </span>
-
-            </div>
-
-        </div>
-
-    `).join("");
 
 }
 
@@ -129,6 +75,358 @@ function getKD(player){
 
 
 /* =========================
+        TEAMS
+========================= */
+
+function renderTeams(){
+
+    const container =
+        document.getElementById("teamList");
+
+    if(!container) return;
+
+
+    container.innerHTML =
+        teams.map(team => `
+
+        <div
+            class="team-card clickable"
+            onclick="openTeam('${team.id}')"
+        >
+
+            <div class="team-card-logo">
+
+                <img
+                    src="${team.logo}"
+                    alt="${team.name}"
+                >
+
+            </div>
+
+
+            <div class="team-card-info">
+
+                <div class="team-card-name">
+                    ${team.name}
+                </div>
+
+                <div class="team-card-players">
+
+                    ${team.players.length}
+
+                    PLAYER${team.players.length > 1 ? "S" : ""}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* =========================
+        TEAM DETAILS
+========================= */
+
+function openTeam(teamId){
+
+    const team =
+        teams.find(
+            t => String(t.id) === String(teamId)
+        );
+
+    if(!team) return;
+
+
+    const list =
+        document.getElementById("teamList");
+
+    const details =
+        document.getElementById("teamDetails");
+
+    if(!list || !details) return;
+
+
+    const sortedTeams =
+        [...teams].sort((a,b) => {
+
+            if(
+                Number(b.points) !==
+                Number(a.points)
+            ){
+
+                return (
+                    Number(b.points) -
+                    Number(a.points)
+                );
+
+            }
+
+            return (
+                Number(b.rd) -
+                Number(a.rd)
+            );
+
+        });
+
+
+    const position =
+        sortedTeams.findIndex(
+            t =>
+                String(t.id) ===
+                String(team.id)
+        ) + 1;
+
+
+    const teamPlayers =
+        players.filter(
+            player =>
+                player.team === team.name
+        );
+
+
+    list.style.display = "none";
+
+
+    details.innerHTML = `
+
+        <button
+            class="back-button"
+            onclick="closeTeam()"
+        >
+            ← BACK TO TEAMS
+        </button>
+
+
+        <div class="team-hero-card">
+
+            <div class="team-hero-logo">
+
+                <img
+                    src="${team.logo}"
+                    alt="${team.name}"
+                >
+
+            </div>
+
+
+            <div class="team-hero-name">
+
+                <span>
+                    TEAM
+                </span>
+
+                <h2>
+                    ${team.name}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="team-position">
+
+
+            <div>
+
+                <span>
+                    RANK
+                </span>
+
+                <strong>
+                    #${position}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    POINTS
+                </span>
+
+                <strong>
+                    ${team.points}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    RD
+                </span>
+
+                <strong>
+
+                    ${
+                        Number(team.rd) >= 0
+                        ? "+"
+                        : ""
+                    }
+
+                    ${team.rd}
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="team-record-grid">
+
+
+            <div class="team-record">
+
+                <span>
+                    ROUNDS WON
+                </span>
+
+                <strong>
+                    ${team.roundsWon}
+                </strong>
+
+            </div>
+
+
+            <div class="team-record">
+
+                <span>
+                    ROUNDS LOST
+                </span>
+
+                <strong>
+                    ${team.roundsLost}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="section-title">
+
+            <span></span>
+
+            ROSTER
+
+            <span></span>
+
+        </div>
+
+
+        <div class="roster-list">
+
+            ${
+                teamPlayers.length
+
+                ?
+
+                teamPlayers.map(
+                    (player,index) => `
+
+                    <div class="roster-player">
+
+                        <div class="roster-number">
+                            ${index + 1}
+                        </div>
+
+
+                        <div class="roster-info">
+
+                            <strong>
+                                ${player.name}
+                            </strong>
+
+                            <span>
+
+                                ${player.kills} K
+                                •
+                                ${player.assists} A
+                                •
+                                ${player.deaths} D
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="roster-kd">
+
+                            ${getKD(player).toFixed(2)}
+
+                            <span>
+                                KD
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `
+                ).join("")
+
+                :
+
+                `
+
+                <div class="empty-card">
+                    NO PLAYERS FOUND
+                </div>
+
+                `
+            }
+
+        </div>
+
+    `;
+
+
+    details.classList.add("active");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+        CLOSE TEAM
+========================= */
+
+function closeTeam(){
+
+    const list =
+        document.getElementById("teamList");
+
+    const details =
+        document.getElementById("teamDetails");
+
+    if(!list || !details) return;
+
+
+    details.classList.remove("active");
+
+    details.innerHTML = "";
+
+    list.style.display = "";
+
+}
+
+
+/* =========================
         PLAYERS
 ========================= */
 
@@ -142,161 +440,266 @@ function renderPlayers(){
 
     const sortedPlayers =
         [...players].sort(
-            (a,b) => getKD(b) - getKD(a)
+            (a,b) => {
+
+                const kdA = getKD(a);
+                const kdB = getKD(b);
+
+                if(kdB !== kdA){
+                    return kdB - kdA;
+                }
+
+                if(b.kills !== a.kills){
+                    return b.kills - a.kills;
+                }
+
+                return b.assists - a.assists;
+
+            }
         );
 
 
     container.innerHTML =
-        sortedPlayers.map((player,index) => {
+        sortedPlayers.map(
+            (player,index) => {
 
-            const kd =
-                getKD(player);
+                const kd =
+                    getKD(player);
+
+                let kdClass =
+                    "kd-bad";
+
+                if(kd >= 2){
+                    kdClass = "kd-good";
+                }
+                else if(kd >= 1){
+                    kdClass = "kd-mid";
+                }
 
 
-            let kdClass =
-                "kd-bad";
+                return `
 
-            if(kd >= 2){
-                kdClass = "kd-good";
-            }
-            else if(kd >= 1){
-                kdClass = "kd-mid";
-            }
+                <div class="player-card">
 
-
-            return `
-
-            <div class="player-card">
-
-                <div class="player-rank">
-                    ${index + 1}
-                </div>
-
-                <div class="player-info">
-
-                    <div class="player-name">
-                        ${player.name}
+                    <div class="player-rank">
+                        ${index + 1}
                     </div>
 
-                    <div class="player-team">
-                        ${player.team}
+
+                    <div class="player-info">
+
+                        <div class="player-name">
+                            ${player.name}
+                        </div>
+
+                        <div class="player-team">
+                            ${player.team}
+                        </div>
+
+                    </div>
+
+
+                    <div class="player-stats">
+
+                        <span>
+                            ${player.kills} K
+                        </span>
+
+                        <span>
+                            ${player.assists} A
+                        </span>
+
+                        <span>
+                            ${player.deaths} D
+                        </span>
+
+                        <strong class="${kdClass}">
+                            ${kd.toFixed(2)} KD
+                        </strong>
+
                     </div>
 
                 </div>
 
-                <div class="player-stats">
+                `;
 
-                    <span>
-                        ${player.kills} K
-                    </span>
-
-                    <span>
-                        ${player.assists} A
-                    </span>
-
-                    <span>
-                        ${player.deaths} D
-                    </span>
-
-                    <strong class="${kdClass}">
-                        ${kd.toFixed(2)} KD
-                    </strong>
-
-                </div>
-
-            </div>
-
-            `;
-
-        }).join("");
+            }
+        ).join("");
 
 }
 
 
 /* =========================
-        COMPTEURS
+        RANKING
+========================= */
+
+function renderRanking(){
+
+    const container =
+        document.getElementById("rankingList");
+
+    if(!container) return;
+
+
+    const sorted =
+        [...teams].sort(
+            (a,b) => {
+
+                if(
+                    Number(b.points) !==
+                    Number(a.points)
+                ){
+
+                    return (
+                        Number(b.points) -
+                        Number(a.points)
+                    );
+
+                }
+
+                return (
+                    Number(b.rd) -
+                    Number(a.rd)
+                );
+
+            }
+        );
+
+
+    container.innerHTML =
+        sorted.map(
+            (team,index) => {
+
+                let rankClass =
+                    "rank-normal";
+
+                if(index === 0){
+                    rankClass =
+                        "rank-first";
+                }
+                else if(index === 1){
+                    rankClass =
+                        "rank-second";
+                }
+                else if(index === 2){
+                    rankClass =
+                        "rank-third";
+                }
+
+
+                return `
+
+                <div
+                    class="
+                        ranking-card
+                        ${rankClass}
+                    "
+                >
+
+                    <div class="ranking-position">
+                        #${index + 1}
+                    </div>
+
+
+                    <img
+                        src="${team.logo}"
+                        class="ranking-logo"
+                        alt="${team.name}"
+                    >
+
+
+                    <div class="ranking-team">
+
+                        <strong>
+                            ${team.name}
+                        </strong>
+
+                        <span>
+
+                            RD
+
+                            ${
+                                Number(team.rd) >= 0
+                                ? "+"
+                                : ""
+                            }
+
+                            ${team.rd}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="ranking-points">
+
+                        ${team.points}
+
+                        <span>
+                            PTS
+                        </span>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================
+        COUNTS
 ========================= */
 
 function updateCounts(){
 
-    const statCards =
-        document.querySelectorAll(
-            ".stat-card"
+    const teamCount =
+        document.getElementById(
+            "homeTeamCount"
+        );
+
+    const playerCount =
+        document.getElementById(
+            "homePlayerCount"
+        );
+
+    const teamPageCount =
+        document.getElementById(
+            "teamPageCount"
+        );
+
+    const playerPageCount =
+        document.getElementById(
+            "playerPageCount"
         );
 
 
-    /* TEAMS */
-
-    if(statCards[0]){
-
-        const value =
-            statCards[0]
-                .querySelector(".stat-value");
-
-        if(value){
-            value.textContent =
-                teams.length;
-        }
-
+    if(teamCount){
+        teamCount.textContent =
+            teams.length;
     }
 
 
-    /* PLAYERS */
-
-    if(statCards[1]){
-
-        const value =
-            statCards[1]
-                .querySelector(".stat-value");
-
-        if(value){
-            value.textContent =
-                players.length;
-        }
-
+    if(playerCount){
+        playerCount.textContent =
+            players.length;
     }
 
 
-    /* PAGE TEAMS */
-
-    document.querySelectorAll(".page-header")
-        .forEach(header => {
-
-            const title =
-                header.querySelector("h2");
-
-            const count =
-                header.querySelector(".page-count");
-
-            if(!title || !count) return;
+    if(teamPageCount){
+        teamPageCount.textContent =
+            teams.length;
+    }
 
 
-            if(
-                title.textContent
-                    .trim()
-                    .toUpperCase()
-                === "TEAMS"
-            ){
-
-                count.textContent =
-                    teams.length;
-
-            }
-
-
-            if(
-                title.textContent
-                    .trim()
-                    .toUpperCase()
-                === "PLAYERS"
-            ){
-
-                count.textContent =
-                    players.length;
-
-            }
-
-        });
+    if(playerPageCount){
+        playerPageCount.textContent =
+            players.length;
+    }
 
 }
 
@@ -318,7 +721,6 @@ function showPage(pageId, button){
     const page =
         document.getElementById(pageId);
 
-
     if(!page) return;
 
 
@@ -338,6 +740,11 @@ function showPage(pageId, button){
     }
 
 
+    if(pageId !== "teams"){
+        closeTeam();
+    }
+
+
     window.scrollTo({
         top:0,
         behavior:"smooth"
@@ -345,6 +752,10 @@ function showPage(pageId, button){
 
 }
 
+
+/* =========================
+        PAGE BY ID
+========================= */
 
 function showPageById(pageId){
 
@@ -356,13 +767,16 @@ function showPageById(pageId){
         );
 
 
-    showPage(pageId,button);
+    showPage(
+        pageId,
+        button
+    );
 
 }
 
 
 /* =========================
-        LIENS
+        EXTERNAL LINKS
 ========================= */
 
 function openLink(url){
@@ -377,7 +791,7 @@ function openLink(url){
 
 
 /* =========================
-        INITIALISATION
+        INIT
 ========================= */
 
 document.addEventListener(
@@ -385,20 +799,26 @@ document.addEventListener(
     async () => {
 
         console.log(
-            "DMBDR CHAMPIONSHIP V2"
+            "DMBDR CHAMPIONSHIP V2 — ONLINE"
         );
+
 
         try{
 
             await loadTeams();
+
             await loadPlayers();
 
-            console.log(
-                `${teams.length} équipes chargées`
-            );
 
             console.log(
-                `${players.length} joueurs chargés`
+                teams.length +
+                " équipes chargées"
+            );
+
+
+            console.log(
+                players.length +
+                " joueurs chargés"
             );
 
         }
