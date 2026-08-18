@@ -3,423 +3,773 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="viewport"
+        content="width=device-width,
+        initial-scale=1.0,
+        maximum-scale=1.0,
+        user-scalable=no"
+    >
 
-<title>DMBDR CHAMPIONSHIP</title>
+    <title>DMBDR CHAMPIONSHIP</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
 
-<!-- =========================
-        BACKGROUND
-========================= -->
 
-<div class="background"></div>
+    <!-- =========================
+            BACKGROUND
+    ========================== -->
+
+    <div class="background">
+
+        <div class="glow glow-blue"></div>
+
+        <div class="glow glow-red"></div>
+
+        <div class="grid-background"></div>
+
+    </div>
 
 
-<!-- =========================
-        HEADER
-========================= -->
+    <!-- =========================
+            HEADER
+    ========================== -->
 
-<header class="header">
+    <header class="header">
 
-    <div class="brand">
+        <div class="brand">
 
-        <img
-            src="logo.jpg"
-            class="main-logo"
-            alt="DMBDR Championship"
-        >
+            <img
+                src="logo.jpg"
+                class="brand-logo"
+                alt="DMBDR"
+            >
 
-        <div>
+            <div>
 
-            <div class="brand-title">
-                DMBDR
+                <div class="brand-title">
+                    DMBDR
+                </div>
+
+                <div class="brand-subtitle">
+                    CHAMPIONSHIP
+                </div>
+
             </div>
 
-            <div class="brand-subtitle">
-                CHAMPIONSHIP
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="season">
-
-        <span class="live-dot">
-            ●
-        </span>
-
-        SEASON 1
-
-    </div>
-
-</header>
-
-
-<!-- =========================
-        NAVIGATION
-========================= -->
-
-<nav class="navigation">
-
-    <button
-        class="nav-button active"
-        onclick="showPage('home', this)"
-    >
-        <span class="nav-icon">⌂</span>
-        <span>HOME</span>
-    </button>
-
-
-    <button
-        class="nav-button"
-        onclick="showPage('teams', this)"
-    >
-        <span class="nav-icon">♜</span>
-        <span>TEAMS</span>
-    </button>
-
-
-    <button
-        class="nav-button"
-        onclick="showPage('players', this)"
-    >
-        <span class="nav-icon">♙</span>
-        <span>PLAYERS</span>
-    </button>
-
-
-    <button
-        class="nav-button"
-        onclick="showPage('matches', this)"
-    >
-        <span class="nav-icon">⚔</span>
-        <span>MATCHES</span>
-    </button>
-
-
-    <button
-        class="nav-button"
-        onclick="showPage('ranking', this)"
-    >
-        <span class="nav-icon">🏆</span>
-        <span>RANKING</span>
-    </button>
-
-</nav>
-
-
-<main>
-
-
-<!-- =========================
-            HOME
-========================= -->
-
-<section
-    id="home"
-    class="page active"
->
-
-    <div class="page-header">
-
-        <div>
-
-            <span class="page-label">
-                DMBDR
-            </span>
-
-            <h1>
-                CHAMPIONSHIP
-            </h1>
-
-        </div>
-
-    </div>
-
-
-    <div class="stats-grid">
-
-        <div
-            class="stat-card clickable"
-            onclick="showPageById('teams')"
-        >
-
-            <span class="stat-label">
-                TEAMS
-            </span>
-
-            <span
-                class="stat-value"
-                id="teamCount"
-            >
-                0
-            </span>
-
         </div>
 
 
-        <div
-            class="stat-card clickable"
-            onclick="showPageById('players')"
-        >
+        <div class="season-status">
 
-            <span class="stat-label">
-                PLAYERS
-            </span>
+            <span class="status-dot"></span>
 
-            <span
-                class="stat-value"
-                id="playerCount"
-            >
-                0
-            </span>
-
-        </div>
-
-
-        <div
-            class="stat-card clickable"
-            onclick="showPageById('matches')"
-        >
-
-            <span class="stat-label">
-                MATCHES
-            </span>
-
-            <span class="stat-value">
-                —
-            </span>
-
-        </div>
-
-
-        <div
-            class="stat-card clickable"
-            onclick="showPageById('ranking')"
-        >
-
-            <span class="stat-label">
-                RANKING
-            </span>
-
-            <span class="stat-value">
-                TOP
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="home-card">
-
-        <div class="home-card-title">
             SEASON 1
+
         </div>
 
-        <div class="home-card-text">
-            DMBDR CHAMPIONSHIP
-        </div>
-
-        <div class="home-card-line"></div>
-
-        <div class="home-card-status">
-            ● CHAMPIONSHIP ACTIVE
-        </div>
-
-    </div>
-
-</section>
+    </header>
 
 
-<!-- =========================
+    <!-- =========================
+            SOCIAL
+    ========================== -->
+
+    <section class="social-bar">
+
+        <button
+            class="social discord"
+            onclick="openLink('https://discord.gg/X2VwYnepAr')"
+        >
+
+            <span>
+                DISCORD
+            </span>
+
+        </button>
+
+
+        <button
+            class="social twitch"
+            onclick="openLink('https://m.twitch.tv/so2francechampionnat/home')"
+        >
+
+            <span>
+                TWITCH
+            </span>
+
+        </button>
+
+
+        <button
+            class="social youtube"
+            onclick="openLink('https://m.youtube.com/channel/UCypbT6QGPC0oARGa3n1XbRQ?ra=m')"
+        >
+
+            <span>
+                YOUTUBE
+            </span>
+
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+            NAVIGATION
+    ========================== -->
+
+    <nav class="navigation">
+
+        <button
+            class="nav-button active"
+            onclick="showPage('home', this)"
+        >
+
+            <span>⌂</span>
+
+            HOME
+
+        </button>
+
+
+        <button
+            class="nav-button"
+            onclick="showPage('teams', this)"
+        >
+
+            <span>♜</span>
+
             TEAMS
-========================= -->
 
-<section
-    id="teams"
-    class="page"
->
-
-    <div class="page-header">
-
-        <div>
-
-            <span class="page-label">
-                CHAMPIONSHIP
-            </span>
-
-            <h1>
-                TEAMS
-            </h1>
-
-        </div>
+        </button>
 
 
-        <div
-            class="page-count"
-            id="teamPageCount"
+        <button
+            class="nav-button"
+            onclick="showPage('players', this)"
         >
-            0
-        </div>
 
-    </div>
+            <span>♙</span>
 
-
-    <!-- LISTE DES ÉQUIPES -->
-
-    <div
-        id="teamList"
-        class="content-list"
-    >
-    </div>
-
-
-    <!-- FICHE ÉQUIPE -->
-
-    <div
-        id="teamDetails"
-        class="team-details"
-    >
-    </div>
-
-</section>
-
-
-<!-- =========================
             PLAYERS
-========================= -->
 
-<section
-    id="players"
-    class="page"
->
-
-    <div class="page-header">
-
-        <div>
-
-            <span class="page-label">
-                CHAMPIONSHIP
-            </span>
-
-            <h1>
-                PLAYERS
-            </h1>
-
-        </div>
+        </button>
 
 
-        <div
-            class="page-count"
-            id="playerPageCount"
+        <button
+            class="nav-button"
+            onclick="showPage('matches', this)"
         >
-            0
-        </div>
 
-    </div>
+            <span>⚔</span>
 
-
-    <div
-        id="playerList"
-        class="content-list"
-    >
-    </div>
-
-</section>
-
-
-<!-- =========================
             MATCHES
-========================= -->
 
-<section
-    id="matches"
-    class="page"
->
-
-    <div class="page-header">
-
-        <div>
-
-            <span class="page-label">
-                CHAMPIONSHIP
-            </span>
-
-            <h1>
-                MATCHES
-            </h1>
-
-        </div>
-
-    </div>
+        </button>
 
 
-    <div class="empty-card">
+        <button
+            class="nav-button"
+            onclick="showPage('ranking', this)"
+        >
 
-        MATCH SYSTEM
+            <span>🏆</span>
 
-        <span>
-            Coming soon
-        </span>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
             RANKING
-========================= -->
 
-<section
-    id="ranking"
-    class="page"
->
+        </button>
 
-    <div class="page-header">
 
-        <div>
+        <button
+            class="nav-button"
+            onclick="showPage('stats', this)"
+        >
 
-            <span class="page-label">
-                CHAMPIONSHIP
-            </span>
+            <span>▥</span>
 
-            <h1>
+            STATS
+
+        </button>
+
+    </nav>
+
+
+    <main>
+
+
+        <!-- =========================
+                HOME
+        ========================== -->
+
+        <section
+            id="home"
+            class="page active"
+        >
+
+            <div class="hero">
+
+                <div class="hero-content">
+
+                    <div class="hero-tag">
+                        ⚜ SEASON 1
+                    </div>
+
+
+                    <h1>
+
+                        DMBDR
+
+                        <span>
+                            CHAMPIONSHIP
+                        </span>
+
+                    </h1>
+
+
+                    <p>
+                        THE BATTLE FOR GLORY
+                    </p>
+
+
+                    <button
+                        class="hero-button"
+                        onclick="showPageById('ranking')"
+                    >
+
+                        VIEW RANKING
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="section-title">
+
+                <span></span>
+
+                CHAMPIONSHIP OVERVIEW
+
+                <span></span>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+
+                <div
+                    class="stat-card clickable"
+                    onclick="showPageById('teams')"
+                >
+
+                    <div class="stat-icon">
+                        ♜
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="homeTeamCount"
+                    >
+                        8
+                    </div>
+
+                    <div class="stat-label">
+                        TEAMS
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-card clickable"
+                    onclick="showPageById('players')"
+                >
+
+                    <div class="stat-icon">
+                        ♙
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="homePlayerCount"
+                    >
+                        30
+                    </div>
+
+                    <div class="stat-label">
+                        PLAYERS
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-card clickable"
+                    onclick="showPageById('matches')"
+                >
+
+                    <div class="stat-icon">
+                        ⚔
+                    </div>
+
+                    <div class="stat-value">
+                        56
+                    </div>
+
+                    <div class="stat-label">
+                        MATCHES
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stat-card clickable"
+                    onclick="showPageById('ranking')"
+                >
+
+                    <div class="stat-icon">
+                        ◈
+                    </div>
+
+                    <div class="stat-value">
+                        16
+                    </div>
+
+                    <div class="stat-label">
+                        PLAYED
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="section-title">
+
+                <span></span>
+
+                LATEST RESULTS
+
+                <span></span>
+
+            </div>
+
+
+            <div class="empty-card">
+
+                <div class="empty-icon">
+                    ⚔
+                </div>
+
+                <strong>
+                    MATCH DATA
+                </strong>
+
+                <p>
+                    Results will appear here.
+                </p>
+
+            </div>
+
+
+            <div class="section-title">
+
+                <span></span>
+
+                NEXT MATCH
+
+                <span></span>
+
+            </div>
+
+
+            <div class="empty-card">
+
+                <div class="empty-icon">
+                    ◷
+                </div>
+
+                <strong>
+                    UPCOMING MATCH
+                </strong>
+
+                <p>
+                    Upcoming matches will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+                TEAMS
+        ========================== -->
+
+        <section
+            id="teams"
+            class="page"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="page-kicker">
+                        CHAMPIONSHIP
+                    </span>
+
+                    <h2>
+                        TEAMS
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="page-count"
+                    id="teamPageCount"
+                >
+                    8
+                </div>
+
+            </div>
+
+
+            <div
+                id="teamList"
+                class="content-list"
+            >
+            </div>
+
+
+            <div
+                id="teamDetails"
+                class="team-details"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+                PLAYERS
+        ========================== -->
+
+        <section
+            id="players"
+            class="page"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="page-kicker">
+                        CHAMPIONSHIP
+                    </span>
+
+                    <h2>
+                        PLAYERS
+                    </h2>
+
+                </div>
+
+
+                <div
+                    class="page-count"
+                    id="playerPageCount"
+                >
+                    30
+                </div>
+
+            </div>
+
+
+            <div class="filter-bar">
+
+                <button class="filter active">
+                    LEADERBOARD
+                </button>
+
+                <button class="filter">
+                    KD
+                </button>
+
+                <button class="filter">
+                    KILLS
+                </button>
+
+                <button class="filter">
+                    MVP
+                </button>
+
+            </div>
+
+
+            <div
+                id="playerList"
+                class="content-list"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+                MATCHES
+        ========================== -->
+
+        <section
+            id="matches"
+            class="page"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="page-kicker">
+                        SEASON 1
+                    </span>
+
+                    <h2>
+                        MATCHES
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="match-tabs">
+
+                <button class="match-tab active">
+                    ALL
+                </button>
+
+                <button class="match-tab">
+                    PLAYED
+                </button>
+
+                <button class="match-tab">
+                    UPCOMING
+                </button>
+
+            </div>
+
+
+            <div
+                id="matchList"
+                class="content-list"
+            >
+
+                <div class="empty-card">
+                    Match data coming soon.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
                 RANKING
-            </h1>
+        ========================== -->
 
-        </div>
+        <section
+            id="ranking"
+            class="page"
+        >
 
-    </div>
+            <div class="page-header">
+
+                <div>
+
+                    <span class="page-kicker">
+                        SEASON 1
+                    </span>
+
+                    <h2>
+                        TEAM RANKING
+                    </h2>
+
+                </div>
+
+            </div>
 
 
-    <div
-        id="rankingList"
-        class="content-list"
-    >
-    </div>
-
-</section>
+            <div class="podium">
 
 
-</main>
+                <div class="podium-place second">
+
+                    <div class="podium-rank">
+                        2
+                    </div>
+
+                    <div class="podium-team">
+                        TEAM 2
+                    </div>
+
+                    <div class="podium-points">
+                        0 PTS
+                    </div>
+
+                </div>
 
 
-<script src="app.js"></script>
+                <div class="podium-place first">
+
+                    <div class="podium-crown">
+                        👑
+                    </div>
+
+                    <div class="podium-rank">
+                        1
+                    </div>
+
+                    <div class="podium-team">
+                        TEAM 1
+                    </div>
+
+                    <div class="podium-points">
+                        0 PTS
+                    </div>
+
+                </div>
+
+
+                <div class="podium-place third">
+
+                    <div class="podium-rank">
+                        3
+                    </div>
+
+                    <div class="podium-team">
+                        TEAM 3
+                    </div>
+
+                    <div class="podium-points">
+                        0 PTS
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="rankingList"
+                class="content-list"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+                STATS
+        ========================== -->
+
+        <section
+            id="stats"
+            class="page"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="page-kicker">
+                        SEASON 1
+                    </span>
+
+                    <h2>
+                        STATISTICS
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="stats-dashboard">
+
+
+                <div class="big-stat">
+
+                    <span>
+                        TOP KD
+                    </span>
+
+                    <strong>
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="big-stat">
+
+                    <span>
+                        TOP KILLS
+                    </span>
+
+                    <strong>
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="big-stat">
+
+                    <span>
+                        TOP ASSISTS
+                    </span>
+
+                    <strong>
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="big-stat">
+
+                    <span>
+                        MVP
+                    </span>
+
+                    <strong>
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="app.js"></script>
 
 </body>
 
