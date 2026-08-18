@@ -8,6 +8,8 @@
       "score1": 13,
       "score2": 2,
       "status": "played",
+      "video": "https://youtu.be/Roxiq13TRKI",
+      "publication": 1,
       "mvp": {
         "name": "Akra",
         "kills": 19,
@@ -32,6 +34,8 @@
       "score1": 5,
       "score2": 13,
       "status": "played",
+      "video": "https://youtu.be/z8dFF81Gi5o",
+      "publication": 2,
       "mvp": {
         "name": "Akra",
         "kills": 20,
@@ -56,6 +60,8 @@
       "score1": 5,
       "score2": 13,
       "status": "played",
+      "video": "https://youtu.be/3c7_nB8ixew",
+      "publication": 18,
       "mvp": {
         "name": "Senzy",
         "kills": 18,
@@ -80,6 +86,8 @@
       "score1": 13,
       "score2": 7,
       "status": "played",
+      "video": "https://youtu.be/k5LJ28djL4s",
+      "publication": 19,
       "mvp": {
         "name": "Senzy",
         "kills": 18,
@@ -104,6 +112,8 @@
       "score1": 11,
       "score2": 13,
       "status": "played",
+      "video": "https://youtu.be/-4I1P82fQaA",
+      "publication": 12,
       "mvp": {
         "name": "Suzuki",
         "kills": 21,
@@ -128,6 +138,8 @@
       "score1": 13,
       "score2": 5,
       "status": "played",
+      "video": "https://youtu.be/Mf_ABS_XZ88",
+      "publication": 13,
       "mvp": {
         "name": "Wanheda",
         "kills": 17,
@@ -152,6 +164,8 @@
       "score1": 13,
       "score2": 7,
       "status": "played",
+      "video": "https://youtu.be/waZyQGPIUOY",
+      "publication": 16,
       "mvp": {
         "name": "Akra",
         "kills": 19,
@@ -176,6 +190,8 @@
       "score1": 9,
       "score2": 13,
       "status": "played",
+      "video": "https://youtu.be/qy9Fj-9XRks",
+      "publication": 17,
       "mvp": {
         "name": "Suzuki",
         "kills": 22,
@@ -200,6 +216,8 @@
       "score1": 13,
       "score2": 2,
       "status": "played",
+      "video": "https://youtu.be/lDM7eARqeZg",
+      "publication": 14,
       "mvp": {
         "name": "Suzuki",
         "kills": 24,
@@ -224,6 +242,8 @@
       "score1": 2,
       "score2": 13,
       "status": "played",
+      "video": "https://youtu.be/xqy4yTXt9FM",
+      "publication": 15,
       "mvp": {
         "name": "Homn",
         "kills": 17,
@@ -321,7 +341,7 @@
       "score2": 0,
       "status": "upcoming"
     },
-        {
+    {
       "label": "MATCH 20",
       "id": 20,
       "team1": "Vortex",
@@ -356,6 +376,8 @@
       "score1": 13,
       "score2": 4,
       "status": "played",
+      "video": "https://youtu.be/z8e7ptbq7l4",
+      "publication": 7,
       "mvp": {
         "name": "Qualites",
         "kills": 21,
@@ -380,6 +402,8 @@
       "score1": 5,
       "score2": 13,
       "status": "played",
+      "video": "https://youtu.be/pJmn7aY0QMQ",
+      "publication": 8,
       "mvp": {
         "name": "Qualites",
         "kills": 22,
@@ -440,6 +464,8 @@
       "score1": 9,
       "score2": 13,
       "status": "played",
+      "video": "https://youtu.be/48Y-YCchZyc",
+      "publication": 9,
       "mvp": {
         "name": "Stronex",
         "kills": 17,
@@ -464,6 +490,8 @@
       "score1": 5,
       "score2": 13,
       "status": "played",
+      "video": "https://youtu.be/QmfBYm0MDaY",
+      "publication": 10,
       "mvp": {
         "name": "Loic",
         "kills": 23,
@@ -488,6 +516,8 @@
       "score1": 13,
       "score2": 8,
       "status": "played",
+      "video": "https://youtu.be/kZY4m0ywhVw",
+      "publication": 5,
       "mvp": {
         "name": "Manji",
         "kills": 22,
@@ -512,6 +542,8 @@
       "score1": 9,
       "score2": 13,
       "status": "played",
+      "video": "https://youtu.be/U0KCqDN2hQM",
+      "publication": 6,
       "mvp": {
         "name": "Bri",
         "kills": 23,
@@ -562,7 +594,9 @@
       "team2": "VitriX",
       "score1": 0,
       "score2": 13,
-      "status": "played"
+      "status": "played",
+      "video": "https://youtu.be/LSnAqgc07ds",
+      "publication": 11
     },
     {
       "label": "MATCH 37",
@@ -582,7 +616,7 @@
       "score2": 0,
       "status": "upcoming"
     },
-        {
+    {
       "label": "MATCH 39",
       "id": 39,
       "team1": "Grizzly SDBT",
@@ -644,6 +678,8 @@
       "score1": 13,
       "score2": 9,
       "status": "played",
+      "video": "https://youtu.be/HsKxgaQK91M",
+      "publication": 3,
       "mvp": {
         "name": "Narvalow",
         "kills": 24,
@@ -694,7 +730,9 @@
       "team2": "Sp4rks",
       "score1": 13,
       "score2": 0,
-      "status": "played"
+      "status": "played",
+      "video": "https://youtu.be/xidj7q_Hu-M",
+      "publication": 4
     },
     {
       "label": "MATCH 50",
