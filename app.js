@@ -1,71 +1,69 @@
-/* =========================
-        DMBDR V2
-        APP CORE
-========================= */
-
 let teams = [];
+let players = [];
 
 
 /* =========================
-        CHARGEMENT DES DONNÉES
+        CHARGEMENT TEAMS
 ========================= */
 
 async function loadTeams(){
 
-    try{
+    const response =
+        await fetch("data/teams.json");
 
-        const response = await fetch("data/teams.json");
-
-        if(!response.ok){
-            throw new Error("Impossible de charger teams.json");
-        }
-
-        const data = await response.json();
-
-        teams = data.teams || [];
-
-        console.log("Équipes chargées :", teams);
-
-        renderTeams();
-        updateTeamCount();
-
-    }catch(error){
-
-        console.error(
-            "Erreur lors du chargement des équipes :",
-            error
-        );
-
+    if(!response.ok){
+        throw new Error("teams.json introuvable");
     }
+
+    const data =
+        await response.json();
+
+    teams = data.teams || [];
+
+    renderTeams();
+    updateCounts();
 
 }
 
 
 /* =========================
-        AFFICHER LES ÉQUIPES
+        CHARGEMENT PLAYERS
+========================= */
+
+async function loadPlayers(){
+
+    const response =
+        await fetch("data/players.json");
+
+    if(!response.ok){
+        throw new Error("players.json introuvable");
+    }
+
+    const data =
+        await response.json();
+
+    players = data.players || [];
+
+    renderPlayers();
+    updateCounts();
+
+}
+
+
+/* =========================
+        TEAMS
 ========================= */
 
 function renderTeams(){
 
-    const teamList =
+    const container =
         document.getElementById("teamList");
 
-    if(!teamList) return;
+    if(!container) return;
 
 
-    if(teams.length === 0){
-
-        teamList.innerHTML = `
-            <div class="empty-card">
-                Aucune équipe disponible.
-            </div>
-        `;
-
-        return;
-    }
-
-
-    teamList.innerHTML = teams.map(team => `
+    container.innerHTML =
+        teams.map(team => `
 
         <div class="team-card">
 
@@ -79,7 +77,6 @@ function renderTeams(){
 
             </div>
 
-
             <div class="team-card-info">
 
                 <div class="team-card-name">
@@ -87,14 +84,11 @@ function renderTeams(){
                 </div>
 
                 <div class="team-card-players">
-
                     ${team.players.length}
                     PLAYER${team.players.length > 1 ? "S" : ""}
-
                 </div>
 
             </div>
-
 
             <div class="team-card-points">
 
@@ -114,23 +108,167 @@ function renderTeams(){
 
 
 /* =========================
-        COMPTEUR ÉQUIPES
+        KD
 ========================= */
 
-function updateTeamCount(){
+function getKD(player){
 
-    document.querySelectorAll(".page-count")
-        .forEach(element => {
+    if(player.deaths === 0){
 
-            const header =
-                element.closest(".page-header");
+        if(player.kills === 0){
+            return 0;
+        }
 
-            if(!header) return;
+        return player.kills;
+
+    }
+
+    return player.kills / player.deaths;
+
+}
+
+
+/* =========================
+        PLAYERS
+========================= */
+
+function renderPlayers(){
+
+    const container =
+        document.getElementById("playerList");
+
+    if(!container) return;
+
+
+    const sortedPlayers =
+        [...players].sort(
+            (a,b) => getKD(b) - getKD(a)
+        );
+
+
+    container.innerHTML =
+        sortedPlayers.map((player,index) => {
+
+            const kd =
+                getKD(player);
+
+
+            let kdClass =
+                "kd-bad";
+
+            if(kd >= 2){
+                kdClass = "kd-good";
+            }
+            else if(kd >= 1){
+                kdClass = "kd-mid";
+            }
+
+
+            return `
+
+            <div class="player-card">
+
+                <div class="player-rank">
+                    ${index + 1}
+                </div>
+
+                <div class="player-info">
+
+                    <div class="player-name">
+                        ${player.name}
+                    </div>
+
+                    <div class="player-team">
+                        ${player.team}
+                    </div>
+
+                </div>
+
+                <div class="player-stats">
+
+                    <span>
+                        ${player.kills} K
+                    </span>
+
+                    <span>
+                        ${player.assists} A
+                    </span>
+
+                    <span>
+                        ${player.deaths} D
+                    </span>
+
+                    <strong class="${kdClass}">
+                        ${kd.toFixed(2)} KD
+                    </strong>
+
+                </div>
+
+            </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================
+        COMPTEURS
+========================= */
+
+function updateCounts(){
+
+    const statCards =
+        document.querySelectorAll(
+            ".stat-card"
+        );
+
+
+    /* TEAMS */
+
+    if(statCards[0]){
+
+        const value =
+            statCards[0]
+                .querySelector(".stat-value");
+
+        if(value){
+            value.textContent =
+                teams.length;
+        }
+
+    }
+
+
+    /* PLAYERS */
+
+    if(statCards[1]){
+
+        const value =
+            statCards[1]
+                .querySelector(".stat-value");
+
+        if(value){
+            value.textContent =
+                players.length;
+        }
+
+    }
+
+
+    /* PAGE TEAMS */
+
+    document.querySelectorAll(".page-header")
+        .forEach(header => {
 
             const title =
                 header.querySelector("h2");
 
-            if(!title) return;
+            const count =
+                header.querySelector(".page-count");
+
+            if(!title || !count) return;
 
 
             if(
@@ -140,34 +278,25 @@ function updateTeamCount(){
                 === "TEAMS"
             ){
 
-                element.textContent =
+                count.textContent =
                     teams.length;
 
             }
 
+
+            if(
+                title.textContent
+                    .trim()
+                    .toUpperCase()
+                === "PLAYERS"
+            ){
+
+                count.textContent =
+                    players.length;
+
+            }
+
         });
-
-
-    /* Compteur HOME */
-
-    const homeCards =
-        document.querySelectorAll(".stat-card");
-
-
-    if(homeCards.length > 0){
-
-        const teamsCard =
-            homeCards[0];
-
-        const value =
-            teamsCard.querySelector(".stat-value");
-
-        if(value){
-            value.textContent =
-                teams.length;
-        }
-
-    }
 
 }
 
@@ -205,9 +334,7 @@ function showPage(pageId, button){
 
 
     if(button){
-
         button.classList.add("active");
-
     }
 
 
@@ -219,10 +346,6 @@ function showPage(pageId, button){
 }
 
 
-/* =========================
-        OUVRIR UNE PAGE
-========================= */
-
 function showPageById(pageId){
 
     const button =
@@ -233,13 +356,13 @@ function showPageById(pageId){
         );
 
 
-    showPage(pageId, button);
+    showPage(pageId,button);
 
 }
 
 
 /* =========================
-        LIENS EXTERNES
+        LIENS
 ========================= */
 
 function openLink(url){
@@ -254,18 +377,39 @@ function openLink(url){
 
 
 /* =========================
-        DÉMARRAGE
+        INITIALISATION
 ========================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    async () => {
 
         console.log(
-            "DMBDR CHAMPIONSHIP V2 — ONLINE"
+            "DMBDR CHAMPIONSHIP V2"
         );
 
-        loadTeams();
+        try{
+
+            await loadTeams();
+            await loadPlayers();
+
+            console.log(
+                `${teams.length} équipes chargées`
+            );
+
+            console.log(
+                `${players.length} joueurs chargés`
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "Erreur chargement données :",
+                error
+            );
+
+        }
 
     }
 );
