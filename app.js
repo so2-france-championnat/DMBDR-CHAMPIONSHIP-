@@ -738,11 +738,29 @@ function openTeam(teamId){
                                 </div>
 
 
-                                <strong>
-                                    ${teamScore}
-                                    -
-                                    ${opponentScore}
-                                </strong>
+                                <strong class="history-score">
+
+    <span class="${
+        won
+        ? "history-score-win"
+        : "history-score-loss"
+    }">
+        ${teamScore}
+    </span>
+
+    <b>
+        -
+    </b>
+
+    <span class="${
+        won
+        ? "history-score-loss"
+        : "history-score-win"
+    }">
+        ${opponentScore}
+    </span>
+
+</strong>
 
 
                                 <div>
