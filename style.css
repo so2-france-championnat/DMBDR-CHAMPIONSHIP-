@@ -5451,3 +5451,65 @@ main{
 
     border:0;
 }
+
+/* =========================
+   DISCORD BOOSTERS — TITLE
+========================= */
+
+.section-title{
+    width:100% !important;
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    text-align:center !important;
+
+    margin:
+        26px 0 12px !important;
+
+    color:#7d8796 !important;
+
+    font-size:9px !important;
+
+    font-weight:900 !important;
+
+    letter-spacing:2px !important;
+}
+
+.section-title span{
+    display:block !important;
+
+    height:1px !important;
+
+    flex:1 !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(0,140,255,.30)
+        ) !important;
+}
+
+.section-title span:last-child{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,140,255,.30),
+            transparent
+        ) !important;
+}
+
+
+/* Le bloc boosters reste en dessous */
+
+.boosters-card{
+    width:100% !important;
+
+    margin-top:0 !important;
+}
