@@ -549,60 +549,96 @@
 
 
         <!-- =========================
+                    MATCHES
+         ========================= -->
+
+<section
+    id="matches"
+    class="page"
+>
+
+    <div class="page-header">
+
+        <div>
+
+            <span class="page-kicker">
+                SEASON 1
+            </span>
+
+            <h2>
                 MATCHES
-        ========================== -->
+            </h2>
 
-        <section
-            id="matches"
-            class="page"
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+            MATCH FILTERS
+    ========================== -->
+
+    <div class="match-tabs">
+
+        <button
+            class="match-tab active"
+            data-match-filter="all"
         >
-
-            <div class="page-header">
-
-                <div>
-
-                    <span class="page-kicker">
-                        SEASON 1
-                    </span>
-
-                    <h2>
-                        MATCHES
-                    </h2>
-
-                </div>
-
-            </div>
+            ALL
+        </button>
 
 
-            <div class="match-tabs">
-
-                <button class="match-tab active">
-                    ALL
-                </button>
-
-                <button class="match-tab">
-                    PLAYED
-                </button>
-
-                <button class="match-tab">
-                    UPCOMING
-                </button>
-
-            </div>
+        <button
+            class="match-tab"
+            data-match-filter="played"
+        >
+            PLAYED
+        </button>
 
 
-            <div
-                id="matchList"
-                class="content-list"
-            >
+        <button
+            class="match-tab"
+            data-match-filter="upcoming"
+        >
+            UPCOMING
+        </button>
 
-                <div class="empty-card">
-                    Match data coming soon.
-                </div>
+    </div>
 
-            </div>
 
-        </section>
+    <!-- =========================
+            TEAM LIST
+    ========================== -->
+
+    <div
+        id="matchTeamList"
+        class="match-team-list"
+    >
+    </div>
+
+
+    <!-- =========================
+            TEAM MATCH HISTORY
+    ========================== -->
+
+    <div
+        id="matchTeamDetails"
+        class="match-team-details"
+    >
+    </div>
+
+
+    <!-- =========================
+            MATCH DETAILS
+    ========================== -->
+
+    <div
+        id="matchDetails"
+        class="match-details"
+    >
+    </div>
+
+</section>
 
 
         <!-- =========================
