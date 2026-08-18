@@ -2618,27 +2618,49 @@ function renderRanking(){
             (team,index) => {
 
                 let rankClass =
-                    "rank-normal";
+    "rank-normal";
 
 
-                if(index === 0){
+/* 🥇 1er */
 
-                    rankClass =
-                        "rank-first";
+if(index === 0){
 
-                }
-                else if(index === 1){
+    rankClass =
+        "rank-first";
 
-                    rankClass =
-                        "rank-second";
+}
 
-                }
-                else if(index === 2){
 
-                    rankClass =
-                        "rank-third";
+/* 🥈 2e */
 
-                }
+else if(index === 1){
+
+    rankClass =
+        "rank-second";
+
+}
+
+
+/* 🥉 3e */
+
+else if(index === 2){
+
+    rankClass =
+        "rank-third";
+
+}
+
+
+/* 🔴 DERNIÈRE ÉQUIPE */
+
+else if(
+    index === sorted.length - 1
+){
+
+    rankClass =
+        "rank-last";
+
+}
 
 
                 const points =
