@@ -949,19 +949,31 @@ function openMatch(matchId){
 
             <div class="match-detail-score">
 
-                <span>
-                    ${score1}
-                </span>
+    <span class="${
+        team1Won
+        ? "history-score-win"
+        : team2Won
+        ? "history-score-loss"
+        : ""
+    }">
+        ${score1}
+    </span>
 
-                <b>
-                    -
-                </b>
+    <b>
+        -
+    </b>
 
-                <span>
-                    ${score2}
-                </span>
+    <span class="${
+        team2Won
+        ? "history-score-win"
+        : team1Won
+        ? "history-score-loss"
+        : ""
+    }">
+        ${score2}
+    </span>
 
-            </div>
+</div>
 
 
             <div class="
