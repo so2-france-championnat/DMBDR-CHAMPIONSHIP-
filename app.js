@@ -57,20 +57,50 @@ async function loadPlayers(){
         LOAD MATCHES
 ========================= */
 
+/* =========================
+        LOAD MATCHES
+========================= */
+
 async function loadMatches(){
 
-    const response =
-        await fetch("data/matches.json");
+    try{
 
-    if(!response.ok){
-        throw new Error("matches.json introuvable");
+        const response =
+            await fetch("./data/matches.json");
+
+        if(!response.ok){
+            throw new Error(
+                `matches.json : HTTP ${response.status}`
+            );
+        }
+
+        const data =
+            await response.json();
+
+        if(!Array.isArray(data.matches)){
+            throw new Error(
+                "matches.json : propriété 'matches' introuvable"
+            );
+        }
+
+        matches = data.matches;
+
+        console.log(
+            "✅ MATCHES CHARGÉS :",
+            matches.length
+        );
+
     }
+    catch(error){
 
-    const data =
-        await response.json();
+        console.error(
+            "❌ ERREUR MATCHES :",
+            error
+        );
 
-    matches =
-        data.matches || [];
+        matches = [];
+
+    }
 
 }
 
