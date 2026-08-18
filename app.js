@@ -706,46 +706,57 @@ function renderMatchTeams(){
 
 
     /* =========================
-            FILTRE
-    ========================= */
+            RESET
+    ========================== */
 
-    let filteredMatches =
-        [...matches];
+    selectedMatchTeam = null;
 
 
-    if(
-        typeof currentMatchFilter !== "undefined"
-    ){
+    /* =========================
+            FILTRE DES ÉQUIPES
+    ========================== */
 
-        if(currentMatchFilter === "played"){
+    let visibleTeams =
+        teams.filter(team => {
 
-            filteredMatches =
-                filteredMatches.filter(
+            const teamMatches =
+                matches.filter(
+                    match =>
+                        match.team1 === team.name ||
+                        match.team2 === team.name
+                );
+
+
+            if(currentMatchFilter === "played"){
+
+                return teamMatches.some(
                     match =>
                         match.status === "played"
                 );
 
-        }
+            }
 
 
-        if(currentMatchFilter === "upcoming"){
+            if(currentMatchFilter === "upcoming"){
 
-            filteredMatches =
-                filteredMatches.filter(
+                return teamMatches.some(
                     match =>
                         match.status !== "played"
                 );
 
-        }
+            }
 
-    }
+
+            return teamMatches.length > 0;
+
+        });
 
 
     /* =========================
-            AUCUN MATCH
-    ========================= */
+            AUCUNE ÉQUIPE
+    ========================== */
 
-    if(filteredMatches.length === 0){
+    if(visibleTeams.length === 0){
 
         container.innerHTML = `
 
@@ -760,7 +771,7 @@ function renderMatchTeams(){
                 </strong>
 
                 <p>
-                    No matches found.
+                    No matches found for this filter.
                 </p>
 
             </div>
@@ -773,244 +784,94 @@ function renderMatchTeams(){
 
 
     /* =========================
-            AFFICHAGE
-    ========================= */
+            LISTE DES ÉQUIPES
+    ========================== */
 
     container.innerHTML =
-        filteredMatches.map(
-            match => {
+        visibleTeams.map(
+            team => {
 
-                const team1 =
-                    teams.find(
-                        team =>
-                            team.name ===
-                            match.team1
+                const teamMatches =
+                    matches.filter(
+                        match =>
+                            match.team1 === team.name ||
+                            match.team2 === team.name
                     );
 
 
-                const team2 =
-                    teams.find(
-                        team =>
-                            team.name ===
-                            match.team2
-                    );
+                const playedCount =
+                    teamMatches.filter(
+                        match =>
+                            match.status === "played"
+                    ).length;
 
 
-                const score1 =
-                    Number(
-                        match.score1 || 0
-                    );
-
-
-                const score2 =
-                    Number(
-                        match.score2 || 0
-                    );
-
-
-                const played =
-                    match.status === "played";
-
-
-                let resultClass =
-                    "match-card-upcoming";
-
-
-                if(played){
-
-                    if(score1 > score2){
-
-                        resultClass =
-                            "match-card-win";
-
-                    }
-                    else if(score2 > score1){
-
-                        resultClass =
-                            "match-card-loss";
-
-                    }
-
-                }
-
-
-                const scoreHTML =
-                    played
-
-                    ?
-
-                    `
-                    <span class="${
-                        score1 > score2
-                        ? "score-win"
-                        : "score-loss"
-                    }">
-                        ${score1}
-                    </span>
-
-                    <b>-</b>
-
-                    <span class="${
-                        score2 > score1
-                        ? "score-win"
-                        : "score-loss"
-                    }">
-                        ${score2}
-                    </span>
-                    `
-
-                    :
-
-                    `
-                    <span class="score-upcoming">
-                        VS
-                    </span>
-                    `;
+                const upcomingCount =
+                    teamMatches.filter(
+                        match =>
+                            match.status !== "played"
+                    ).length;
 
 
                 return `
 
                 <div
-                    class="
-                        match-v2-card
-                        ${resultClass}
-                    "
-                    onclick="openMatch('${match.id}')"
+                    class="match-team-card"
+                    onclick="openMatchTeam('${team.name}')"
                 >
 
-                    <div class="match-v2-top">
+                    <div class="match-team-logo">
 
-                        <span>
-                            MATCH ${match.id}
-                        </span>
+                        <img
+                            src="${team.logo}"
+                            alt="${team.name}"
+                        >
 
+                    </div>
+
+
+                    <div class="match-team-info">
 
                         <strong>
-
-                            ${
-                                played
-                                ? (
-                                    score1 > score2
-                                    ? match.team1 + " WIN"
-                                    : score2 > score1
-                                    ? match.team2 + " WIN"
-                                    : "DRAW"
-                                )
-                                : "UPCOMING"
-                            }
-
+                            ${team.name}
                         </strong>
 
-                    </div>
-
-
-                    <div class="match-v2-versus">
-
-
-                        <div class="match-v2-team">
-
-                            ${
-                                team1
-                                ?
-
-                                `
-                                <img
-                                    src="${team1.logo}"
-                                    alt="${match.team1}"
-                                >
-                                `
-
-                                :
-
-                                ""
-                            }
-
-                            <span>
-                                ${match.team1}
-                            </span>
-
-                        </div>
-
-
-                        <div class="match-v2-score">
-
-                            <strong>
-
-                                ${scoreHTML}
-
-                            </strong>
-
-                        </div>
-
-
-                        <div class="match-v2-team">
-
-                            ${
-                                team2
-                                ?
-
-                                `
-                                <img
-                                    src="${team2.logo}"
-                                    alt="${match.team2}"
-                                >
-                                `
-
-                                :
-
-                                ""
-                            }
-
-                            <span>
-                                ${match.team2}
-                            </span>
-
-                        </div>
-
+                        <span>
+                            ${teamMatches.length}
+                            MATCH${teamMatches.length > 1 ? "S" : ""}
+                        </span>
 
                     </div>
 
 
-                    ${
-                        match.mvp
+                    <div class="match-team-status">
 
-                        ?
-
-                        `
-                        <div class="match-v2-mvp">
-
-                            👑 MVP
-
-                            <strong>
-                                ${match.mvp.name}
-                            </strong>
-
-                        </div>
-                        `
-
-                        :
-
-                        ""
-                    }
+                        ${
+                            playedCount > 0
+                            ?
+                            `
+                            <span class="match-team-played">
+                                ${playedCount} PLAYED
+                            </span>
+                            `
+                            :
+                            ""
+                        }
 
 
-                    ${
-                        !played
+                        ${
+                            upcomingCount > 0
+                            ?
+                            `
+                            <span class="match-team-upcoming">
+                                ${upcomingCount} UPCOMING
+                            </span>
+                            `
+                            :
+                            ""
+                        }
 
-                        ?
-
-                        `
-                        <div class="match-v2-status">
-
-                            UPCOMING MATCH
-
-                        </div>
-                        `
-
-                        :
-
-                        ""
-                    }
+                    </div>
 
                 </div>
 
@@ -1018,6 +879,489 @@ function renderMatchTeams(){
 
             }
         ).join("");
+
+}
+
+
+/* =========================
+        OPEN TEAM MATCHES
+========================= */
+
+function openMatchTeam(teamName){
+
+    const team =
+        teams.find(
+            t =>
+                t.name === teamName
+        );
+
+    if(!team) return;
+
+
+    selectedMatchTeam =
+        team.name;
+
+
+    const list =
+        document.getElementById(
+            "matchTeamList"
+        );
+
+    const details =
+        document.getElementById(
+            "matchTeamDetails"
+        );
+
+
+    if(!list || !details) return;
+
+
+    list.style.display =
+        "none";
+
+
+    renderTeamMatchHistory(
+        team
+    );
+
+
+    details.classList.add(
+        "active"
+    );
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+        TEAM MATCH HISTORY
+========================= */
+
+function renderTeamMatchHistory(team){
+
+    const details =
+        document.getElementById(
+            "matchTeamDetails"
+        );
+
+    if(!details) return;
+
+
+    /* =========================
+            MATCHS DE L'ÉQUIPE
+    ========================== */
+
+    let teamMatches =
+        matches.filter(
+            match =>
+                match.team1 === team.name ||
+                match.team2 === team.name
+        );
+
+
+    /* =========================
+            FILTRE
+    ========================== */
+
+    if(currentMatchFilter === "played"){
+
+        teamMatches =
+            teamMatches.filter(
+                match =>
+                    match.status === "played"
+            );
+
+    }
+
+
+    if(currentMatchFilter === "upcoming"){
+
+        teamMatches =
+            teamMatches.filter(
+                match =>
+                    match.status !== "played"
+            );
+
+    }
+
+
+    /* =========================
+            TRI PAR ID
+    ========================== */
+
+    teamMatches.sort(
+        (a,b) =>
+            Number(a.id) -
+            Number(b.id)
+    );
+
+
+    /* =========================
+            HEADER
+    ========================== */
+
+    details.innerHTML = `
+
+        <button
+            class="back-button"
+            onclick="closeMatch()"
+        >
+            ← BACK TO TEAMS
+        </button>
+
+
+        <div class="match-team-profile">
+
+            <div class="match-team-profile-logo">
+
+                <img
+                    src="${team.logo}"
+                    alt="${team.name}"
+                >
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    MATCH HISTORY
+                </span>
+
+                <h2>
+                    ${team.name}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="match-team-filter-info">
+
+            <span>
+                ${
+                    currentMatchFilter === "all"
+                    ? "ALL MATCHES"
+                    : currentMatchFilter === "played"
+                    ? "PLAYED MATCHES"
+                    : "UPCOMING MATCHES"
+                }
+            </span>
+
+
+            <strong>
+                ${teamMatches.length}
+            </strong>
+
+        </div>
+
+
+        <div class="match-history-list">
+
+            ${
+                teamMatches.length
+
+                ?
+
+                teamMatches.map(
+                    match => {
+
+                        const team1 =
+                            teams.find(
+                                t =>
+                                    t.name ===
+                                    match.team1
+                            );
+
+
+                        const team2 =
+                            teams.find(
+                                t =>
+                                    t.name ===
+                                    match.team2
+                            );
+
+
+                        const played =
+                            match.status === "played";
+
+
+                        const score1 =
+                            Number(
+                                match.score1 || 0
+                            );
+
+
+                        const score2 =
+                            Number(
+                                match.score2 || 0
+                            );
+
+
+                        const isTeam1 =
+                            match.team1 ===
+                            team.name;
+
+
+                        let resultClass =
+                            "match-card-upcoming";
+
+
+                        if(played){
+
+                            const teamWon =
+                                isTeam1
+                                ? score1 > score2
+                                : score2 > score1;
+
+
+                            resultClass =
+                                teamWon
+                                ? "match-card-win"
+                                : "match-card-loss";
+
+                        }
+
+
+                        const scoreHTML =
+                            played
+
+                            ?
+
+                            `
+                            <span class="${
+                                score1 > score2
+                                ? "score-win"
+                                : "score-loss"
+                            }">
+                                ${score1}
+                            </span>
+
+                            <b>
+                                -
+                            </b>
+
+                            <span class="${
+                                score2 > score1
+                                ? "score-win"
+                                : "score-loss"
+                            }">
+                                ${score2}
+                            </span>
+                            `
+
+                            :
+
+                            `
+                            <span class="score-upcoming">
+                                VS
+                            </span>
+                            `;
+
+
+                        return `
+
+                        <div
+                            class="
+                                match-v2-card
+                                ${resultClass}
+                            "
+                            onclick="
+                                openMatch('${match.id}')
+                            "
+                        >
+
+                            <div class="match-v2-top">
+
+                                <span>
+                                    MATCH ${match.id}
+                                </span>
+
+
+                                <strong>
+
+                                    ${
+                                        played
+
+                                        ?
+
+                                        (
+                                            isTeam1
+                                            ?
+                                            (
+                                                score1 > score2
+                                                ? `${team.name} WIN`
+                                                : score1 < score2
+                                                ? `${match.team2} WIN`
+                                                : "DRAW"
+                                            )
+                                            :
+                                            (
+                                                score2 > score1
+                                                ? `${team.name} WIN`
+                                                : score2 < score1
+                                                ? `${match.team1} WIN`
+                                                : "DRAW"
+                                            )
+                                        )
+
+                                        :
+
+                                        "UPCOMING"
+                                    }
+
+                                </strong>
+
+                            </div>
+
+
+                            <div class="match-v2-versus">
+
+
+                                <div class="match-v2-team">
+
+                                    ${
+                                        team1
+                                        ?
+
+                                        `
+                                        <img
+                                            src="${team1.logo}"
+                                            alt="${match.team1}"
+                                        >
+                                        `
+
+                                        :
+
+                                        ""
+                                    }
+
+
+                                    <span>
+                                        ${match.team1}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="match-v2-score">
+
+                                    <strong>
+
+                                        ${scoreHTML}
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="match-v2-team">
+
+                                    ${
+                                        team2
+                                        ?
+
+                                        `
+                                        <img
+                                            src="${team2.logo}"
+                                            alt="${match.team2}"
+                                        >
+                                        `
+
+                                        :
+
+                                        ""
+                                    }
+
+
+                                    <span>
+                                        ${match.team2}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            ${
+                                match.mvp
+
+                                ?
+
+                                `
+                                <div class="match-v2-mvp">
+
+                                    👑 MVP
+
+                                    <strong>
+                                        ${match.mvp.name}
+                                    </strong>
+
+                                </div>
+                                `
+
+                                :
+
+                                ""
+                            }
+
+
+                            ${
+                                !played
+
+                                ?
+
+                                `
+                                <div class="match-v2-status">
+                                    UPCOMING MATCH
+                                </div>
+                                `
+
+                                :
+
+                                ""
+                            }
+
+                        </div>
+
+                        `;
+
+                    }
+                ).join("")
+
+                :
+
+                `
+
+                <div class="empty-card">
+
+                    <div class="empty-icon">
+                        ⚔
+                    </div>
+
+                    <strong>
+                        NO MATCHES
+                    </strong>
+
+                    <p>
+                        No matches found for this filter.
+                    </p>
+
+                </div>
+
+                `
+
+            }
+
+        </div>
+
+    `;
 
 }
 
@@ -1035,9 +1379,17 @@ function setupMatchFilters(){
             "click",
             () => {
 
+                /* =========================
+                    NOUVEAU FILTRE
+                ========================= */
+
                 currentMatchFilter =
                     button.dataset.matchFilter;
 
+
+                /* =========================
+                    BOUTON ACTIF
+                ========================= */
 
                 document
                     .querySelectorAll(
@@ -1055,6 +1407,10 @@ function setupMatchFilters(){
                     "active"
                 );
 
+
+                /* =========================
+                    SI UNE ÉQUIPE EST OUVERTE
+                ========================= */
 
                 if(selectedMatchTeam){
 
@@ -1074,7 +1430,17 @@ function setupMatchFilters(){
 
                     }
 
+                    return;
+
                 }
+
+
+                /* =========================
+                    SINON :
+                    AFFICHER LES ÉQUIPES
+                ========================= */
+
+                renderMatchTeams();
 
             }
         );
