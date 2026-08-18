@@ -1,0 +1,281 @@
+{
+  "players": [
+    {
+      "id": 1,
+      "name": "Akra",
+      "team": "BussGang",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 2,
+      "name": "Homn",
+      "team": "BussGang",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 3,
+      "name": "Suzuki",
+      "team": "BussGang",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+
+    {
+      "id": 4,
+      "name": "LaynOx",
+      "team": "Nexus",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 5,
+      "name": "Gabin15",
+      "team": "Nexus",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 6,
+      "name": "Qualites",
+      "team": "Nexus",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 7,
+      "name": "Vlase",
+      "team": "Nexus",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+
+    {
+      "id": 8,
+      "name": "Loic",
+      "team": "VitriX",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 9,
+      "name": "Senzy",
+      "team": "VitriX",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 10,
+      "name": "Nounours",
+      "team": "VitriX",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 11,
+      "name": "Oceano",
+      "team": "VitriX",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+
+    {
+      "id": 12,
+      "name": "Freezy",
+      "team": "Grizzly SDBT",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 13,
+      "name": "Youko",
+      "team": "Grizzly SDBT",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 14,
+      "name": "Wanheda",
+      "team": "Grizzly SDBT",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 15,
+      "name": "ZoraYtB",
+      "team": "Grizzly SDBT",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+
+    {
+      "id": 16,
+      "name": "Narvalow",
+      "team": "Vortex",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 17,
+      "name": "Stronex",
+      "team": "Vortex",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 18,
+      "name": "Numb",
+      "team": "Vortex",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 19,
+      "name": "Grainut",
+      "team": "Vortex",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+
+    {
+      "id": 20,
+      "name": "Manji",
+      "team": "CP-0",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 21,
+      "name": "Tata",
+      "team": "CP-0",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 22,
+      "name": "Sharko",
+      "team": "CP-0",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+
+    {
+      "id": 23,
+      "name": "Nistugo",
+      "team": "NSRP",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 24,
+      "name": "Go Silver",
+      "team": "NSRP",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 25,
+      "name": "Ragnar",
+      "team": "NSRP",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 26,
+      "name": "PickixBack",
+      "team": "NSRP",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+
+    {
+      "id": 27,
+      "name": "OmarBapLO6",
+      "team": "Sp4rks",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 28,
+      "name": "Moe Lester",
+      "team": "Sp4rks",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 29,
+      "name": "Skiimi",
+      "team": "Sp4rks",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    },
+    {
+      "id": 30,
+      "name": "Kitaro",
+      "team": "Sp4rks",
+      "kills": 0,
+      "assists": 0,
+      "deaths": 0,
+      "mvp": 0
+    }
+  ]
+}
