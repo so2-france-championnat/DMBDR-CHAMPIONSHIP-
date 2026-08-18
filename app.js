@@ -2904,6 +2904,93 @@ function openLink(url){
 
 }
 
+/* =========================
+        LATEST VIDEO
+========================= */
+
+function renderLatestVideo(){
+
+    const container =
+        document.getElementById("latestVideo");
+
+    if(!container) return;
+
+
+    const videos =
+        matches.filter(
+            match =>
+                match.status === "played" &&
+                match.video &&
+                match.publication
+        );
+
+
+    if(videos.length === 0){
+
+        container.innerHTML = "";
+
+        return;
+
+    }
+
+
+    const latest =
+        [...videos].sort(
+            (a,b) =>
+                Number(b.publication) -
+                Number(a.publication)
+        )[0];
+
+
+    const videoId =
+        latest.video
+            .split("youtu.be/")[1]
+            ?.split("?")[0];
+
+
+    if(!videoId){
+
+        container.innerHTML = "";
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+        <div class="latest-video-card">
+
+            <div class="latest-video-title">
+
+                <span></span>
+
+                <strong>
+                    LATEST VIDEO
+                </strong>
+
+                <span></span>
+
+            </div>
+
+
+            <div class="latest-video-player">
+
+                <iframe
+                    src="https://www.youtube.com/embed/${videoId}"
+                    title="Latest video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
 
 /* =========================
         INIT
@@ -2938,13 +3025,7 @@ document.addEventListener(
                RAFRAÎCHISSEMENT AFFICHAGE
             ========================= */
 
-            renderTeams();
-
-renderPlayers("leaderboard");
-
-renderRanking();
-
-renderMatchTeams();
+            renderMatchTeams();
 
 updateCounts();
 
@@ -2953,6 +3034,8 @@ updateMatchCount();
 setupPlayerFilters();
 
 setupMatchFilters();
+
+renderLatestVideo();
 
 renderBoosters();
 
