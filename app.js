@@ -147,25 +147,31 @@ function openTeam(teamId){
     if(!list || !details) return;
 
 
+    /* =========================
+            POSITION
+    ========================= */
+
     const sortedTeams =
         [...teams].sort((a,b) => {
 
-            if(
-                Number(b.points) !==
-                Number(a.points)
-            ){
+            const pointsA =
+                Number(a.points ?? a.pts ?? 0);
 
-                return (
-                    Number(b.points) -
-                    Number(a.points)
-                );
+            const pointsB =
+                Number(b.points ?? b.pts ?? 0);
 
+            const rdA =
+                Number(a.rd ?? 0);
+
+            const rdB =
+                Number(b.rd ?? 0);
+
+
+            if(pointsB !== pointsA){
+                return pointsB - pointsA;
             }
 
-            return (
-                Number(b.rd) -
-                Number(a.rd)
-            );
+            return rdB - rdA;
 
         });
 
@@ -178,6 +184,35 @@ function openTeam(teamId){
         ) + 1;
 
 
+    /* =========================
+            TEAM DATA
+    ========================= */
+
+    const points =
+        Number(team.points ?? team.pts ?? 0);
+
+    const rd =
+        Number(team.rd ?? 0);
+
+    const roundsWon =
+        Number(
+            team.roundsWon ??
+            team.rounds_won ??
+            0
+        );
+
+    const roundsLost =
+        Number(
+            team.roundsLost ??
+            team.rounds_lost ??
+            0
+        );
+
+
+    /* =========================
+            PLAYERS
+    ========================= */
+
     const teamPlayers =
         players.filter(
             player =>
@@ -185,8 +220,16 @@ function openTeam(teamId){
         );
 
 
+    /* =========================
+            HIDE TEAM LIST
+    ========================= */
+
     list.style.display = "none";
 
+
+    /* =========================
+            TEAM PROFILE
+    ========================= */
 
     details.innerHTML = `
 
@@ -197,6 +240,8 @@ function openTeam(teamId){
             ← BACK TO TEAMS
         </button>
 
+
+        <!-- TEAM HEADER -->
 
         <div class="team-hero-card">
 
@@ -213,7 +258,7 @@ function openTeam(teamId){
             <div class="team-hero-name">
 
                 <span>
-                    TEAM
+                    TEAM PROFILE
                 </span>
 
                 <h2>
@@ -225,8 +270,9 @@ function openTeam(teamId){
         </div>
 
 
-        <div class="team-position">
+        <!-- CHAMPIONSHIP STATS -->
 
+        <div class="team-position">
 
             <div>
 
@@ -248,7 +294,7 @@ function openTeam(teamId){
                 </span>
 
                 <strong>
-                    ${team.points}
+                    ${points}
                 </strong>
 
             </div>
@@ -260,55 +306,58 @@ function openTeam(teamId){
                     RD
                 </span>
 
-                <strong>
-
-                    ${
-                        Number(team.rd) >= 0
-                        ? "+"
+                <strong class="
+                    ${rd > 0
+                        ? "rd-positive"
+                        : rd < 0
+                        ? "rd-negative"
                         : ""
                     }
+                ">
 
-                    ${team.rd}
+                    ${rd >= 0 ? "+" : ""}
+                    ${rd}
 
                 </strong>
 
             </div>
 
-
         </div>
 
 
+        <!-- ROUNDS -->
+
         <div class="team-record-grid">
 
-
-            <div class="team-record">
+            <div class="team-record rounds-win">
 
                 <span>
                     ROUNDS WON
                 </span>
 
                 <strong>
-                    ${team.roundsWon}
+                    ${roundsWon}
                 </strong>
 
             </div>
 
 
-            <div class="team-record">
+            <div class="team-record rounds-loss">
 
                 <span>
                     ROUNDS LOST
                 </span>
 
                 <strong>
-                    ${team.roundsLost}
+                    ${roundsLost}
                 </strong>
 
             </div>
 
-
         </div>
 
+
+        <!-- ROSTER -->
 
         <div class="section-title">
 
@@ -329,47 +378,81 @@ function openTeam(teamId){
                 ?
 
                 teamPlayers.map(
-                    (player,index) => `
+                    (player,index) => {
 
-                    <div class="roster-player">
+                        const kd =
+                            getKD(player);
 
-                        <div class="roster-number">
-                            ${index + 1}
+                        const kdClass =
+                            kd >= 2
+                            ? "kd-good"
+                            : kd >= 1
+                            ? "kd-mid"
+                            : "kd-bad";
+
+
+                        return `
+
+                        <div
+                            class="roster-player"
+                        >
+
+                            <div
+                                class="roster-number"
+                            >
+
+                                ${String(
+                                    index + 1
+                                ).padStart(2,"0")}
+
+                            </div>
+
+
+                            <div
+                                class="roster-info"
+                            >
+
+                                <strong>
+                                    ${player.name}
+                                </strong>
+
+                                <span>
+
+                                    ${player.kills} K
+
+                                    •
+
+                                    ${player.assists} A
+
+                                    •
+
+                                    ${player.deaths} D
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="
+                                    roster-kd
+                                    ${kdClass}
+                                "
+                            >
+
+                                ${kd.toFixed(2)}
+
+                                <span>
+                                    KD
+                                </span>
+
+                            </div>
+
                         </div>
 
+                        `;
 
-                        <div class="roster-info">
-
-                            <strong>
-                                ${player.name}
-                            </strong>
-
-                            <span>
-
-                                ${player.kills} K
-                                •
-                                ${player.assists} A
-                                •
-                                ${player.deaths} D
-
-                            </span>
-
-                        </div>
-
-
-                        <div class="roster-kd">
-
-                            ${getKD(player).toFixed(2)}
-
-                            <span>
-                                KD
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                `
+                    }
                 ).join("")
 
                 :
@@ -377,11 +460,47 @@ function openTeam(teamId){
                 `
 
                 <div class="empty-card">
+
                     NO PLAYERS FOUND
+
                 </div>
 
                 `
             }
+
+        </div>
+
+
+        <!-- MATCH HISTORY -->
+
+        <div class="section-title">
+
+            <span></span>
+
+            MATCH HISTORY
+
+            <span></span>
+
+        </div>
+
+
+        <div class="team-match-history">
+
+            <div class="empty-card">
+
+                <div class="empty-icon">
+                    ⚔
+                </div>
+
+                <strong>
+                    MATCH HISTORY
+                </strong>
+
+                <p>
+                    Match results will appear here.
+                </p>
+
+            </div>
 
         </div>
 
