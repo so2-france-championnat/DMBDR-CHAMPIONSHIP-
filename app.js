@@ -689,6 +689,335 @@ function closeTeam(){
 
 }
 
+/* =========================
+        RENDER MATCH TEAMS
+========================= */
+
+function renderMatchTeams(){
+
+    const container =
+        document.getElementById(
+            "matchTeamList"
+        );
+
+    if(!container) return;
+
+
+    /* =========================
+            FILTRE
+    ========================= */
+
+    let filteredMatches =
+        [...matches];
+
+
+    if(
+        typeof currentMatchFilter !== "undefined"
+    ){
+
+        if(currentMatchFilter === "played"){
+
+            filteredMatches =
+                filteredMatches.filter(
+                    match =>
+                        match.status === "played"
+                );
+
+        }
+
+
+        if(currentMatchFilter === "upcoming"){
+
+            filteredMatches =
+                filteredMatches.filter(
+                    match =>
+                        match.status !== "played"
+                );
+
+        }
+
+    }
+
+
+    /* =========================
+            AUCUN MATCH
+    ========================= */
+
+    if(filteredMatches.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty-card">
+
+                <div class="empty-icon">
+                    ⚔
+                </div>
+
+                <strong>
+                    NO MATCHES
+                </strong>
+
+                <p>
+                    No matches found.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* =========================
+            AFFICHAGE
+    ========================= */
+
+    container.innerHTML =
+        filteredMatches.map(
+            match => {
+
+                const team1 =
+                    teams.find(
+                        team =>
+                            team.name ===
+                            match.team1
+                    );
+
+
+                const team2 =
+                    teams.find(
+                        team =>
+                            team.name ===
+                            match.team2
+                    );
+
+
+                const score1 =
+                    Number(
+                        match.score1 || 0
+                    );
+
+
+                const score2 =
+                    Number(
+                        match.score2 || 0
+                    );
+
+
+                const played =
+                    match.status === "played";
+
+
+                let resultClass =
+                    "match-card-upcoming";
+
+
+                if(played){
+
+                    if(score1 > score2){
+
+                        resultClass =
+                            "match-card-win";
+
+                    }
+                    else if(score2 > score1){
+
+                        resultClass =
+                            "match-card-loss";
+
+                    }
+
+                }
+
+
+                const scoreHTML =
+                    played
+
+                    ?
+
+                    `
+                    <span class="${
+                        score1 > score2
+                        ? "score-win"
+                        : "score-loss"
+                    }">
+                        ${score1}
+                    </span>
+
+                    <b>-</b>
+
+                    <span class="${
+                        score2 > score1
+                        ? "score-win"
+                        : "score-loss"
+                    }">
+                        ${score2}
+                    </span>
+                    `
+
+                    :
+
+                    `
+                    <span class="score-upcoming">
+                        VS
+                    </span>
+                    `;
+
+
+                return `
+
+                <div
+                    class="
+                        match-v2-card
+                        ${resultClass}
+                    "
+                    onclick="openMatch('${match.id}')"
+                >
+
+                    <div class="match-v2-top">
+
+                        <span>
+                            MATCH ${match.id}
+                        </span>
+
+
+                        <strong>
+
+                            ${
+                                played
+                                ? (
+                                    score1 > score2
+                                    ? match.team1 + " WIN"
+                                    : score2 > score1
+                                    ? match.team2 + " WIN"
+                                    : "DRAW"
+                                )
+                                : "UPCOMING"
+                            }
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="match-v2-versus">
+
+
+                        <div class="match-v2-team">
+
+                            ${
+                                team1
+                                ?
+
+                                `
+                                <img
+                                    src="${team1.logo}"
+                                    alt="${match.team1}"
+                                >
+                                `
+
+                                :
+
+                                ""
+                            }
+
+                            <span>
+                                ${match.team1}
+                            </span>
+
+                        </div>
+
+
+                        <div class="match-v2-score">
+
+                            <strong>
+
+                                ${scoreHTML}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="match-v2-team">
+
+                            ${
+                                team2
+                                ?
+
+                                `
+                                <img
+                                    src="${team2.logo}"
+                                    alt="${match.team2}"
+                                >
+                                `
+
+                                :
+
+                                ""
+                            }
+
+                            <span>
+                                ${match.team2}
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    ${
+                        match.mvp
+
+                        ?
+
+                        `
+                        <div class="match-v2-mvp">
+
+                            👑 MVP
+
+                            <strong>
+                                ${match.mvp.name}
+                            </strong>
+
+                        </div>
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    ${
+                        !played
+
+                        ?
+
+                        `
+                        <div class="match-v2-status">
+
+                            UPCOMING MATCH
+
+                        </div>
+                        `
+
+                        :
+
+                        ""
+                    }
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
 
 /* =========================
         MATCH FILTERS
