@@ -2652,20 +2652,42 @@ main{
 
     background:
         rgba(255,255,255,.025);
+
+    transition:.25s;
 }
 
 
-.match-player-team:first-child{
+/* =========================
+        WIN / LOSS
+========================= */
+
+.match-player-team-win{
+
     border-color:
-        rgba(0,255,136,.18);
+        rgba(0,255,136,.30) !important;
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(0,255,136,.035);
+
 }
 
 
-.match-player-team:last-child{
+.match-player-team-loss{
+
     border-color:
-        rgba(255,23,68,.18);
+        rgba(255,23,68,.30) !important;
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(255,23,68,.035);
+
 }
 
+
+/* =========================
+        TEAM TITLE
+========================= */
 
 .match-player-team-title{
     padding:12px;
@@ -2684,17 +2706,25 @@ main{
 }
 
 
-.match-player-team:first-child
+.match-player-team-win
 .match-player-team-title{
-    color:#00ff88;
+
+    color:#00ff88 !important;
+
 }
 
 
-.match-player-team:last-child
+.match-player-team-loss
 .match-player-team-title{
-    color:#ff1744;
+
+    color:#ff1744 !important;
+
 }
 
+
+/* =========================
+        PLAYER CARD
+========================= */
 
 .match-player-card{
     display:flex;
