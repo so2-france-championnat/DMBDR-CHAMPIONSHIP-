@@ -1340,6 +1340,11 @@ function renderPlayers(){
                 const kd =
                     getKD(player);
 
+
+                /* =========================
+                        KD COLOR
+                ========================= */
+
                 let kdClass =
                     "kd-bad";
 
@@ -1351,12 +1356,97 @@ function renderPlayers(){
                 }
 
 
+                /* =========================
+                        RANK COLOR
+                ========================= */
+
+                let rankClass =
+                    "player-rank-normal";
+
+
+                if(index === 0){
+
+                    rankClass =
+                        "player-rank-first";
+
+                }
+                else if(index === 1){
+
+                    rankClass =
+                        "player-rank-second";
+
+                }
+                else if(index === 2){
+
+                    rankClass =
+                        "player-rank-third";
+
+                }
+                else if(
+                    index >=
+                    sortedPlayers.length - 3
+                ){
+
+                    rankClass =
+                        "player-rank-last";
+
+                }
+
+
+                /* =========================
+                        TEAM LOGO
+                ========================= */
+
+                const playerTeam =
+                    teams.find(
+                        team =>
+                            team.name ===
+                            player.team
+                    );
+
+
+                const teamLogo =
+                    playerTeam
+                    ? playerTeam.logo
+                    : "";
+
+
                 return `
 
                 <div class="player-card">
 
-                    <div class="player-rank">
+                    <div
+                        class="
+                            player-rank
+                            ${rankClass}
+                        "
+                    >
                         ${index + 1}
+                    </div>
+
+
+                    <div class="player-team-logo">
+
+                        ${
+                            teamLogo
+                            ?
+
+                            `
+                            <img
+                                src="${teamLogo}"
+                                alt="${player.team}"
+                            >
+                            `
+
+                            :
+
+                            `
+                            <div class="player-team-logo-empty">
+                                ?
+                            </div>
+                            `
+                        }
+
                     </div>
 
 
@@ -1365,6 +1455,7 @@ function renderPlayers(){
                         <div class="player-name">
                             ${player.name}
                         </div>
+
 
                         <div class="player-team">
                             ${player.team}
@@ -1379,13 +1470,16 @@ function renderPlayers(){
                             ${player.kills} K
                         </span>
 
+
                         <span>
                             ${player.assists} A
                         </span>
 
+
                         <span>
                             ${player.deaths} D
                         </span>
+
 
                         <strong class="${kdClass}">
                             ${kd.toFixed(2)} KD
