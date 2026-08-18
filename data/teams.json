@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "BussGang",
-      "logo": "team1.jpg",
+      "logo": "assets/teams/bussgang.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
@@ -17,7 +17,7 @@
     {
       "id": 2,
       "name": "Nexus",
-      "logo": "team2.jpg",
+      "logo": "assets/teams/nexus.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
@@ -32,7 +32,7 @@
     {
       "id": 3,
       "name": "VitriX",
-      "logo": "team3.jpg",
+      "logo": "assets/teams/vitrix.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
@@ -47,7 +47,7 @@
     {
       "id": 4,
       "name": "Grizzly SDBT",
-      "logo": "team4.jpg",
+      "logo": "assets/teams/grizzly-sdbt.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
@@ -62,7 +62,7 @@
     {
       "id": 5,
       "name": "Vortex",
-      "logo": "team5.jpg",
+      "logo": "assets/teams/vortex.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
@@ -77,7 +77,7 @@
     {
       "id": 6,
       "name": "CP-0",
-      "logo": "team6.jpg",
+      "logo": "assets/teams/cp-0.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
@@ -91,7 +91,7 @@
     {
       "id": 7,
       "name": "NSRP",
-      "logo": "team7.jpg",
+      "logo": "assets/teams/nsrp.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
@@ -106,7 +106,7 @@
     {
       "id": 8,
       "name": "Sp4rks",
-      "logo": "team8.jpg",
+      "logo": "assets/teams/sp4rks.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
