@@ -1541,14 +1541,31 @@ function openMatch(matchId){
     if(!match) return;
 
 
+    /*
+     * Il existe maintenant deux contextes :
+     *
+     * 1. Match ouvert depuis TEAMS
+     * 2. Match ouvert depuis MATCHES
+     *
+     * Les deux ont leur propre conteneur.
+     */
+
+    const teamsPage =
+        document.getElementById("teams");
+
+    const matchesPage =
+        document.getElementById("matches");
+
+
+    const openedFromTeams =
+        teamsPage &&
+        teamsPage.classList.contains("active");
+
+
     const details =
-        document.getElementById("matchDetails");
-
-    const teamDetails =
-        document.getElementById("teamDetails");
-
-    const teamList =
-        document.getElementById("teamList");
+        openedFromTeams
+        ? document.getElementById("teamMatchDetails")
+        : document.getElementById("matchDetails");
 
 
     if(!details) return;
@@ -1580,12 +1597,73 @@ function openMatch(matchId){
         score2 > score1;
 
 
-    teamList.style.display = "none";
+    /*
+     * Si le match est ouvert depuis TEAMS,
+     * on masque le profil de l'équipe.
+     */
+
+    if(openedFromTeams){
+
+        const teamDetails =
+            document.getElementById("teamDetails");
+
+        const teamList =
+            document.getElementById("teamList");
 
 
-    if(teamDetails){
-        teamDetails.classList.remove("active");
-        teamDetails.innerHTML = "";
+        if(teamDetails){
+
+            teamDetails.classList.remove(
+                "active"
+            );
+
+        }
+
+
+        if(teamList){
+
+            teamList.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    /*
+     * Si le match est ouvert depuis MATCHES,
+     * on masque les autres vues de MATCHES.
+     */
+
+    else{
+
+        const teamList =
+            document.getElementById(
+                "matchTeamList"
+            );
+
+        const matchTeamDetails =
+            document.getElementById(
+                "matchTeamDetails"
+            );
+
+
+        if(teamList){
+
+            teamList.style.display =
+                "none";
+
+        }
+
+
+        if(matchTeamDetails){
+
+            matchTeamDetails.classList.remove(
+                "active"
+            );
+
+        }
+
     }
 
 
@@ -1636,31 +1714,37 @@ function openMatch(matchId){
 
             <div class="match-detail-score">
 
-    <span class="${
-        team1Won
-        ? "history-score-win"
-        : team2Won
-        ? "history-score-loss"
-        : ""
-    }">
-        ${score1}
-    </span>
+                <span class="${
+                    team1Won
+                    ? "history-score-win"
+                    : team2Won
+                    ? "history-score-loss"
+                    : ""
+                }">
 
-    <b>
-        -
-    </b>
+                    ${score1}
 
-    <span class="${
-        team2Won
-        ? "history-score-win"
-        : team1Won
-        ? "history-score-loss"
-        : ""
-    }">
-        ${score2}
-    </span>
+                </span>
 
-</div>
+
+                <b>
+                    -
+                </b>
+
+
+                <span class="${
+                    team2Won
+                    ? "history-score-win"
+                    : team1Won
+                    ? "history-score-loss"
+                    : ""
+                }">
+
+                    ${score2}
+
+                </span>
+
+            </div>
 
 
             <div class="
@@ -1697,6 +1781,7 @@ function openMatch(matchId){
 
         ${
             match.mvp
+
             ?
 
             `
@@ -1925,7 +2010,9 @@ function openMatch(matchId){
     `;
 
 
-    details.classList.add("active");
+    details.classList.add(
+        "active"
+    );
 
 
     window.scrollTo({
@@ -1942,23 +2029,109 @@ function openMatch(matchId){
 
 function closeMatch(){
 
-    const details =
-        document.getElementById("matchDetails");
+    const matchDetails =
+        document.getElementById(
+            "matchDetails"
+        );
+
+    const teamMatchDetails =
+        document.getElementById(
+            "teamMatchDetails"
+        );
+
+
+    /*
+     * Fermer le détail MATCHES
+     */
+
+    if(matchDetails){
+
+        matchDetails.classList.remove(
+            "active"
+        );
+
+        matchDetails.innerHTML = "";
+
+    }
+
+
+    /*
+     * Fermer le détail ouvert
+     * depuis TEAMS
+     */
+
+    if(teamMatchDetails){
+
+        teamMatchDetails.classList.remove(
+            "active"
+        );
+
+        teamMatchDetails.innerHTML = "";
+
+    }
+
+
+    /*
+     * Restaurer les équipes de MATCHES
+     */
+
+    const matchTeamList =
+        document.getElementById(
+            "matchTeamList"
+        );
+
+    const matchTeamDetails =
+        document.getElementById(
+            "matchTeamDetails"
+        );
+
+
+    if(matchTeamList){
+
+        matchTeamList.style.display = "";
+
+    }
+
+
+    if(matchTeamDetails){
+
+        matchTeamDetails.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    /*
+     * Restaurer le profil / la liste TEAMS
+     */
 
     const teamList =
-        document.getElementById("teamList");
+        document.getElementById(
+            "teamList"
+        );
+
+    const teamDetails =
+        document.getElementById(
+            "teamDetails"
+        );
 
 
-    if(!details) return;
+    if(teamDetails){
 
+        teamDetails.classList.remove(
+            "active"
+        );
 
-    details.classList.remove("active");
+        teamDetails.innerHTML = "";
 
-    details.innerHTML = "";
+    }
 
 
     if(teamList){
+
         teamList.style.display = "";
+
     }
 
 }
@@ -1970,19 +2143,48 @@ function closeMatch(){
 function closeTeam(){
 
     const list =
-        document.getElementById("teamList");
+        document.getElementById(
+            "teamList"
+        );
 
     const details =
-        document.getElementById("teamDetails");
+        document.getElementById(
+            "teamDetails"
+        );
 
-    if(!list || !details) return;
+    const teamMatchDetails =
+        document.getElementById(
+            "teamMatchDetails"
+        );
 
 
-    details.classList.remove("active");
+    if(details){
 
-    details.innerHTML = "";
+        details.classList.remove(
+            "active"
+        );
 
-    list.style.display = "";
+        details.innerHTML = "";
+
+    }
+
+
+    if(teamMatchDetails){
+
+        teamMatchDetails.classList.remove(
+            "active"
+        );
+
+        teamMatchDetails.innerHTML = "";
+
+    }
+
+
+    if(list){
+
+        list.style.display = "";
+
+    }
 
 }
 
