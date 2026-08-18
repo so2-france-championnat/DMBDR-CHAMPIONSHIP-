@@ -1822,3 +1822,84 @@ main{
     }
 
 }
+
+/* =========================
+        TEAM PROFILE V2
+========================= */
+
+.rd-positive{
+    color:#00ff88 !important;
+}
+
+.rd-negative{
+    color:#ff1744 !important;
+}
+
+
+.rounds-win strong{
+    color:#00ff88;
+}
+
+
+.rounds-loss strong{
+    color:#ff1744;
+}
+
+
+.team-match-history{
+    margin-top:5px;
+}
+
+
+/* =========================
+        ROSTER HOVER
+========================= */
+
+.roster-player{
+    transition:.25s;
+}
+
+
+.roster-player:hover{
+    transform:translateX(3px);
+
+    border-color:
+        rgba(0,140,255,.3);
+
+    background:
+        rgba(0,140,255,.035);
+}
+
+
+/* =========================
+        TEAM PROFILE MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    .team-hero-card{
+        padding:18px;
+    }
+
+
+    .team-hero-logo{
+        width:70px;
+        height:70px;
+    }
+
+
+    .team-hero-name h2{
+        font-size:21px;
+    }
+
+
+    .team-position strong{
+        font-size:18px;
+    }
+
+
+    .roster-player{
+        padding:11px 9px;
+    }
+
+}
