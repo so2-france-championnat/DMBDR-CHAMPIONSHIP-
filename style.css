@@ -2037,6 +2037,35 @@ main{
     white-space:nowrap;
 }
 
+.history-versus > strong{
+    font-size:22px;
+
+    font-weight:1000;
+
+    white-space:nowrap;
+}
+
+
+/* =========================
+        HISTORY SCORE COLORS
+========================= */
+
+.history-win .history-versus > strong{
+    color:#00ff88;
+
+    text-shadow:
+        0 0 12px
+        rgba(0,255,136,.20);
+}
+
+
+.history-loss .history-versus > strong{
+    color:#ff1744;
+
+    text-shadow:
+        0 0 12px
+        rgba(255,23,68,.20);
+}
 
 .history-mvp{
     display:flex;
@@ -2091,4 +2120,598 @@ main{
         font-size:19px;
     }
 
+}
+
+/* =========================
+        MATCH DETAILS
+========================= */
+
+.match-details{
+    display:none;
+}
+
+
+.match-details.active{
+    display:block;
+
+    animation:
+        pageIn
+        .3s
+        ease;
+}
+
+
+/* =========================
+        MATCH HEADER
+========================= */
+
+.match-detail-header{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+    padding:12px 15px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+
+.match-detail-header span{
+    color:#008cff;
+
+    font-size:11px;
+
+    font-weight:1000;
+
+    letter-spacing:2px;
+}
+
+
+.match-detail-header strong{
+    padding:6px 10px;
+
+    border:
+        1px solid
+        rgba(0,255,136,.3);
+
+    border-radius:7px;
+
+    color:#00ff88;
+
+    background:
+        rgba(0,255,136,.06);
+
+    font-size:8px;
+
+    letter-spacing:1px;
+}
+
+
+/* =========================
+        SCOREBOARD
+========================= */
+
+.match-detail-scoreboard{
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:25px 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,140,255,.08),
+            rgba(255,0,51,.06)
+        );
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.35);
+}
+
+
+/* =========================
+        MATCH TEAMS
+========================= */
+
+.match-detail-team{
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    min-width:0;
+
+    text-align:center;
+
+    opacity:.65;
+
+    transition:.25s;
+}
+
+
+.match-detail-team.match-winner{
+    opacity:1;
+}
+
+
+.match-detail-team img{
+    width:95px;
+
+    height:95px;
+
+    max-width:95px;
+
+    max-height:95px;
+
+    object-fit:contain;
+
+    border-radius:16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    background:
+        rgba(0,0,0,.25);
+
+    padding:8px;
+}
+
+
+.match-detail-team.match-winner img{
+    border-color:
+        rgba(0,255,136,.35);
+
+    box-shadow:
+        0 0 25px
+        rgba(0,255,136,.15);
+}
+
+
+.match-detail-team strong{
+    max-width:130px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    font-size:13px;
+
+    font-weight:1000;
+}
+
+
+.match-detail-team.match-winner strong{
+    color:#00ff88;
+}
+
+
+/* =========================
+        MATCH SCORE
+========================= */
+
+.match-detail-score{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+}
+
+
+.match-detail-score span{
+    font-size:52px;
+
+    line-height:1;
+
+    font-weight:1000;
+}
+
+
+.match-detail-score span:first-child{
+    color:#00ff88;
+
+    text-shadow:
+        0 0 20px
+        rgba(0,255,136,.25);
+}
+
+
+.match-detail-score span:last-child{
+    color:#ff1744;
+
+    text-shadow:
+        0 0 20px
+        rgba(255,23,68,.25);
+}
+
+
+.match-detail-score b{
+    color:#737b88;
+
+    font-size:28px;
+}
+
+
+/* =========================
+        MATCH RESULT
+========================= */
+
+.match-result{
+    margin-top:10px;
+
+    padding:10px;
+
+    text-align:center;
+
+    color:#00ff88;
+
+    font-size:11px;
+
+    font-weight:1000;
+
+    letter-spacing:2px;
+}
+
+
+/* =========================
+        MVP
+========================= */
+
+.match-mvp-card{
+    margin-top:15px;
+
+    padding:18px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(255,215,0,.25);
+
+    border-radius:16px;
+
+    background:
+        rgba(255,215,0,.035);
+
+    box-shadow:
+        inset 0 0 25px
+        rgba(255,215,0,.025);
+}
+
+
+.match-mvp-title{
+    margin-bottom:8px;
+
+    color:#ffd700;
+
+    font-size:9px;
+
+    font-weight:1000;
+
+    letter-spacing:2px;
+}
+
+
+.match-mvp-card > strong{
+    display:block;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:1000;
+}
+
+
+.match-mvp-card > div:last-child{
+    margin-top:8px;
+
+    color:#737b88;
+
+    font-size:9px;
+
+    font-weight:bold;
+}
+
+
+.match-mvp-card > div:last-child span{
+    margin-left:8px;
+
+    color:#ffd700;
+
+    font-weight:1000;
+}
+
+
+/* =========================
+        PLAYER STATS
+========================= */
+
+.match-player-columns{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+}
+
+
+.match-player-team{
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+
+.match-player-team:first-child{
+    border-color:
+        rgba(0,255,136,.18);
+}
+
+
+.match-player-team:last-child{
+    border-color:
+        rgba(255,23,68,.18);
+}
+
+
+.match-player-team-title{
+    padding:12px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+    color:white;
+
+    font-size:10px;
+
+    font-weight:1000;
+
+    letter-spacing:1px;
+}
+
+
+.match-player-team:first-child
+.match-player-team-title{
+    color:#00ff88;
+}
+
+
+.match-player-team:last-child
+.match-player-team-title{
+    color:#ff1744;
+}
+
+
+.match-player-card{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:12px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.045);
+}
+
+
+.match-player-card:last-child{
+    border-bottom:none;
+}
+
+
+.match-player-card > div{
+    min-width:0;
+}
+
+
+.match-player-card > div strong{
+    display:block;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    font-size:11px;
+
+    font-weight:900;
+}
+
+
+.match-player-card > div span{
+    display:block;
+
+    margin-top:4px;
+
+    color:#737b88;
+
+    font-size:8px;
+
+    font-weight:bold;
+}
+
+
+.match-player-card > strong{
+    min-width:45px;
+
+    text-align:right;
+
+    font-size:13px;
+
+    font-weight:1000;
+}
+
+
+.match-player-card small{
+    display:block;
+
+    margin-top:2px;
+
+    color:#737b88;
+
+    font-size:6px;
+
+    letter-spacing:1px;
+}
+
+
+/* =========================
+        MATCH MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .match-detail-scoreboard{
+        grid-template-columns:
+            1fr
+            auto
+            1fr;
+
+        gap:6px;
+
+        padding:18px 8px;
+    }
+
+
+    .match-detail-team img{
+        width:65px;
+
+        height:65px;
+
+        max-width:65px;
+
+        max-height:65px;
+
+        padding:5px;
+
+        border-radius:12px;
+    }
+
+
+    .match-detail-team strong{
+        max-width:95px;
+
+        font-size:10px;
+    }
+
+
+    .match-detail-score{
+        gap:5px;
+    }
+
+
+    .match-detail-score span{
+        font-size:36px;
+    }
+
+
+    .match-detail-score b{
+        font-size:20px;
+    }
+
+
+    .match-player-columns{
+        grid-template-columns:1fr;
+    }
+
+
+    .match-mvp-card{
+        padding:15px;
+    }
+
+}
+
+/* =========================
+        HISTORY SCORE
+========================= */
+
+.history-score{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:5px;
+
+    font-size:22px;
+
+    font-weight:1000;
+}
+
+
+.history-score-win{
+    color:#00ff88;
+
+    text-shadow:
+        0 0 12px
+        rgba(0,255,136,.25);
+}
+
+
+.history-score-loss{
+    color:#ff1744;
+
+    text-shadow:
+        0 0 12px
+        rgba(255,23,68,.25);
+}
+
+
+.history-score b{
+    color:#737b88;
+
+    font-weight:900;
 }
