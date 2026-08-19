@@ -5513,3 +5513,266 @@ main{
 
     margin-top:0 !important;
 }
+
+/* =========================================================
+        TEAM BANNERS
+========================================================= */
+
+.team-card{
+    position:relative;
+
+    min-height:92px;
+
+    overflow:hidden;
+
+    padding:0;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+        BANNIÈRE
+========================= */
+
+.team-card-banner{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    opacity:.75;
+
+    z-index:0;
+
+}
+
+
+/* =========================
+        FONDU / TRANSPARENCE
+========================= */
+
+.team-card-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3,5,10,.98) 0%,
+            rgba(3,5,10,.88) 22%,
+            rgba(3,5,10,.55) 48%,
+            rgba(3,5,10,.18) 75%,
+            rgba(3,5,10,.05) 100%
+        );
+
+}
+
+
+/* =========================
+        CONTENU
+========================= */
+
+.team-card-content{
+
+    position:relative;
+
+    z-index:2;
+
+    width:100%;
+
+    min-height:92px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:13px;
+
+}
+
+
+/* =========================
+        LOGO
+========================= */
+
+.team-card-logo{
+
+    width:52px;
+    height:52px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    border-radius:14px;
+
+    background:
+        rgba(3,5,10,.65);
+
+    border:
+        1px solid
+        rgba(0,140,255,.35);
+
+    box-shadow:
+        0 0 18px
+        rgba(0,140,255,.18);
+
+    backdrop-filter:blur(4px);
+
+}
+
+
+.team-card-logo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+/* =========================
+        TEXTE
+========================= */
+
+.team-card-info{
+
+    position:relative;
+
+    z-index:2;
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.team-card-name{
+
+    font-size:15px;
+
+    font-weight:900;
+
+    color:white;
+
+    text-shadow:
+        0 2px 8px
+        rgba(0,0,0,.8);
+
+}
+
+
+.team-card-players{
+
+    margin-top:4px;
+
+    color:#b0b7c3;
+
+    font-size:8px;
+
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+
+    text-shadow:
+        0 1px 6px
+        rgba(0,0,0,.9);
+
+}
+
+
+/* =========================
+        HOVER
+========================= */
+
+.team-card:hover .team-card-banner{
+
+    transform:scale(1.04);
+
+    opacity:.9;
+
+}
+
+
+.team-card-banner{
+
+    transition:
+        transform .4s ease,
+        opacity .4s ease;
+
+}
+
+
+.team-card:hover{
+
+    border-color:
+        rgba(0,140,255,.45);
+
+    box-shadow:
+        0 0 25px
+        rgba(0,140,255,.12);
+
+}
+
+
+/* =========================
+        MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    .team-card{
+
+        min-height:88px;
+
+    }
+
+
+    .team-card-content{
+
+        min-height:88px;
+
+        padding:11px;
+
+    }
+
+
+    .team-card-logo{
+
+        width:50px;
+        height:50px;
+
+    }
+
+
+    .team-card-name{
+
+        font-size:14px;
+
+    }
+
+}
