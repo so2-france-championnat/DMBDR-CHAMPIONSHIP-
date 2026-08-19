@@ -373,52 +373,72 @@ function renderTeams(){
 
     if(!container) return;
 
-
     container.innerHTML =
-        teams.map(team => `
+        teams.map(team => {
 
-        <div
-            class="team-card clickable"
-            onclick="openTeam('${team.id}')"
-        >
+            const bannerName =
+                team.name
+                    .toLowerCase()
+                    .replace(/\s+/g, "-");
 
-            <div class="team-card-logo">
+            return `
+
+            <div
+                class="team-card clickable"
+                onclick="openTeam('${team.id}')"
+            >
 
                 <img
-                    src="${team.logo}"
-                    alt="${team.name}"
+                    class="team-card-banner"
+                    src="assets/teams/banner-${bannerName}.png"
+                    alt=""
                 >
 
-            </div>
+                <div class="team-card-overlay"></div>
 
-            <div class="team-card-info">
+                <div class="team-card-content">
 
-                <div class="team-card-name">
-                    ${team.name}
+                    <div class="team-card-logo">
+
+                        <img
+                            src="${team.logo}"
+                            alt="${team.name}"
+                        >
+
+                    </div>
+
+                    <div class="team-card-info">
+
+                        <div class="team-card-name">
+                            ${team.name}
+                        </div>
+
+                        <div class="team-card-players">
+
+                            ${
+                                Array.isArray(team.players)
+                                ? team.players.length
+                                : 0
+                            }
+
+                            PLAYER${
+                                Array.isArray(team.players) &&
+                                team.players.length > 1
+                                ? "S"
+                                : ""
+                            }
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="team-card-players">
-
-                    ${
-                        Array.isArray(team.players)
-                        ? team.players.length
-                        : 0
-                    }
-
-                    PLAYER${
-                        Array.isArray(team.players) &&
-                        team.players.length > 1
-                        ? "S"
-                        : ""
-                    }
-
-                </div>
-
             </div>
 
-        </div>
+            `;
 
-        `).join("");
+        }).join("");
 
 }
 
