@@ -12,6 +12,7 @@ const boosters = [
     "Manji",
     "Nounours",
     "Sharko",
+    "Narvalow",
 
 ];
 
