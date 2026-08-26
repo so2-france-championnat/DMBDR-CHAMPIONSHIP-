@@ -52,7 +52,6 @@
         {"player": "Homn", "team": "BussGang", "kills": 8, "assists": 3, "deaths": 8}
       ]
     },
-
     {
       "label": "MATCH 3",
       "id": 3,
@@ -60,7 +59,17 @@
       "team2": "VitriX",
       "score1": 13,
       "score2": 0,
-      "status": "played"
+      "status": "played",
+      "video": "https://youtu.be/3c7_nB8ixew",
+      "publication": 18,
+      "stats": [
+        {"player": "Akra", "team": "BussGang", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Suzuki", "team": "BussGang", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Homn", "team": "BussGang", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Senzy", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Oceano", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Loic", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0}
+      ]
     },
     {
       "label": "MATCH 4",
@@ -69,9 +78,18 @@
       "team2": "BussGang",
       "score1": 0,
       "score2": 13,
-      "status": "played"
+      "status": "played",
+      "video": "https://youtu.be/k5LJ28djL4s",
+      "publication": 19,
+      "stats": [
+        {"player": "Senzy", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Loic", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Oceano", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Akra", "team": "BussGang", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Suzuki", "team": "BussGang", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Homn", "team": "BussGang", "kills": 0, "assists": 0, "deaths": 0}
+      ]
     },
-
     {
       "label": "MATCH 5",
       "id": 5,
@@ -228,7 +246,6 @@
         {"player": "Akra", "team": "BussGang", "kills": 12, "assists": 2, "deaths": 6}
       ]
     },
-
     {
       "label": "MATCH 11",
       "id": 11,
@@ -265,7 +282,6 @@
       "score2": 13,
       "status": "played"
     },
-
     {
       "label": "MATCH 15",
       "id": 15,
@@ -284,7 +300,6 @@
       "score2": 13,
       "status": "played"
     },
-
     {
       "label": "MATCH 17",
       "id": 17,
@@ -339,7 +354,6 @@
       "score2": 0,
       "status": "upcoming"
     },
-
     {
       "label": "MATCH 23",
       "id": 23,
@@ -410,7 +424,6 @@
       "score2": 13,
       "status": "played"
     },
-
     {
       "label": "MATCH 27",
       "id": 27,
@@ -436,7 +449,17 @@
       "team2": "Vortex",
       "score1": 0,
       "score2": 13,
-      "status": "played"
+      "status": "played",
+      "video": "https://youtu.be/48Y-YCchZyc",
+      "publication": 9,
+      "stats": [
+        {"player": "Loic", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Bri", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Nounours", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Stronex", "team": "Vortex", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Narvalow", "team": "Vortex", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Kurapika", "team": "Vortex", "kills": 0, "assists": 0, "deaths": 0}
+      ]
     },
     {
       "label": "MATCH 30",
@@ -445,7 +468,17 @@
       "team2": "VitriX",
       "score1": 13,
       "score2": 0,
-      "status": "played"
+      "status": "played",
+      "video": "https://youtu.be/QmfBYm0MDaY",
+      "publication": 10,
+      "stats": [
+        {"player": "Narvalow", "team": "Vortex", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Stronex", "team": "Vortex", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Kurapika", "team": "Vortex", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Loic", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Bri", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Nounours", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0}
+      ]
     },
     {
       "label": "MATCH 31",
@@ -454,7 +487,17 @@
       "team2": "CP-0",
       "score1": 0,
       "score2": 13,
-      "status": "played"
+      "status": "played",
+      "video": "https://youtu.be/kZY4m0ywhVw",
+      "publication": 5,
+      "stats": [
+        {"player": "Loic", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Bri", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Nounours", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Manji", "team": "CP-0", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Sharko", "team": "CP-0", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Tata", "team": "CP-0", "kills": 0, "assists": 0, "deaths": 0}
+      ]
     },
     {
       "label": "MATCH 32",
@@ -463,7 +506,17 @@
       "team2": "VitriX",
       "score1": 13,
       "score2": 0,
-      "status": "played"
+      "status": "played",
+      "video": "https://youtu.be/U0KCqDN2hQM",
+      "publication": 6,
+      "stats": [
+        {"player": "Manji", "team": "CP-0", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Sharko", "team": "CP-0", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Tata", "team": "CP-0", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Bri", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Loic", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+        {"player": "Nounours", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0}
+      ]
     },
     {
       "label": "MATCH 33",
@@ -489,7 +542,7 @@
       "team1": "VitriX",
       "team2": "Sp4rks",
       "score1": 0,
-      "score2": 13,
+      "score2": 0,
       "status": "played"
     },
     {
@@ -497,11 +550,12 @@
       "id": 36,
       "team1": "Sp4rks",
       "team2": "VitriX",
-      "score1": 13,
+      "score1": 0,
       "score2": 0,
-      "status": "played"
+      "status": "played",
+      "video": "https://youtu.be/LSnAqgc07ds",
+      "publication": 11
     },
-
     {
       "label": "MATCH 37",
       "id": 37,
