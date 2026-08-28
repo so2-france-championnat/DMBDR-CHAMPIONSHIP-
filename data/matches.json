@@ -519,16 +519,31 @@
       ]
     },
     {
-      "label": "MATCH 33",
-      "id": 33,
-      "team1": "VitriX",
-      "team2": "NSRP",
-      "score1": 0,
-      "score2": 13,
-      "status": "played"
-      "video": "https://youtu.be/E2TuiI4fgq4?si=MWqozsvPqZ5zOx6Z",
-      "publication": 20
-    },
+  "label": "MATCH 33",
+  "id": 33,
+  "team1": "VitriX",
+  "team2": "NSRP",
+  "score1": 0,
+  "score2": 13,
+  "status": "played",
+  "video": "https://youtu.be/E2TuiI4fgq4?si=MWqozsvPqZ5zOx6Z",
+  "publication": 20,
+  "mvp": {
+    "name": "",
+    "kills": 0,
+    "assists": 0,
+    "deaths": 0,
+    "kd": 0
+  },
+  "stats": [
+    {"player": "Senzy", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+    {"player": "Oceano", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+    {"player": "Loic", "team": "VitriX", "kills": 0, "assists": 0, "deaths": 0},
+    {"player": "Go Silver", "team": "NSRP", "kills": 0, "assists": 0, "deaths": 0},
+    {"player": "Ragnar", "team": "NSRP", "kills": 0, "assists": 0, "deaths": 0},
+    {"player": "Nistugo", "team": "NSRP", "kills": 0, "assists": 0, "deaths": 0}
+  ]
+}
     {
       "label": "MATCH 34",
       "id": 34,
