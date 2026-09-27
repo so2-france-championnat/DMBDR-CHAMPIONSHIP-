@@ -679,25 +679,54 @@
       "score1": 0,
       "score2": 0,
       "status": "upcoming"
-    },
+    },{
+  "label": "MATCH 47",
+  "id": 47,
+  "team1": "Vortex",
+  "team2": "NSRP",
+  "score1": 13,
+  "score2": 6,
+  "status": "played",
+  "mvp": {
+    "name": "Narvalow",
+    "kills": 19,
+    "assists": 0,
+    "deaths": 11,
+    "kd": 1.73
+  },
+  "stats": [
+    {"player": "Narvalow", "team": "Vortex", "kills": 19, "assists": 0, "deaths": 11},
+    {"player": "Numb", "team": "Vortex", "kills": 17, "assists": 2, "deaths": 11},
+    {"player": "Stronex", "team": "Vortex", "kills": 8, "assists": 3, "deaths": 13},
+    {"player": "Nistugo", "team": "NSRP", "kills": 12, "assists": 3, "deaths": 16},
+    {"player": "Ropz", "team": "NSRP", "kills": 13, "assists": 2, "deaths": 14},
+    {"player": "Ragnar", "team": "NSRP", "kills": 8, "assists": 1, "deaths": 15}
+  ]
+},
     {
-      "label": "MATCH 47",
-      "id": 47,
-      "team1": "Vortex",
-      "team2": "NSRP",
-      "score1": 0,
-      "score2": 0,
-      "status": "upcoming"
-    },
-    {
-      "label": "MATCH 48",
-      "id": 48,
-      "team1": "NSRP",
-      "team2": "Vortex",
-      "score1": 0,
-      "score2": 0,
-      "status": "upcoming"
-    },
+  "label": "MATCH 48",
+  "id": 48,
+  "team1": "NSRP",
+  "team2": "Vortex",
+  "score1": 10,
+  "score2": 13,
+  "status": "played",
+  "mvp": {
+    "name": "Ropz",
+    "kills": 21,
+    "assists": 4,
+    "deaths": 17,
+    "kd": 1.24
+  },
+  "stats": [
+    {"player": "Nistugo", "team": "NSRP", "kills": 16, "assists": 1, "deaths": 18},
+    {"player": "Ropz", "team": "NSRP", "kills": 21, "assists": 4, "deaths": 17},
+    {"player": "Ragnar", "team": "NSRP", "kills": 8, "assists": 3, "deaths": 16},
+    {"player": "Numb", "team": "Vortex", "kills": 20, "assists": 1, "deaths": 12},
+    {"player": "Narvalow", "team": "Vortex", "kills": 18, "assists": 3, "deaths": 15},
+    {"player": "Stronex", "team": "Vortex", "kills": 11, "assists": 2, "deaths": 18}
+  ]
+},
     {
       "label": "MATCH 49",
       "id": 49,
