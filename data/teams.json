@@ -2,52 +2,72 @@
   "teams": [
     {
       "id": 1,
-      "name": "BussGang",
-      "logo": "assets/teams/bussgang.jpg",
+      "name": "GLADIATOR",
+      "logo": "assets/teams/gladiator.jpg",
+      "banner": "assets/teams/banner-gladiator.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
       "rd": 0,
       "players": [
-        "Akra",
-        "Homn",
-        "Suzuki"
+        "Franco",
+        "Oscar",
+        "Mbobutu"
       ]
     },
     {
       "id": 2,
-      "name": "Nexus",
-      "logo": "assets/teams/nexus.jpg",
+      "name": "OSAKA",
+      "logo": "assets/teams/osaka.jpg",
+      "banner": "assets/teams/banner-osaka.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
       "rd": 0,
       "players": [
-        "LaynOx",
-        "Gabin15",
-        "Qualites",
-        "Vlase"
+        "Numb",
+        "Loic",
+        "Grainut"
+      ],
+      "substitutes": [
+        "Kirito"
       ]
     },
     {
       "id": 3,
-      "name": "VitriX",
-      "logo": "assets/teams/vitrix.jpg",
+      "name": "NOFLASH",
+      "logo": "assets/teams/noflash.jpg",
+      "banner": "assets/teams/banner-noflash.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
       "rd": 0,
       "players": [
-        "Loic",
-        "Senzy",
-        "Nounours",
-        "Oceano"
+        "Yupy",
+        "LM",
+        "Albin"
       ]
     },
     {
       "id": 4,
-      "name": "Grizzly SDBT",
-      "logo": "assets/teams/grizzly-sdbt.jpg",
+      "name": "VIKII",
+      "logo": "assets/teams/vk.jpg",
+      "banner": "assets/teams/banner-vikii.jpg",
+      "points": 0,
+      "roundsWon": 0,
+      "roundsLost": 0,
+      "rd": 0,
+      "players": [
+        "Suzuki",
+        "Qualités",
+        "Solo"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "SDBT",
+      "logo": "assets/teams/sdbt.jpg",
+      "banner": "assets/teams/banner-sdbt.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
@@ -55,67 +75,55 @@
       "players": [
         "Freezy",
         "Youko",
-        "Wanheda",
-        "ZoraYtB"
-      ]
-    },
-    {
-      "id": 5,
-      "name": "Vortex",
-      "logo": "assets/teams/vortex.jpg",
-      "points": 0,
-      "roundsWon": 0,
-      "roundsLost": 0,
-      "rd": 0,
-      "players": [
-        "Narvalow",
-        "Stronex",
-        "Numb",
-        "Grainut"
+        "Brussels"
       ]
     },
     {
       "id": 6,
-      "name": "CP-0",
-      "logo": "assets/teams/cp-0.jpg",
+      "name": "PROTOCOL X",
+      "logo": "assets/teams/protocolx.jpg",
+      "banner": "assets/teams/banner-protocolx.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
       "rd": 0,
       "players": [
-        "Manji",
-        "Tata",
-        "Sharko"
+        "Ruzonoa",
+        "Force-spécial",
+        "Best30kill.17z"
+      ],
+      "substitutes": [
+        "Azkaban"
       ]
     },
     {
       "id": 7,
-      "name": "NSRP",
-      "logo": "assets/teams/nsrp.jpg",
+      "name": "NMJF",
+      "logo": "assets/teams/nmjf.jpg",
+      "banner": "assets/teams/banner-nmjf.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
       "rd": 0,
       "players": [
-        "Nistugo",
-        "Go Silver",
-        "Ragnar",
-        "PickixBack"
+        "Akra",
+        "Darky",
+        "Narvalow"
       ]
     },
     {
       "id": 8,
-      "name": "Sp4rks",
-      "logo": "assets/teams/sp4rks.jpg",
+      "name": "MONEY",
+      "logo": "assets/teams/money.jpg",
+      "banner": "assets/teams/banner-money.jpg",
       "points": 0,
       "roundsWon": 0,
       "roundsLost": 0,
       "rd": 0,
       "players": [
-        "OmarBapLO6",
-        "Moe Lester",
-        "Skiimi",
-        "Kitaro"
+        "SHOT",
+        "Playboi",
+        "Botchi"
       ]
     }
   ]
