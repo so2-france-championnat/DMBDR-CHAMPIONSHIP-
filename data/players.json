@@ -2,8 +2,8 @@
   "players": [
     {
       "id": 1,
-      "name": "Akra",
-      "team": "BussGang",
+      "name": "Franco",
+      "team": "GLADIATOR",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -11,8 +11,8 @@
     },
     {
       "id": 2,
-      "name": "Homn",
-      "team": "BussGang",
+      "name": "Oscar",
+      "team": "GLADIATOR",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -20,18 +20,17 @@
     },
     {
       "id": 3,
-      "name": "Suzuki",
-      "team": "BussGang",
+      "name": "Mbobutu",
+      "team": "GLADIATOR",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
       "mvp": 0
     },
-
     {
       "id": 4,
-      "name": "LaynOx",
-      "team": "Nexus",
+      "name": "Numb",
+      "team": "OSAKA",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -39,8 +38,8 @@
     },
     {
       "id": 5,
-      "name": "Gabin15",
-      "team": "Nexus",
+      "name": "Loic",
+      "team": "OSAKA",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -48,8 +47,8 @@
     },
     {
       "id": 6,
-      "name": "Qualites",
-      "team": "Nexus",
+      "name": "Grainut",
+      "team": "OSAKA",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -57,18 +56,18 @@
     },
     {
       "id": 7,
-      "name": "Vlase",
-      "team": "Nexus",
+      "name": "Kirito",
+      "team": "OSAKA",
+      "role": "substitute",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
       "mvp": 0
     },
-
     {
       "id": 8,
-      "name": "Loic",
-      "team": "VitriX",
+      "name": "Yupy",
+      "team": "NOFLASH",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -76,8 +75,8 @@
     },
     {
       "id": 9,
-      "name": "Senzy",
-      "team": "VitriX",
+      "name": "LM",
+      "team": "NOFLASH",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -85,8 +84,8 @@
     },
     {
       "id": 10,
-      "name": "Nounours",
-      "team": "VitriX",
+      "name": "Albin",
+      "team": "NOFLASH",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -94,18 +93,17 @@
     },
     {
       "id": 11,
-      "name": "Oceano",
-      "team": "VitriX",
+      "name": "Suzuki",
+      "team": "VIKII",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
       "mvp": 0
     },
-
     {
       "id": 12,
-      "name": "Freezy",
-      "team": "Grizzly SDBT",
+      "name": "Qualités",
+      "team": "VIKII",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -113,8 +111,8 @@
     },
     {
       "id": 13,
-      "name": "Youko",
-      "team": "Grizzly SDBT",
+      "name": "Solo",
+      "team": "VIKII",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -122,8 +120,8 @@
     },
     {
       "id": 14,
-      "name": "Wanheda",
-      "team": "Grizzly SDBT",
+      "name": "Freezy",
+      "team": "SDBT",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -131,18 +129,17 @@
     },
     {
       "id": 15,
-      "name": "ZoraYtB",
-      "team": "Grizzly SDBT",
+      "name": "Youko",
+      "team": "SDBT",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
       "mvp": 0
     },
-
     {
       "id": 16,
-      "name": "Narvalow",
-      "team": "Vortex",
+      "name": "Brussels",
+      "team": "SDBT",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -150,8 +147,8 @@
     },
     {
       "id": 17,
-      "name": "Stronex",
-      "team": "Vortex",
+      "name": "Ruzonoa",
+      "team": "PROTOCOL X",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -159,8 +156,8 @@
     },
     {
       "id": 18,
-      "name": "Numb",
-      "team": "Vortex",
+      "name": "Force-spécial",
+      "team": "PROTOCOL X",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -168,18 +165,18 @@
     },
     {
       "id": 19,
-      "name": "Grainut",
-      "team": "Vortex",
+      "name": "Best30kill.17z",
+      "team": "PROTOCOL X",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
       "mvp": 0
     },
-
     {
       "id": 20,
-      "name": "Manji",
-      "team": "CP-0",
+      "name": "Azkaban",
+      "team": "PROTOCOL X",
+      "role": "substitute",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -187,8 +184,8 @@
     },
     {
       "id": 21,
-      "name": "Tata",
-      "team": "CP-0",
+      "name": "Akra",
+      "team": "NMJF",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -196,18 +193,17 @@
     },
     {
       "id": 22,
-      "name": "Sharko",
-      "team": "CP-0",
+      "name": "Darky",
+      "team": "NMJF",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
       "mvp": 0
     },
-
     {
       "id": 23,
-      "name": "Nistugo",
-      "team": "NSRP",
+      "name": "Narvalow",
+      "team": "NMJF",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -215,8 +211,8 @@
     },
     {
       "id": 24,
-      "name": "Ropz",
-      "team": "NSRP",
+      "name": "SHOT",
+      "team": "MONEY",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -224,8 +220,8 @@
     },
     {
       "id": 25,
-      "name": "Ragnar",
-      "team": "NSRP",
+      "name": "Playboi",
+      "team": "MONEY",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
@@ -233,45 +229,8 @@
     },
     {
       "id": 26,
-      "name": "Akz",
-      "team": "NSRP",
-      "kills": 0,
-      "assists": 0,
-      "deaths": 0,
-      "mvp": 0
-    },
-
-    {
-      "id": 27,
-      "name": "OmarBapLO6",
-      "team": "Sp4rks",
-      "kills": 0,
-      "assists": 0,
-      "deaths": 0,
-      "mvp": 0
-    },
-    {
-      "id": 28,
-      "name": "Moe Lester",
-      "team": "Sp4rks",
-      "kills": 0,
-      "assists": 0,
-      "deaths": 0,
-      "mvp": 0
-    },
-    {
-      "id": 29,
-      "name": "Skiimi",
-      "team": "Sp4rks",
-      "kills": 0,
-      "assists": 0,
-      "deaths": 0,
-      "mvp": 0
-    },
-    {
-      "id": 30,
-      "name": "Kitaro",
-      "team": "Sp4rks",
+      "name": "Botchi",
+      "team": "MONEY",
       "kills": 0,
       "assists": 0,
       "deaths": 0,
