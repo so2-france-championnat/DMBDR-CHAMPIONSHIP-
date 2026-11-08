@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "GLADIATOR",
-      "logo": "assets/teams/gladiator.jpg",
+      "logo": "assets/teams/Gladiator.jpg",
       "banner": "assets/teams/banner-gladiator.jpg",
       "points": 0,
       "roundsWon": 0,
@@ -18,7 +18,7 @@
     {
       "id": 2,
       "name": "OSAKA",
-      "logo": "assets/teams/osaka.jpg",
+      "logo": "assets/teams/Osaka.jpg",
       "banner": "assets/teams/banner-osaka.jpg",
       "points": 0,
       "roundsWon": 0,
@@ -36,7 +36,7 @@
     {
       "id": 3,
       "name": "NOFLASH",
-      "logo": "assets/teams/noflash.jpg",
+      "logo": "assets/teams/Noflash.jpg",
       "banner": "assets/teams/banner-noflash.jpg",
       "points": 0,
       "roundsWon": 0,
@@ -51,7 +51,7 @@
     {
       "id": 4,
       "name": "VIKII",
-      "logo": "assets/teams/vk.jpg",
+      "logo": "assets/teams/Vk.jpg",
       "banner": "assets/teams/banner-vikii.jpg",
       "points": 0,
       "roundsWon": 0,
@@ -66,7 +66,7 @@
     {
       "id": 5,
       "name": "SDBT",
-      "logo": "assets/teams/sdbt.jpg",
+      "logo": "assets/teams/Sdbt.jpg",
       "banner": "assets/teams/banner-sdbt.jpg",
       "points": 0,
       "roundsWon": 0,
@@ -81,7 +81,7 @@
     {
       "id": 6,
       "name": "PROTOCOL X",
-      "logo": "assets/teams/protocolx.jpg",
+      "logo": "assets/teams/Protocolx.jpg",
       "banner": "assets/teams/banner-protocolx.jpg",
       "points": 0,
       "roundsWon": 0,
@@ -99,7 +99,7 @@
     {
       "id": 7,
       "name": "NMJF",
-      "logo": "assets/teams/nmjf.jpg",
+      "logo": "assets/teams/Nmjf.jpg",
       "banner": "assets/teams/banner-nmjf.jpg",
       "points": 0,
       "roundsWon": 0,
@@ -114,7 +114,7 @@
     {
       "id": 8,
       "name": "MONEY",
-      "logo": "assets/teams/money.jpg",
+      "logo": "assets/teams/Money.jpg",
       "banner": "assets/teams/banner-money.jpg",
       "points": 0,
       "roundsWon": 0,
