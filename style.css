@@ -5776,3 +5776,29 @@ main{
     }
 
 }
+
+/* =========================
+   FIX — PHOTOS JOUEURS DANS TEAMS
+========================= */
+
+#teamDetails .simple-roster-player img,
+#teamDetails .roster-player img {
+
+    width:42px !important;
+    height:42px !important;
+
+    min-width:42px;
+    min-height:42px;
+
+    max-width:42px !important;
+    max-height:42px !important;
+
+    flex:0 0 42px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
