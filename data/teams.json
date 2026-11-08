@@ -1,130 +1,130 @@
 {
-  "teams": [
-    {
-      "id": 1,
-      "name": "GLADIATOR",
-      "logo": "assets/teams/gladiator.jpg",
-      "banner": "assets/teams/banner-gladiator.jpg",
-      "points": 0,
-      "roundsWon": 0,
-      "roundsLost": 0,
-      "rd": 0,
-      "players": [
-        "Franco",
-        "Oscar",
-        "Mbobutu"
-      ]
-    },
-    {
-      "id": 2,
-      "name": "OSAKA",
-      "logo": "assets/teams/osaka.jpg",
-      "banner": "assets/teams/banner-osaka.jpg",
-      "points": 0,
-      "roundsWon": 0,
-      "roundsLost": 0,
-      "rd": 0,
-      "players": [
-        "Numb",
-        "Loic",
-        "Grainut"
-      ],
-      "substitutes": [
-        "Kirito"
-      ]
-    },
-    {
-      "id": 3,
-      "name": "NOFLASH",
-      "logo": "assets/teams/noflash.jpg",
-      "banner": "assets/teams/banner-noflash.jpg",
-      "points": 0,
-      "roundsWon": 0,
-      "roundsLost": 0,
-      "rd": 0,
-      "players": [
-        "Yupy",
-        "LM",
-        "Albin"
-      ]
-    },
-    {
-      "id": 4,
-      "name": "VIKII",
-      "logo": "assets/teams/vk.jpg",
-      "banner": "assets/teams/banner-vikii.jpg",
-      "points": 0,
-      "roundsWon": 0,
-      "roundsLost": 0,
-      "rd": 0,
-      "players": [
-        "Suzuki",
-        "Qualités",
-        "Solo"
-      ]
-    },
-    {
-      "id": 5,
-      "name": "SDBT",
-      "logo": "assets/teams/sdbt.jpg",
-      "banner": "assets/teams/banner-sdbt.jpg",
-      "points": 0,
-      "roundsWon": 0,
-      "roundsLost": 0,
-      "rd": 0,
-      "players": [
-        "Freezy",
-        "Youko",
-        "Brussels"
-      ]
-    },
-    {
-      "id": 6,
-      "name": "PROTOCOL X",
-      "logo": "assets/teams/protocolx.jpg",
-      "banner": "assets/teams/banner-protocolx.jpg",
-      "points": 0,
-      "roundsWon": 0,
-      "roundsLost": 0,
-      "rd": 0,
-      "players": [
-        "Ruzonoa",
-        "Force-spécial",
-        "Best30kill.17z"
-      ],
-      "substitutes": [
-        "Azkaban"
-      ]
-    },
-    {
-      "id": 7,
-      "name": "NMJF",
-      "logo": "assets/teams/nmjf.jpg",
-      "banner": "assets/teams/banner-nmjf.jpg",
-      "points": 0,
-      "roundsWon": 0,
-      "roundsLost": 0,
-      "rd": 0,
-      "players": [
-        "Akra",
-        "Darky",
-        "Narvalow"
-      ]
-    },
-    {
-      "id": 8,
-      "name": "MONEY",
-      "logo": "assets/teams/money.jpg",
-      "banner": "assets/teams/banner-money.jpg",
-      "points": 0,
-      "roundsWon": 0,
-      "roundsLost": 0,
-      "rd": 0,
-      "players": [
-        "SHOT",
-        "Playboi",
-        "Botchi"
-      ]
-    }
-  ]
+“teams”: [
+{
+“id”: 1,
+“name”: “GLADIATOR”,
+“logo”: “Assets/Team/Gladiator.jpg”,
+“banner”: “Assets/Team/banner-gladiator.jpg”,
+“points”: 0,
+“roundsWon”: 0,
+“roundsLost”: 0,
+“rd”: 0,
+“players”: [
+“Franco”,
+“Oscar”,
+“Mbobutu”
+]
+},
+{
+“id”: 2,
+“name”: “OSAKA”,
+“logo”: “Assets/Team/Osaka.jpg”,
+“banner”: “Assets/Team/banner-osaka.jpg”,
+“points”: 0,
+“roundsWon”: 0,
+“roundsLost”: 0,
+“rd”: 0,
+“players”: [
+“Numb”,
+“Loic”,
+“Grainut”
+],
+“substitutes”: [
+“Kirito”
+]
+},
+{
+“id”: 3,
+“name”: “NOFLASH”,
+“logo”: “Assets/Team/Noflash.jpg”,
+“banner”: “Assets/Team/banner-noflash.jpg”,
+“points”: 0,
+“roundsWon”: 0,
+“roundsLost”: 0,
+“rd”: 0,
+“players”: [
+“Yupy”,
+“LM”,
+“Albin”
+]
+},
+{
+“id”: 4,
+“name”: “VIKII”,
+“logo”: “Assets/Team/Vk.jpg”,
+“banner”: “Assets/Team/banner-vikii.jpg”,
+“points”: 0,
+“roundsWon”: 0,
+“roundsLost”: 0,
+“rd”: 0,
+“players”: [
+“Suzuki”,
+“Qualités”,
+“Solo”
+]
+},
+{
+“id”: 5,
+“name”: “SDBT”,
+“logo”: “Assets/Team/Sdbt.jpg”,
+“banner”: “Assets/Team/banner-sdbt.jpg”,
+“points”: 0,
+“roundsWon”: 0,
+“roundsLost”: 0,
+“rd”: 0,
+“players”: [
+“Freezy”,
+“Youko”,
+“Brussels”
+]
+},
+{
+“id”: 6,
+“name”: “PROTOCOL X”,
+“logo”: “Assets/Team/Protocolx.jpg”,
+“banner”: “Assets/Team/banner-protocolx.jpg”,
+“points”: 0,
+“roundsWon”: 0,
+“roundsLost”: 0,
+“rd”: 0,
+“players”: [
+“Ruzonoa”,
+“Force-spécial”,
+“Best30kill.17z”
+],
+“substitutes”: [
+“Azkaban”
+]
+},
+{
+“id”: 7,
+“name”: “NMJF”,
+“logo”: “Assets/Team/Nmjf.jpg”,
+“banner”: “Assets/Team/banner-nmjf.jpg”,
+“points”: 0,
+“roundsWon”: 0,
+“roundsLost”: 0,
+“rd”: 0,
+“players”: [
+“Akra”,
+“Darky”,
+“Narvalow”
+]
+},
+{
+“id”: 8,
+“name”: “MONEY”,
+“logo”: “Assets/Team/Money.jpg”,
+“banner”: “Assets/Team/banner-money.jpg”,
+“points”: 0,
+“roundsWon”: 0,
+“roundsLost”: 0,
+“rd”: 0,
+“players”: [
+“SHOT”,
+“Playboi”,
+“Botchi”
+]
+}
+]
 }
