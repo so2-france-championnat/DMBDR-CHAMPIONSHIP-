@@ -92,6 +92,16 @@
       "mvp": 0
     },
     {
+  "id": 27,
+  "name": "Green",
+  "team": "NOFLASH",
+  "role": "substitute",
+  "kills": 0,
+  "assists": 0,
+  "deaths": 0,
+  "mvp": 0
+},
+    {
       "id": 11,
       "name": "Suzuki",
       "team": "VIKII",
