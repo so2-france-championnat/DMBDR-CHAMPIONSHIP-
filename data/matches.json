@@ -234,14 +234,68 @@
     "status": "upcoming"
   },
   {
-    "id": 21,
-    "label": "Match 21",
-    "team1": "GLADIATOR",
-    "team2": "NOFLASH",
-    "score1": 0,
-    "score2": 0,
-    "status": "upcoming"
+  "id": 21,
+  "label": "Match 21",
+  "team1": "GLADIATOR",
+  "team2": "NOFLASH",
+  "score1": 11,
+  "score2": 13,
+  "status": "played",
+  "publication": 2,
+  "video": "https://youtu.be/6RQ1gBbRQjQ?si=Z9bXa2keYr5QlkuL",
+  "mvp": {
+    "name": "Albin",
+    "team": "NOFLASH",
+    "kills": 19,
+    "assists": 7,
+    "deaths": 12,
+    "kd": 1.58
   },
+  "stats": [
+    {
+      "player": "Albin",
+      "team": "NOFLASH",
+      "kills": 19,
+      "assists": 7,
+      "deaths": 12
+    },
+    {
+      "player": "Green",
+      "team": "NOFLASH",
+      "kills": 15,
+      "assists": 3,
+      "deaths": 17
+    },
+    {
+      "player": "Yupy",
+      "team": "NOFLASH",
+      "kills": 13,
+      "assists": 2,
+      "deaths": 13
+    },
+    {
+      "player": "Oscar",
+      "team": "GLADIATOR",
+      "kills": 19,
+      "assists": 5,
+      "deaths": 13
+    },
+    {
+      "player": "Franco",
+      "team": "GLADIATOR",
+      "kills": 15,
+      "assists": 5,
+      "deaths": 16
+    },
+    {
+      "player": "Mbobutu",
+      "team": "GLADIATOR",
+      "kills": 8,
+      "assists": 3,
+      "deaths": 18
+    }
+  ]
+},
   {
     "id": 22,
     "label": "Match 22",
