@@ -342,14 +342,68 @@
     "status": "upcoming"
   },
   {
-    "id": 27,
-    "label": "Match 27",
-    "team1": "VIKII",
-    "team2": "NMJF",
-    "score1": 0,
-    "score2": 0,
-    "status": "upcoming"
+  "id": 27,
+  "label": "Match 27",
+  "team1": "VIKII",
+  "team2": "NMJF",
+  "score1": 13,
+  "score2": 11,
+  "status": "played",
+  "publication": 3,
+  "video": "https://youtu.be/FkuUBPVjmBw?si=mdfiK-XnogNeCVD9",
+  "mvp": {
+    "name": "Qualités",
+    "team": "VIKII",
+    "kills": 23,
+    "assists": 1,
+    "deaths": 13,
+    "kd": 1.77
   },
+  "stats": [
+    {
+      "player": "Qualités",
+      "team": "VIKII",
+      "kills": 23,
+      "assists": 1,
+      "deaths": 13
+    },
+    {
+      "player": "Suzuki",
+      "team": "VIKII",
+      "kills": 19,
+      "assists": 1,
+      "deaths": 16
+    },
+    {
+      "player": "Solo",
+      "team": "VIKII",
+      "kills": 9,
+      "assists": 5,
+      "deaths": 19
+    },
+    {
+      "player": "Narvalow",
+      "team": "NMJF",
+      "kills": 18,
+      "assists": 5,
+      "deaths": 16
+    },
+    {
+      "player": "Darky",
+      "team": "NMJF",
+      "kills": 17,
+      "assists": 3,
+      "deaths": 15
+    },
+    {
+      "player": "Akra",
+      "team": "NMJF",
+      "kills": 13,
+      "assists": 4,
+      "deaths": 20
+    }
+  ]
+},
   {
     "id": 28,
     "label": "Match 28",
