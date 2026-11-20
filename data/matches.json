@@ -324,14 +324,68 @@
     "status": "upcoming"
   },
   {
-    "id": 25,
-    "label": "Match 25",
-    "team1": "GLADIATOR",
-    "team2": "OSAKA",
-    "score1": 0,
-    "score2": 0,
-    "status": "upcoming"
+  "id": 25,
+  "label": "Match 25",
+  "team1": "GLADIATOR",
+  "team2": "OSAKA",
+  "score1": 1,
+  "score2": 13,
+  "status": "played",
+  "publication": 5,
+  "video": "https://youtu.be/ESo6hVYg6TU?si=pVL4L7FsMkPb3W8j",
+  "mvp": {
+    "name": "Loic",
+    "team": "OSAKA",
+    "kills": 11,
+    "assists": 2,
+    "deaths": 2,
+    "kd": 5.50
   },
+  "stats": [
+    {
+      "player": "Mbobutu",
+      "team": "GLADIATOR",
+      "kills": 6,
+      "assists": 2,
+      "deaths": 13
+    },
+    {
+      "player": "Franco",
+      "team": "GLADIATOR",
+      "kills": 6,
+      "assists": 0,
+      "deaths": 14
+    },
+    {
+      "player": "Oscar",
+      "team": "GLADIATOR",
+      "kills": 3,
+      "assists": 1,
+      "deaths": 14
+    },
+    {
+      "player": "Grainut",
+      "team": "OSAKA",
+      "kills": 19,
+      "assists": 2,
+      "deaths": 7
+    },
+    {
+      "player": "Loic",
+      "team": "OSAKA",
+      "kills": 11,
+      "assists": 2,
+      "deaths": 2
+    },
+    {
+      "player": "Numb",
+      "team": "OSAKA",
+      "kills": 11,
+      "assists": 3,
+      "deaths": 6
+    }
+  ]
+},
   {
     "id": 26,
     "label": "Match 26",
