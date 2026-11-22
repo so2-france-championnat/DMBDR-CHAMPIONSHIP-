@@ -295,16 +295,69 @@
       "deaths": 18
     }
   ]
-},
-  {
-    "id": 22,
-    "label": "Match 22",
-    "team1": "VIKII",
-    "team2": "OSAKA",
-    "score1": 0,
-    "score2": 0,
-    "status": "upcoming"
+},{
+  "id": 22,
+  "label": "Match 22",
+  "team1": "VIKII",
+  "team2": "OSAKA",
+  "score1": 13,
+  "score2": 0,
+  "status": "played",
+  "publication": 6,
+  "video": "https://youtu.be/skp6RkxvV0A?si=Zcm8MUjFy6X6fP9j",
+  "mvp": {
+    "name": "Qualités",
+    "team": "VIKII",
+    "kills": 10,
+    "assists": 3,
+    "deaths": 2,
+    "kd": 5.00
   },
+  "stats": [
+    {
+      "player": "Suzuki",
+      "team": "VIKII",
+      "kills": 14,
+      "assists": 3,
+      "deaths": 3
+    },
+    {
+      "player": "Qualités",
+      "team": "VIKII",
+      "kills": 10,
+      "assists": 3,
+      "deaths": 2
+    },
+    {
+      "player": "Solo",
+      "team": "VIKII",
+      "kills": 12,
+      "assists": 0,
+      "deaths": 4
+    },
+    {
+      "player": "Kirito",
+      "team": "OSAKA",
+      "kills": 5,
+      "assists": 0,
+      "deaths": 11
+    },
+    {
+      "player": "Grainut",
+      "team": "OSAKA",
+      "kills": 2,
+      "assists": 1,
+      "deaths": 13
+    },
+    {
+      "player": "Numb",
+      "team": "OSAKA",
+      "kills": 2,
+      "assists": 0,
+      "deaths": 12
+    }
+  ]
+},
   {
     "id": 23,
     "label": "Match 23",
