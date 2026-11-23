@@ -710,14 +710,68 @@
     "status": "upcoming"
   },
   {
-    "id": 50,
-    "label": "Match 50",
-    "team1": "OSAKA",
-    "team2": "VIKII",
-    "score1": 0,
-    "score2": 0,
-    "status": "upcoming"
+  "id": 50,
+  "label": "Match 50",
+  "team1": "OSAKA",
+  "team2": "VIKII",
+  "score1": 6,
+  "score2": 13,
+  "status": "played",
+  "publication": 7,
+  "video": "https://youtu.be/CND8Q4A0iKc?is=ZV2yGwRfWMxEN861",
+  "mvp": {
+    "name": "Suzuki",
+    "team": "VIKII",
+    "kills": 24,
+    "assists": 1,
+    "deaths": 7,
+    "kd": 3.43
   },
+  "stats": [
+    {
+      "player": "Numb",
+      "team": "OSAKA",
+      "kills": 9,
+      "assists": 2,
+      "deaths": 15
+    },
+    {
+      "player": "Kirito",
+      "team": "OSAKA",
+      "kills": 8,
+      "assists": 2,
+      "deaths": 15
+    },
+    {
+      "player": "Grainut",
+      "team": "OSAKA",
+      "kills": 6,
+      "assists": 0,
+      "deaths": 16
+    },
+    {
+      "player": "Suzuki",
+      "team": "VIKII",
+      "kills": 24,
+      "assists": 1,
+      "deaths": 7
+    },
+    {
+      "player": "Solo",
+      "team": "VIKII",
+      "kills": 15,
+      "assists": 2,
+      "deaths": 8
+    },
+    {
+      "player": "Qualités",
+      "team": "VIKII",
+      "kills": 7,
+      "assists": 2,
+      "deaths": 8
+    }
+  ]
+},
   {
     "id": 51,
     "label": "Match 51",
