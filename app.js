@@ -12,9 +12,7 @@ let matches = [];
 
 ========================= */
 
-const boosters = [
-
-        ],
+const boosters = [];
 
 let currentMatchFilter = "all";
 
