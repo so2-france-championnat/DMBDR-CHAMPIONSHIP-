@@ -14,7 +14,7 @@ let matches = [];
 
 const boosters = [
 
-        
+        ],
 
 let currentMatchFilter = "all";
 
