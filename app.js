@@ -14,17 +14,7 @@ let matches = [];
 
 const boosters = [
 
-    "Akra",
-
-    "Manji",
-
-    "Nounours",
-
-    "Sharko",
-
-    "Narvalow"
-
-];
+        
 
 let currentMatchFilter = "all";
 
