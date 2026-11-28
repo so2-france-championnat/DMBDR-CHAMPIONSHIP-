@@ -6032,3 +6032,115 @@ main{
     box-shadow: none !important;
     outline: none !important;
 }
+
+/* =====================================================
+   FIX PAGES — AFFICHER UN SEUL ONGLET À LA FOIS
+===================================================== */
+
+main > .page {
+    display: none !important;
+    width: 100%;
+}
+
+main > .page.active {
+    display: block !important;
+}
+
+/* =====================================================
+   BOUTON ÉVÉNEMENT DMBDR NOËL SUR HOME
+===================================================== */
+
+.home-event-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    margin-top: 22px;
+    padding: 17px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 140, 255, .4);
+    border-radius: 17px;
+    background: linear-gradient(
+        120deg,
+        rgba(0, 100, 220, .17),
+        rgba(255, 0, 55, .10)
+    );
+    box-shadow:
+        0 0 18px rgba(0, 140, 255, .10),
+        inset 0 0 20px rgba(0, 140, 255, .04);
+}
+
+.home-event-icon {
+    flex-shrink: 0;
+    font-size: 34px;
+}
+
+.home-event-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.home-event-info > span {
+    color: #008cff;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.home-event-info h2 {
+    margin: 5px 0;
+    color: white;
+    font-size: 16px;
+    font-weight: 1000;
+}
+
+.home-event-info p {
+    margin: 0;
+    color: #aab5c5;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.home-event-button {
+    flex-shrink: 0;
+    padding: 11px 12px;
+    border: 1px solid rgba(80, 180, 255, .6);
+    border-radius: 9px;
+    background: linear-gradient(135deg, #087fe0, #0750a0);
+    color: white;
+    font-size: 9px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 140, 255, .2);
+}
+
+.home-event-button:active {
+    transform: scale(.96);
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+    .home-event-card {
+        gap: 9px;
+        padding: 13px 10px;
+    }
+
+    .home-event-icon {
+        font-size: 27px;
+    }
+
+    .home-event-info h2 {
+        font-size: 13px;
+    }
+
+    .home-event-info p {
+        font-size: 9px;
+    }
+
+    .home-event-button {
+        padding: 10px 9px;
+        font-size: 8px;
+    }
+}
