@@ -5998,3 +5998,29 @@ main{
         font-weight: 700;
     }
 }
+/* BARRE JAUNE CENTRALE - ROULETTE DMBDR */
+
+.calendar-roulette-window {
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-roulette-marker {
+    position: absolute;
+    z-index: 20;
+    top: -5px;
+    bottom: -5px;
+    left: 50%;
+    width: 6px;
+    transform: translateX(-50%);
+    background: #ffea00;
+    border-radius: 10px;
+    box-shadow:
+        0 0 5px rgba(255, 234, 0, 0.9),
+        0 0 12px rgba(255, 234, 0, 0.6);
+    pointer-events: none;
+}
+
+.calendar-roulette-marker span {
+    display: none;
+}
