@@ -5952,3 +5952,49 @@ main{
         height: 76px;
     }
 }
+/* CALENDRIER : TITRE CENTRÉ */
+
+.calendar-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.calendar-heading > div {
+    flex: 1;
+    text-align: center;
+}
+
+.calendar-heading h2 {
+    margin: 0;
+    font-size: 21px;
+    letter-spacing: 3px;
+}
+
+/* CASES : TEXTE PLUS FIN */
+
+.calendar-day span {
+    padding: 3px 1px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    line-height: 1.2;
+}
+
+.calendar-day {
+    border-radius: 10px;
+}
+
+@media (max-width: 420px) {
+    .calendar-heading h2 {
+        font-size: 17px;
+        letter-spacing: 2px;
+    }
+
+    .calendar-day span {
+        font-size: 9px;
+        font-weight: 700;
+    }
+}
