@@ -6144,3 +6144,25 @@ main > .page.active {
         font-size: 8px;
     }
 }
+/* =========================
+   CASES VERROUILLÉES
+========================= */
+
+.calendar-day.locked {
+    opacity: .45;
+    filter: grayscale(1);
+    cursor: not-allowed;
+}
+
+.calendar-day.locked::before {
+    content: "🔒";
+    position: absolute;
+    z-index: 5;
+    top: 8px;
+    right: 8px;
+    font-size: 18px;
+}
+
+.calendar-day:disabled {
+    pointer-events: none;
+}
