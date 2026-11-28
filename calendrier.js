@@ -1,5 +1,4 @@
 
-
 (() => {
     /* =========================
        CONFIGURATION
@@ -8,7 +7,7 @@
     const DATA_URL = "./codes_calendrier.json";
     const IMAGE_FOLDER = "images-calendrier/";
 
-    // Image commune aux 25 cases et à l'aperçu avant tirage
+    // Image commune aux 25 cases
     const GRID_IMAGE =
         IMAGE_FOLDER + "caisse-dmdr-noel.png";
 
@@ -19,7 +18,8 @@
     const STORAGE_KEY =
         "so2_calendar_used_codes_v1";
 
-    const ROULETTE_DURATION = 16000;
+    // Durée de la roulette : 12 secondes
+    const ROULETTE_DURATION = 12000;
 
     const grid =
         document.getElementById("calendarGrid");
@@ -100,6 +100,10 @@
             return item;
         }
 
+        if (!item || typeof item !== "object") {
+            return "";
+        }
+
         return item.code || item.value || item.text || "";
     }
 
@@ -137,13 +141,13 @@
 
         const used = getUsedCodes();
 
-        return data.codes.some(item =>
-            used.includes(
-                getCodeValue(item)
-                    .trim()
-                    .toUpperCase()
-            )
-        );
+        return data.codes.some(item => {
+            const code = getCodeValue(item)
+                .trim()
+                .toUpperCase();
+
+            return used.includes(code);
+        });
     }
 
     /* =========================
@@ -164,7 +168,6 @@
             const img =
                 document.createElement("img");
 
-            // Même caisse DMBDR pour les 25 jours
             img.src = GRID_IMAGE;
             img.alt =
                 "Caisse DMBDR Noël - Jour " + day;
@@ -294,25 +297,30 @@
             const img = new Image();
 
             img.onload = resolve;
-            img.onerror = resolve;
+            img.onerror = () => {
+                console.warn("Image introuvable :", src);
+                resolve();
+            };
 
             img.src = src;
         });
     }
 
     /* =========================
-       ROULETTE 16 SECONDES
+       ROULETTE 12 SECONDES
        26 IMAGES
     ========================= */
 
     async function runRoulette(won, day) {
 
-        // Image correspondant au vrai résultat
+        // Image correspondant au résultat réel
         const rewardImage =
             getRewardImage(day);
 
-        // Position de la carte finale
-        const targetIndex = 72;
+        // Résultat déterminé par le code
+        const finalImage = won
+            ? rewardImage
+            : LOOSE_IMAGE;
 
         // Les 25 récompenses + LOOSE
         const allImages = [];
@@ -325,21 +333,48 @@
 
         // Préchargement des 26 images
         await Promise.all(
-            allImages.map(src =>
-                preloadImage(src)
-            )
+            allImages.map(src => preloadImage(src))
         );
 
         track.textContent = "";
 
-        // Les 26 images apparaissent toutes
-        const imageSequence =
-            shuffle(allImages);
+        /*
+         * POSITION DU RÉSULTAT
+         *
+         * Le résultat est à la position 72.
+         * Il reste encore 10 cartes après lui.
+         * Il n'est donc PAS la dernière image
+         * de la roulette.
+         */
 
-        // Ajout d'images aléatoires
-        // jusqu'à la position du résultat
-        while (
-            imageSequence.length < targetIndex
+        const targetIndex = 72;
+        const extraCardsAfterResult = 10;
+
+        let imageSequence = [];
+
+        // Première série : les 26 images mélangées
+        imageSequence.push(...shuffle(allImages));
+
+        // Remplir jusqu'à la position du résultat
+        while (imageSequence.length < targetIndex) {
+            const randomImage =
+                allImages[
+                    Math.floor(
+                        Math.random() * allImages.length
+                    )
+                ];
+
+            imageSequence.push(randomImage);
+        }
+
+        // Insérer le vrai résultat à la position 72
+        imageSequence.push(finalImage);
+
+        // Ajouter des images APRÈS le résultat
+        for (
+            let i = 0;
+            i < extraCardsAfterResult;
+            i++
         ) {
             const randomImage =
                 allImages[
@@ -351,33 +386,31 @@
             imageSequence.push(randomImage);
         }
 
-        // Résultat final déterminé par le code
-        const finalImage = won
-            ? rewardImage
-            : LOOSE_IMAGE;
-
-        imageSequence.push(finalImage);
-
-        // Création des cartes
-        for (
-            let i = 0;
-            i <= targetIndex;
-            i++
-        ) {
-            const image =
-                i === targetIndex
-                    ? finalImage
-                    : imageSequence[i];
-
+        // Création de toutes les cartes
+        imageSequence.forEach(image => {
             track.appendChild(
                 createRouletteCard(image)
             );
-        }
+        });
 
-        // Calcul de la position finale
+        // Attendre l'affichage des cartes
+        await new Promise(resolve => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(resolve);
+            });
+        });
+
+        // Récupérer précisément la carte du résultat
         const target =
             track.children[targetIndex];
 
+        if (!target) {
+            throw new Error(
+                "Carte du résultat introuvable."
+            );
+        }
+
+        // Calcul du centrage sous la barre jaune
         const containerWidth =
             track.parentElement.clientWidth;
 
@@ -386,15 +419,15 @@
             target.offsetWidth / 2;
 
         const offset =
-            targetCenter -
-            containerWidth / 2;
+            targetCenter - containerWidth / 2;
 
+        // Réinitialiser la roulette
         track.style.transition = "none";
-        track.style.transform =
-            "translateX(0)";
+        track.style.transform = "translateX(0)";
 
-        // Animation de 16 secondes
+        // Animation de 12 secondes
         await new Promise(resolve => {
+
             let finished = false;
 
             function finish() {
@@ -404,25 +437,39 @@
                 resolve();
             }
 
+            function onTransitionEnd(event) {
+                if (event.propertyName !== "transform") {
+                    return;
+                }
+
+                track.removeEventListener(
+                    "transitionend",
+                    onTransitionEnd
+                );
+
+                finish();
+            }
+
             track.addEventListener(
                 "transitionend",
-                finish,
-                { once: true }
+                onTransitionEnd
             );
 
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
 
                     track.style.transition =
-                        "transform 16s cubic-bezier(.06,.72,.08,1)";
+                        "transform " +
+                        ROULETTE_DURATION +
+                        "ms cubic-bezier(.06,.72,.08,1)";
 
                     track.style.transform =
                         "translateX(-" + offset + "px)";
                 });
             });
 
-            // Sécurité
-            setTimeout(finish, 16500);
+            // Sécurité en cas de transitionend absent
+            setTimeout(finish, ROULETTE_DURATION + 500);
         });
     }
 
@@ -523,7 +570,7 @@
                 '[data-day="' + currentDay + '"]'
             )?.classList.add("completed");
 
-            // RÉVÉLATION APRÈS LE TIRAGE
+            // RÉVÉLATION DU RÉSULTAT
             if (won) {
                 preview.src =
                     getRewardImage(currentDay);
@@ -632,7 +679,7 @@
             );
 
             console.log(
-                "25 cases / 26 images / Roulette 16 secondes"
+                "25 cases / 26 images / Roulette 12 secondes"
             );
         })
         .catch(error => {
