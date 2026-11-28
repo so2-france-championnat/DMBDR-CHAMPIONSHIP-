@@ -6,55 +6,10 @@ let players = [];
 
 let matches = [];
 
-/* =========================
-
-        DISCORD BOOSTERS
-
-========================= */
-
-const boosters = [];
-
 let currentMatchFilter = "all";
 
 let selectedMatchTeam = null;
 
-/* =========================
-
-        RENDER BOOSTERS
-
-========================= */
-
-function renderBoosters(){
-
-    const container =
-
-        document.getElementById("boostersList");
-
-    if(!container) return;
-
-    container.innerHTML =
-
-        boosters.map(player => `
-
-            <div class="booster-player">
-
-                <div class="booster-image">
-
-                    <img src="boost.jpg" alt="Discord Booster">
-
-                </div>
-
-                <div class="booster-name">
-
-                    ${player}
-
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
 
 /* =========================
 
@@ -3145,8 +3100,6 @@ document.addEventListener(
             setupMatchFilters();
 
             renderLatestVideo();
-
-            renderBoosters();
 
             console.log(
 
