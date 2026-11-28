@@ -7,6 +7,9 @@
     const DATA_URL = "./codes_calendrier.json";
     const IMAGE_FOLDER = "images-calendrier/";
 
+    // Année du calendrier
+    const CALENDAR_YEAR = 2026;
+
     // Image commune aux 25 cases
     const GRID_IMAGE =
         IMAGE_FOLDER + "caisse-dmdr-noel.png";
@@ -20,6 +23,10 @@
 
     // Durée de la roulette : 12 secondes
     const ROULETTE_DURATION = 12000;
+
+    // Position du résultat et nombre d'images après lui
+    const TARGET_INDEX = 72;
+    const EXTRA_CARDS_AFTER_RESULT = 10;
 
     const grid =
         document.getElementById("calendarGrid");
@@ -65,6 +72,27 @@
     let calendarData = {};
     let selectedDay = null;
     let isRolling = false;
+
+    /* =========================
+       DÉBLOCAGE AUTOMATIQUE
+    ========================= */
+
+    function isDayAvailable(day) {
+        const now = new Date();
+
+        // Le mois 11 correspond à décembre
+        const unlockDate = new Date(
+            CALENDAR_YEAR,
+            11,
+            day,
+            0,
+            0,
+            0,
+            0
+        );
+
+        return now >= unlockDate;
+    }
 
     /* =========================
        CODES UTILISÉS
@@ -182,6 +210,13 @@
 
             button.append(img, number);
 
+            // Verrouillage des jours futurs
+            if (!isDayAvailable(day)) {
+                button.disabled = true;
+                button.classList.add("locked");
+            }
+
+            // Case déjà utilisée
             if (dayHasBeenUsed(day)) {
                 button.classList.add("completed");
             }
@@ -196,6 +231,17 @@
 
     function selectDay(day) {
         if (isRolling) return;
+
+        // Sécurité : impossible de sélectionner
+        // une case avant sa date d'ouverture
+        if (!isDayAvailable(day)) {
+            setMessage(
+                "🔒 Cette case sera disponible le " +
+                day + " décembre " + CALENDAR_YEAR + ".",
+                "error"
+            );
+            return;
+        }
 
         selectedDay = day;
 
@@ -297,8 +343,12 @@
             const img = new Image();
 
             img.onload = resolve;
+
             img.onerror = () => {
-                console.warn("Image introuvable :", src);
+                console.warn(
+                    "Image introuvable :",
+                    src
+                );
                 resolve();
             };
 
@@ -339,24 +389,16 @@
         track.textContent = "";
 
         /*
-         * POSITION DU RÉSULTAT
-         *
-         * Le résultat est à la position 72.
-         * Il reste encore 10 cartes après lui.
-         * Il n'est donc PAS la dernière image
-         * de la roulette.
+         * Les 26 images apparaissent
+         * dans la roulette.
          */
 
-        const targetIndex = 72;
-        const extraCardsAfterResult = 10;
-
-        let imageSequence = [];
-
-        // Première série : les 26 images mélangées
-        imageSequence.push(...shuffle(allImages));
+        let imageSequence = shuffle(allImages);
 
         // Remplir jusqu'à la position du résultat
-        while (imageSequence.length < targetIndex) {
+        while (
+            imageSequence.length < TARGET_INDEX
+        ) {
             const randomImage =
                 allImages[
                     Math.floor(
@@ -367,13 +409,13 @@
             imageSequence.push(randomImage);
         }
 
-        // Insérer le vrai résultat à la position 72
+        // Insérer le résultat à la position 72
         imageSequence.push(finalImage);
 
         // Ajouter des images APRÈS le résultat
         for (
             let i = 0;
-            i < extraCardsAfterResult;
+            i < EXTRA_CARDS_AFTER_RESULT;
             i++
         ) {
             const randomImage =
@@ -402,7 +444,7 @@
 
         // Récupérer précisément la carte du résultat
         const target =
-            track.children[targetIndex];
+            track.children[TARGET_INDEX];
 
         if (!target) {
             throw new Error(
@@ -434,6 +476,12 @@
                 if (finished) return;
 
                 finished = true;
+
+                track.removeEventListener(
+                    "transitionend",
+                    onTransitionEnd
+                );
+
                 resolve();
             }
 
@@ -441,11 +489,6 @@
                 if (event.propertyName !== "transform") {
                     return;
                 }
-
-                track.removeEventListener(
-                    "transitionend",
-                    onTransitionEnd
-                );
 
                 finish();
             }
@@ -469,7 +512,10 @@
             });
 
             // Sécurité en cas de transitionend absent
-            setTimeout(finish, ROULETTE_DURATION + 500);
+            setTimeout(
+                finish,
+                ROULETTE_DURATION + 1000
+            );
         });
     }
 
@@ -483,6 +529,15 @@
         if (!selectedDay) {
             setMessage(
                 "Sélectionne d'abord une case.",
+                "error"
+            );
+            return;
+        }
+
+        // Vérification supplémentaire de la date
+        if (!isDayAvailable(selectedDay)) {
+            setMessage(
+                "🔒 Cette case n'est pas encore disponible.",
                 "error"
             );
             return;
@@ -628,7 +683,7 @@
             const button =
                 event.target.closest(".calendar-day");
 
-            if (!button) return;
+            if (!button || button.disabled) return;
 
             selectDay(
                 Number(button.dataset.day)
@@ -671,8 +726,12 @@
 
             // Aperçu initial : caisse DMBDR
             preview.src = GRID_IMAGE;
+
             rewardName.textContent =
                 "Choisis une case pour commencer";
+
+            input.disabled = true;
+            validate.disabled = true;
 
             console.log(
                 "🎄 CALENDRIER DMBDR CHARGÉ"
@@ -680,6 +739,11 @@
 
             console.log(
                 "25 cases / 26 images / Roulette 12 secondes"
+            );
+
+            console.log(
+                "Déblocage automatique : 1er au 25 décembre " +
+                CALENDAR_YEAR
             );
         })
         .catch(error => {
