@@ -124,6 +124,10 @@
             RANKING
         </button>
 
+        <button class="nav-button" onclick="showPage('calendar', this)">
+    <span>🎄</span> CALENDRIER
+</button>
+        
     </nav>
 
     <main>
@@ -174,39 +178,54 @@
             ></div>
 
             <!-- CALENDRIER DE L'AVENT -->
-
-<div class="section-title">
-    <span></span>
-    ÉVÉNEMENT SPÉCIAL
-    <span></span>
-</div>
-
-<div class="calendar-entry">
-
-    <div class="calendar-entry-info">
-
-        <span class="calendar-entry-icon">🎄</span>
-
+<section id="calendar" class="page">
+    <div class="section-title">
+        <span>🎄</span>
         <div>
-            <strong>CALENDRIER DE L'AVENT</strong>
-            <span>25 JOURS • 25 RÉCOMPENSES</span>
+            <h2>CALENDRIER DE L'AVENT</h2>
+            <p>25 jours • 500 codes • 25 récompenses</p>
         </div>
-
     </div>
 
-    <a
-        href="calendrier.html"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="calendar-entry-button"
-    >
-        LE CALENDRIER DE L'AVENT
-        <span>→</span>
-    </a>
+    <div class="calendar-intro">
+        <h3>WINTER EVENT</h3>
+        <p>Sélectionne une case et entre ton code pour découvrir ton résultat.</p>
+        <span>MODE TEST : toutes les cases sont accessibles</span>
+    </div>
 
-</div>
+    <div id="calendarGrid" class="calendar-grid"></div>
 
-        </section>
+    <div class="calendar-game">
+        <h3 id="calendarDayTitle">SÉLECTIONNE UNE CASE</h3>
+
+        <div class="calendar-reward-preview">
+            <img id="calendarRewardImage"
+                 src="images-calendrier/loose.jpg"
+                 alt="Récompense du calendrier">
+            <p id="calendarRewardName">Choisis une case pour commencer</p>
+        </div>
+
+        <div class="calendar-roulette-window">
+            <div id="calendarRouletteTrack" class="calendar-roulette-track"></div>
+        </div>
+
+        <div class="calendar-code-form">
+            <input id="calendarCodeInput"
+                   type="text"
+                   placeholder="ENTRE TON CODE"
+                   autocomplete="off"
+                   autocapitalize="characters">
+
+            <button id="calendarValidateBtn" type="button">
+                VALIDER
+            </button>
+        </div>
+
+        <p id="calendarMessage" class="calendar-message">
+            Sélectionne une case pour saisir ton code.
+        </p>
+    </div>
+</section>
 
         <!-- TEAMS -->
 
@@ -417,6 +436,7 @@
     </main>
 
     <script src="app.js"></script>
+<script src="calendrier.js"></script>
 
 </body>
 </html>
