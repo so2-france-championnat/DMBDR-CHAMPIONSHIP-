@@ -1,21 +1,66 @@
 
+
 (() => {
+    /* =========================
+       CONFIGURATION
+    ========================= */
+
     const DATA_URL = "./codes_calendrier.json";
     const IMAGE_FOLDER = "images-calendrier/";
-    const GRID_IMAGE = IMAGE_FOLDER + "porte-dmdr.jpg";
-    const LOOSE_IMAGE = IMAGE_FOLDER + "loose.jpg";
-    const STORAGE_KEY = "so2_calendar_used_codes_v1";
 
-    const grid = document.getElementById("calendarGrid");
+    // Image commune aux 25 cases et à l'aperçu avant tirage
+    const GRID_IMAGE =
+        IMAGE_FOLDER + "caisse-dmdr-noel.png";
+
+    // Image de défaite
+    const LOOSE_IMAGE =
+        IMAGE_FOLDER + "loose.jpg";
+
+    const STORAGE_KEY =
+        "so2_calendar_used_codes_v1";
+
+    const ROULETTE_DURATION = 16000;
+
+    const grid =
+        document.getElementById("calendarGrid");
+
     if (!grid) return;
 
-    const title = document.getElementById("calendarDayTitle");
-    const preview = document.getElementById("calendarRewardImage");
-    const rewardName = document.getElementById("calendarRewardName");
-    const input = document.getElementById("calendarCodeInput");
-    const validate = document.getElementById("calendarValidateBtn");
-    const message = document.getElementById("calendarMessage");
-    const track = document.getElementById("calendarRouletteTrack");
+    const title =
+        document.getElementById("calendarDayTitle");
+
+    const preview =
+        document.getElementById("calendarRewardImage");
+
+    const rewardName =
+        document.getElementById("calendarRewardName");
+
+    const input =
+        document.getElementById("calendarCodeInput");
+
+    const validate =
+        document.getElementById("calendarValidateBtn");
+
+    const message =
+        document.getElementById("calendarMessage");
+
+    const track =
+        document.getElementById("calendarRouletteTrack");
+
+    if (
+        !title ||
+        !preview ||
+        !rewardName ||
+        !input ||
+        !validate ||
+        !message ||
+        !track
+    ) {
+        console.error(
+            "❌ Éléments HTML du calendrier manquants."
+        );
+        return;
+    }
 
     let calendarData = {};
     let selectedDay = null;
@@ -42,6 +87,7 @@
 
         if (!used.includes(code)) {
             used.push(code);
+
             localStorage.setItem(
                 STORAGE_KEY,
                 JSON.stringify(used)
@@ -61,15 +107,26 @@
         return calendarData[String(day)];
     }
 
+    /* =========================
+       IMAGES DES RÉCOMPENSES
+    ========================= */
+
     function getRewardImage(day) {
         return IMAGE_FOLDER +
-            "jour-" + String(day).padStart(2, "0") + ".jpg";
+            "jour-" +
+            String(day).padStart(2, "0") +
+            ".jpg";
     }
 
     function setMessage(text, type = "") {
         message.textContent = text;
-        message.className = "calendar-message " + type;
+        message.className =
+            "calendar-message " + type;
     }
+
+    /* =========================
+       CODES DÉJÀ UTILISÉS
+    ========================= */
 
     function dayHasBeenUsed(day) {
         const data = getDayData(day);
@@ -82,7 +139,9 @@
 
         return data.codes.some(item =>
             used.includes(
-                getCodeValue(item).trim().toUpperCase()
+                getCodeValue(item)
+                    .trim()
+                    .toUpperCase()
             )
         );
     }
@@ -95,21 +154,27 @@
         grid.textContent = "";
 
         for (let day = 1; day <= 25; day++) {
-            const button = document.createElement("button");
+            const button =
+                document.createElement("button");
 
             button.type = "button";
             button.className = "calendar-day";
             button.dataset.day = day;
 
-            const img = document.createElement("img");
+            const img =
+                document.createElement("img");
 
-            // Même image DMBDR pour les 25 cases
+            // Même caisse DMBDR pour les 25 jours
             img.src = GRID_IMAGE;
-            img.alt = "Calendrier DMBDR - Case " + day;
+            img.alt =
+                "Caisse DMBDR Noël - Jour " + day;
+
             img.loading = "lazy";
             img.decoding = "async";
 
-            const number = document.createElement("span");
+            const number =
+                document.createElement("span");
+
             number.textContent = "JOUR " + day;
 
             button.append(img, number);
@@ -141,7 +206,9 @@
             return;
         }
 
-        grid.querySelectorAll(".calendar-day").forEach(button => {
+        grid.querySelectorAll(
+            ".calendar-day"
+        ).forEach(button => {
             button.classList.toggle(
                 "selected",
                 Number(button.dataset.day) === day
@@ -150,11 +217,12 @@
 
         title.textContent = "CASE " + day;
 
+        // La récompense reste secrète avant le tirage
         rewardName.textContent =
-            data.reward || "Récompense mystère";
+            "CAISSE DMBDR NOËL";
 
-        // Image individuelle de la récompense
-        preview.src = getRewardImage(day);
+        preview.src = GRID_IMAGE;
+        preview.alt = "Caisse DMBDR Noël";
 
         input.disabled = false;
         validate.disabled = false;
@@ -175,22 +243,18 @@
        CARTES DE LA ROULETTE
     ========================= */
 
-    function createRouletteCard(image, isWinner = false) {
-        const card = document.createElement("div");
+    function createRouletteCard(image) {
+        const card =
+            document.createElement("div");
 
-        card.className = "calendar-roulette-card";
+        card.className =
+            "calendar-roulette-card";
 
-        if (isWinner) {
-            card.classList.add("winner");
-        }
-
-        const img = document.createElement("img");
+        const img =
+            document.createElement("img");
 
         img.src = image;
-        img.alt = isWinner
-            ? "Récompense gagnée"
-            : "Résultat roulette";
-
+        img.alt = "Résultat roulette";
         img.loading = "eager";
         img.decoding = "async";
 
@@ -200,58 +264,137 @@
     }
 
     /* =========================
-       ROULETTE 8 SECONDES
+       MÉLANGE ALÉATOIRE
     ========================= */
 
-    function runRoulette(won, day) {
+    function shuffle(array) {
+        const result = [...array];
+
+        for (
+            let i = result.length - 1;
+            i > 0;
+            i--
+        ) {
+            const j =
+                Math.floor(Math.random() * (i + 1));
+
+            [result[i], result[j]] =
+                [result[j], result[i]];
+        }
+
+        return result;
+    }
+
+    /* =========================
+       PRÉCHARGEMENT DES IMAGES
+    ========================= */
+
+    function preloadImage(src) {
         return new Promise(resolve => {
-            track.textContent = "";
+            const img = new Image();
 
-            const rewardImage = getRewardImage(day);
+            img.onload = resolve;
+            img.onerror = resolve;
 
-            // Position du résultat final
-            const targetIndex = 38;
-            const totalCards = 45;
+            img.src = src;
+        });
+    }
 
-            // Mélange des images gagnantes et LOSE
-            for (let i = 0; i < totalCards; i++) {
-                const isTarget = i === targetIndex;
+    /* =========================
+       ROULETTE 16 SECONDES
+       26 IMAGES
+    ========================= */
 
-                let image;
+    async function runRoulette(won, day) {
 
-                if (isTarget) {
-                    image = won
-                        ? rewardImage
-                        : LOOSE_IMAGE;
-                } else {
-                    image = Math.random() < 0.5
-                        ? rewardImage
-                        : LOOSE_IMAGE;
-                }
+        // Image correspondant au vrai résultat
+        const rewardImage =
+            getRewardImage(day);
 
-                track.appendChild(
-                    createRouletteCard(
-                        image,
-                        isTarget && won
+        // Position de la carte finale
+        const targetIndex = 72;
+
+        // Les 25 récompenses + LOOSE
+        const allImages = [];
+
+        for (let i = 1; i <= 25; i++) {
+            allImages.push(getRewardImage(i));
+        }
+
+        allImages.push(LOOSE_IMAGE);
+
+        // Préchargement des 26 images
+        await Promise.all(
+            allImages.map(src =>
+                preloadImage(src)
+            )
+        );
+
+        track.textContent = "";
+
+        // Les 26 images apparaissent toutes
+        const imageSequence =
+            shuffle(allImages);
+
+        // Ajout d'images aléatoires
+        // jusqu'à la position du résultat
+        while (
+            imageSequence.length < targetIndex
+        ) {
+            const randomImage =
+                allImages[
+                    Math.floor(
+                        Math.random() * allImages.length
                     )
-                );
-            }
+                ];
 
-            const target = track.children[targetIndex];
+            imageSequence.push(randomImage);
+        }
 
-            const containerWidth =
-                track.parentElement.clientWidth;
+        // Résultat final déterminé par le code
+        const finalImage = won
+            ? rewardImage
+            : LOOSE_IMAGE;
 
-            const targetCenter =
-                target.offsetLeft +
-                target.offsetWidth / 2;
+        imageSequence.push(finalImage);
 
-            const offset =
-                targetCenter - containerWidth / 2;
+        // Création des cartes
+        for (
+            let i = 0;
+            i <= targetIndex;
+            i++
+        ) {
+            const image =
+                i === targetIndex
+                    ? finalImage
+                    : imageSequence[i];
 
-            track.style.transition = "none";
-            track.style.transform = "translateX(0)";
+            track.appendChild(
+                createRouletteCard(image)
+            );
+        }
 
+        // Calcul de la position finale
+        const target =
+            track.children[targetIndex];
+
+        const containerWidth =
+            track.parentElement.clientWidth;
+
+        const targetCenter =
+            target.offsetLeft +
+            target.offsetWidth / 2;
+
+        const offset =
+            targetCenter -
+            containerWidth / 2;
+
+        track.style.transition = "none";
+        track.style.transform =
+            "translateX(0)";
+
+        // Animation de 16 secondes
+        await new Promise(resolve => {
             let finished = false;
 
             function finish() {
@@ -269,16 +412,17 @@
 
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
+
                     track.style.transition =
-                        "transform 8s cubic-bezier(.08,.75,.12,1)";
+                        "transform 16s cubic-bezier(.06,.72,.08,1)";
 
                     track.style.transform =
                         "translateX(-" + offset + "px)";
                 });
             });
 
-            // Sécurité si transitionend ne se déclenche pas
-            setTimeout(finish, 8500);
+            // Sécurité
+            setTimeout(finish, 16500);
         });
     }
 
@@ -310,9 +454,13 @@
             return;
         }
 
-        const data = getDayData(selectedDay);
+        const data =
+            getDayData(selectedDay);
 
-        if (!data || !Array.isArray(data.codes)) {
+        if (
+            !data ||
+            !Array.isArray(data.codes)
+        ) {
             setMessage(
                 "Impossible de charger les codes de cette case.",
                 "error"
@@ -330,9 +478,12 @@
             return;
         }
 
-        const matchingCode = data.codes.find(item =>
-            getCodeValue(item).trim().toUpperCase() === enteredCode
-        );
+        const matchingCode =
+            data.codes.find(item =>
+                getCodeValue(item)
+                    .trim()
+                    .toUpperCase() === enteredCode
+            );
 
         if (!matchingCode) {
             setMessage(
@@ -349,6 +500,8 @@
                 matchingCode.winner === "true"
             );
 
+        const currentDay = selectedDay;
+
         isRolling = true;
 
         input.disabled = true;
@@ -356,56 +509,99 @@
 
         setMessage("🎰 TIRAGE EN COURS...");
 
+        // Le code est marqué comme utilisé
         saveUsedCode(enteredCode);
 
-        const currentDay = selectedDay;
-
-        await runRoulette(won, currentDay);
-
-        isRolling = false;
-
-        grid.querySelector(
-            '[data-day="' + currentDay + '"]'
-        )?.classList.add("completed");
-
-        if (won) {
-            setMessage(
-                "🎉 FÉLICITATIONS ! TU AS GAGNÉ : " +
-                data.reward,
-                "success"
+        try {
+            await runRoulette(
+                won,
+                currentDay
             );
-        } else {
+
+            // Marquer la case comme terminée
+            grid.querySelector(
+                '[data-day="' + currentDay + '"]'
+            )?.classList.add("completed");
+
+            // RÉVÉLATION APRÈS LE TIRAGE
+            if (won) {
+                preview.src =
+                    getRewardImage(currentDay);
+
+                preview.alt =
+                    "Récompense gagnée";
+
+                rewardName.textContent =
+                    data.reward || "Récompense gagnée";
+
+                setMessage(
+                    "🎉 FÉLICITATIONS ! TU AS GAGNÉ : " +
+                    (data.reward || "Récompense mystère"),
+                    "success"
+                );
+
+            } else {
+                preview.src = LOOSE_IMAGE;
+                preview.alt = "Aucune récompense";
+
+                rewardName.textContent =
+                    "AUCUNE RÉCOMPENSE";
+
+                setMessage(
+                    "❄️ DOMMAGE ! Tu n'as pas gagné cette fois.",
+                    "error"
+                );
+            }
+
+            input.value = "";
+
+        } catch (error) {
+            console.error(
+                "Erreur roulette :",
+                error
+            );
+
             setMessage(
-                "❄️ DOMMAGE ! Tu n'as pas gagné cette fois.",
+                "Une erreur est survenue pendant le tirage.",
                 "error"
             );
-        }
 
-        input.value = "";
+        } finally {
+            isRolling = false;
+        }
     }
 
     /* =========================
        ÉVÉNEMENTS
     ========================= */
 
-    grid.addEventListener("click", event => {
-        const button = event.target.closest(".calendar-day");
+    grid.addEventListener(
+        "click",
+        event => {
+            const button =
+                event.target.closest(".calendar-day");
 
-        if (!button) return;
+            if (!button) return;
 
-        selectDay(Number(button.dataset.day));
-    });
+            selectDay(
+                Number(button.dataset.day)
+            );
+        }
+    );
 
     validate.addEventListener(
         "click",
         validateCode
     );
 
-    input.addEventListener("keydown", event => {
-        if (event.key === "Enter") {
-            validateCode();
+    input.addEventListener(
+        "keydown",
+        event => {
+            if (event.key === "Enter") {
+                validateCode();
+            }
         }
-    });
+    );
 
     /* =========================
        CHARGEMENT DES DONNÉES
@@ -426,8 +622,17 @@
 
             renderGrid();
 
+            // Aperçu initial : caisse DMBDR
+            preview.src = GRID_IMAGE;
+            rewardName.textContent =
+                "Choisis une case pour commencer";
+
             console.log(
                 "🎄 CALENDRIER DMBDR CHARGÉ"
+            );
+
+            console.log(
+                "25 cases / 26 images / Roulette 16 secondes"
             );
         })
         .catch(error => {
